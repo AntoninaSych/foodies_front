@@ -1,0 +1,50 @@
+.header {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-badgets);
+  background-color: var(--color-inputs);
+  height: 72px;
+}
+
+.header > div {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.nav {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  color: var(--color-main);
+  font-family: "Mulish Mulish", Arial, sans-serif;
+}
+
+.brand a {
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+  }
+  .brand {
+    margin-right: auto;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .header {
+    padding: 24px 0;
+  }
+}

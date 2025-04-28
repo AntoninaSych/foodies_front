@@ -1,0 +1,46 @@
+.wrapper {
+  height: 100%;
+}
+
+.hero {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  padding: 140px 0 90px 0;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--color-main);
+  text-align: center;
+}
+
+.title,
+.description {
+  color: var(--color-inputs);
+}
+
+.description {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .hero {
+    padding: 125px 0 80px 0;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0 46px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .hero {
+    padding: 80px 196px;
+  }
+  .description {
+    padding: 0 140px;
+  }
+}

@@ -1,0 +1,14 @@
+.container {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 16px 0;
+  color: var(--color-text);
+  text-align: center;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 24px 0;
+  }
+}

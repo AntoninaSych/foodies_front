@@ -1,0 +1,10 @@
+.footer {
+  border-top: 1px solid #BFBEBE;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+  color: #000000;
+}
