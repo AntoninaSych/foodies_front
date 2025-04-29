@@ -1,4 +1,44 @@
-{
-  "total": 23,
-  "items": []
-}
+[
+  {
+    "id": "07b8d9ae-c56c-4a1c-9734-1b2fde6dc416",
+    "title": "Irish stew",
+    "description": "A traditional Irish dish made with lamb, potatoes, carrots, onions, and herbs, cooked in a broth or gravy.",
+    "instructions": "Heat the oven to 180C/350F/gas mark 4. Drain and rinse the soaked wheat, put it in a medium pan with lots of water, bring to a boil and simmer for an hour, until cooked. Drain and set aside.\r\n\r\nSeason the lamb with a teaspoon of salt and some black pepper. Put one tablespoon of oil in a large, deep sauté pan for which you have a lid; place on a medium-high heat. Add some of the lamb – don't overcrowd the pan – and sear for four minutes on all sides. Transfer to a bowl, and repeat with the remaining lamb, adding oil as needed.\r\n\r\nLower the heat to medium and add a tablespoon of oil to the pan. Add the shallots and fry for four minutes, until caramelised. Tip these into the lamb bowl, and repeat with the remaining vegetables until they are all nice and brown, adding more oil as you need it.\r\n\r\nOnce all the vegetables are seared and removed from the pan, add the wine along with the sugar, herbs, a teaspoon of salt and a good grind of black pepper. Boil on a high heat for about three minutes.\r\n\r\nTip the lamb, vegetables and whole wheat back into the pot, and add the stock. Cover and boil for five minutes, then transfer to the oven for an hour and a half.\r\n\r\nRemove the stew from the oven and check the liquid; if there is a lot, remove the lid and boil for a few minutes.",
+    "thumb": "https://ftp.goit.study/img/so-yummy/preview/Irish%20stew.jpg",
+    "time": "160",
+    "areaId": "fe6fab5d-802f-48cb-a2cd-4eb347e18b40",
+    "ownerId": "3988ae89-5f2e-4d0b-b045-459ac9264343",
+    "createdAt": "2025-04-29T08:46:39.845Z",
+    "updatedAt": "2025-04-29T08:46:39.845Z",
+    "area": {
+      "id": "fe6fab5d-802f-48cb-a2cd-4eb347e18b40",
+      "name": "Irish"
+    },
+    "owner": {
+      "id": "3988ae89-5f2e-4d0b-b045-459ac9264343",
+      "name": "GoIT",
+      "email": "goit@gmail.com"
+    }
+  },
+  {
+    "id": "a773f8f8-ab98-4025-86f1-bb189be9a1c2",
+    "title": "Lancashire hotpot",
+    "description": "A hearty casserole with tender lamb and vegetables, topped with sliced potatoes.",
+    "instructions": "Heat oven to 160C/fan 140C/gas 3. Heat some dripping or butter in a large shallow casserole dish, brown the lamb in batches, lift to a plate, then repeat with the kidneys.\r\nFry the onions and carrots in the pan with a little more dripping until golden. Sprinkle over the flour, allow to cook for a couple of mins, shake over the Worcestershire sauce, pour in the stock, then bring to the boil. Stir in the meat and bay leaves, then turn off the heat. Arrange the sliced potatoes on top of the meat, then drizzle with a little more dripping. Cover, then place in the oven for about 1½ hrs until the potatoes are cooked.\r\nRemove the lid, brush the potatoes with a little more dripping, then turn the oven up to brown the potatoes, or finish under the grill for 5-8 mins until brown.",
+    "thumb": "https://ftp.goit.study/img/so-yummy/preview/Lancashire%20hotpot.jpg",
+    "time": "115",
+    "areaId": "40a3cef7-6f90-468c-a9ac-d608cc163443",
+    "ownerId": "3988ae89-5f2e-4d0b-b045-459ac9264343",
+    "createdAt": "2025-04-29T08:46:39.845Z",
+    "updatedAt": "2025-04-29T08:46:39.845Z",
+    "area": {
+      "id": "40a3cef7-6f90-468c-a9ac-d608cc163443",
+      "name": "British"
+    },
+    "owner": {
+      "id": "3988ae89-5f2e-4d0b-b045-459ac9264343",
+      "name": "GoIT",
+      "email": "goit@gmail.com"
+    }
+  }
+]

@@ -1,8 +1,5 @@
 .header {
   padding: 12px 0;
-  border-bottom: 1px solid var(--color-badgets);
-  background-color: var(--color-inputs);
-  height: 72px;
 }
 
 .header > div {
@@ -11,14 +8,14 @@
 
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  height: 100%;
+  padding: 40px 0;
+  height: 46px;
+  font-size: 12px;
 }
 
 .nav {
-  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,25 +23,31 @@
 
 .brand {
   color: var(--color-main);
-  font-family: "Mulish Mulish", Arial, sans-serif;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-size: 24px;
+  margin-right: auto;
+  width: 30%;
 }
 
 .brand a {
   text-decoration: none;
 }
 
+.dark .brand {
+  color: var(--color-white);
+}
+
 @media only screen and (min-width: 768px) {
-  .wrapper {
-    flex-direction: row;
-  }
-  .brand {
-    margin-right: auto;
-    width: 50%;
+  .nav {
+    flex-grow: 1;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .header {
     padding: 24px 0;
+  }
+  .brand {
+    width: 50%;
   }
 }
