@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import HomeLayout from "./components/Layout/HomeLayout";
 import PrivateRoute from "./components/PrivateRoute";
-// import RestrictedRoute from "../RestrictedRoute";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
@@ -16,8 +16,10 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<HomeLayout />}>
           <Route index element={<HomePage />} />
+        </Route>
+        <Route path="/" element={<Layout />}>
           <Route path="user/:id" element={<PrivateRoute component={<DetailUserPage />} />} />
           <Route path="recipe/add" element={<PrivateRoute component={<AddRecipePage />} />} />
           <Route path="recipe/:id" element={<DetailPage />} />

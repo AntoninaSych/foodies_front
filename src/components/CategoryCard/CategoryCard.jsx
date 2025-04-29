@@ -1,9 +1,10 @@
 import css from "./CategoryCard.module.css";
 
-const CategoryCard = () => {
+const CategoryCard = ({data}) => {
+  const {name} = data
   return (
     <div className={css.wrapper}>
-      <div>Category Card </div>
+      <div>{name}</div>
     </div>
   );
 };

@@ -2,6 +2,12 @@
   height: 100%;
 }
 
+.header {
+  margin: 20px 20px 0 20px;
+  background-color: var(--color-main);
+  border-radius: 30px;
+}
+
 .hero {
   display: flex;
   gap: 16px;
@@ -15,7 +21,7 @@
 
 .title,
 .description {
-  color: var(--color-inputs);
+  color: var(--color-white);
 }
 
 .description {

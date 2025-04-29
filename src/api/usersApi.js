@@ -1,5 +1,5 @@
 
-import mockUserData from "./mock/user.json";
+import mockUserData from "./mock/users.json";
 import axios, {useMockData} from './default'
 import {getAuthorizationHeader} from "./utils";
 
@@ -8,7 +8,7 @@ export const fetchCurrentUser = async (id, options = {}) => {
     ...options,
   };
   if (useMockData) {
-    return mockUserData;
+    return mockUserData[0];
   }
 
   const response = await axios.get(`/users/${id}`, {

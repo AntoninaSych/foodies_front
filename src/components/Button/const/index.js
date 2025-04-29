@@ -1,6 +1,7 @@
 export const VARIANTS = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
+  SECONDARY_REVERSED: "secondaryReversed",
   TEXT: "text",
 };
 

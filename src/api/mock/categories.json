@@ -1,20 +1,22 @@
-{
-  "total": 23,
-  "items": [
-    {
-      "id": 1,
-      "name": "Beef",
-      "image": "https://placehold.in/400x300"
-    },
-    {
-      "id": 2,
-      "name": "Breakfast",
-      "image": "https://placehold.in/400x300"
-    },
-    {
-      "id": 3,
-      "name": "Desserts",
-      "image": "https://placehold.in/400x300"
-    }
-  ]
-}
+[
+  {
+    "id": "c87e2f2d-087a-4c7b-bf7b-95b08520cbf5",
+    "name": "Seafood",
+    "thumb": null
+  },
+  {
+    "id": "78db02cd-0909-401e-89c9-b720377ef15e",
+    "name": "Lamb",
+    "thumb": null
+  },
+  {
+    "id": "23836495-4861-47d5-b7ca-2e27b03b0d3c",
+    "name": "Starter",
+    "thumb": null
+  },
+  {
+    "id": "215c9e57-8b30-4dbc-9835-d54c21beac85",
+    "name": "Chicken",
+    "thumb": null
+  }
+]

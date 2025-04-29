@@ -6,23 +6,26 @@
   width: 48px;
   height: 48px;
   display: none;
-  background-color: var(--color-inputs);
+  background-color: var(--color-main);
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
-  color: var(--color-button);
-  border: 1px solid var(--color-badgets);
+  color: var(--color-white);
+  border: 1px solid var(--color-main);
   animation-name: spin;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   box-shadow: var(--box-shadow);
+  transition: all var(--trns-fast);
   font-size: 18px;
 }
 
 .wrapper:hover {
-  color: var(--color-button-hover);
+  color: var(--color-main);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-text);
 }
 
 .show {
@@ -34,14 +37,6 @@
     width: 64px;
     height: 64px;
     font-size: 24px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .wrapper {
-    width: 80px;
-    height: 80px;
-    font-size: 28px;
   }
 }
 

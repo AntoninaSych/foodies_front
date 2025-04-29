@@ -6,6 +6,7 @@ import { ROUTERS } from "../../const";
 import { fetchCategories } from "../../redux/categories/operations";
 import CategoriesList from "../../components/CategoriesList/CategoriesList";
 import css from "./HomePage.module.css";
+import AppBar from "../../components/AppBar/AppBar.jsx";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,20 @@ const HomePage = () => {
 
   return (
     <div className={css.wrapper}>
+      <div className={css.header}>
+        <Container>
+          <AppBar theme="dark" />
+          <div className={css.hero}>
+            <h1 className={css.title}>Improve Your Culinary Talents</h1>
+            <h2 className={css.description}>
+              Amazing recipes for beginners in the world of cooking, enveloping you in the aromas and tastes of various cuisines.
+            </h2>
+            <Button to={ROUTERS.ADD_RECIPE} variant={Button.variants.SECONDARY_REVERSED}>Add recipe</Button>
+          </div>
+          <CategoriesList />
+        </Container>
+      </div>
       <Container>
-        <div className={css.hero}>
-          <h1 className={css.title}>Improve Your Culinary Talents</h1>
-          <h2 className={css.description}>
-            Amazing recipes for beginners in the world of cooking, enveloping you in the aromas and tastes of various cuisines.
-          </h2>
-          <Button to={ROUTERS.ADD_RECIPE}> Add recipe</Button>
-        </div>
         <CategoriesList />
       </Container>
     </div>

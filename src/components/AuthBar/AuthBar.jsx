@@ -1,24 +1,12 @@
 import clsx from "clsx";
-import { NavLink } from "react-router-dom";
-import { ROUTERS } from "../../const";
 import css from "../styles/navigation.module.css";
 
-const buildClassName = ({ isActive }) => {
-  return clsx(css.link, isActive && css.active);
-};
+const AuthBar = ({theme}) => {
+  const className = clsx(css.wrapper, css[theme]);
 
-const AuthBar = () => {
   return (
-    <div className={css.wrapper}>
-      <nav className={css.nav}>
-        <NavLink className={buildClassName} to={ROUTERS.HOME}>
-          Home
-        </NavLink>
-        <NavLink className={buildClassName} to={ROUTERS.ADD_RECIPE}>
-          Add recipe
-        </NavLink>
-      </nav>
-      <div>SIGN IN / SIGN UP</div>
+    <div className={className}>
+      <div className={css.accountPlaceholder}>SIGN IN / SIGN UP</div>
     </div>
   );
 };

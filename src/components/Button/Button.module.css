@@ -14,24 +14,39 @@
 }
 
 .button.primary {
-  background-color: var(--color-button);
+  background-color: var(--color-main);
   color: var(--color-white);
-  border: 1px solid var(--color-button);
+  border: 1px solid var(--color-main);
 }
 
 .button.primary:hover,
 .button.primary:focus-visible {
-  background-color: var(--color-button-hover);
-  border-color: var(--color-button-hover);
+  background-color: var(--color-main);
+  border-color: var(--color-main);
 }
 
 .button.secondary {
   background-color: var(--color-white);
   color: var(--color-main);
-  border: 1px solid var(--color-grey-light);
+  border: 1px solid var(--color-text);
 }
 
 .button.secondary:hover,
 .button.secondary:focus-visible {
-  border-color: var(--color-button-hover);
+  background-color: var(--color-main);
+  color: var(--color-white);
+  border-color: var(--color-main);
+}
+
+.button.secondaryReversed {
+  background-color: var(--color-main);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+}
+
+.button.secondaryReversed:hover,
+.button.secondaryReversed:focus-visible {
+  background-color: var(--color-white);
+  color: var(--color-main);
+  border-color: var(--color-white);
 }

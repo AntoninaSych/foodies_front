@@ -22,8 +22,7 @@ const recipesSlice = createSlice({
     builder
       .addCase(fetchRecipes.pending, handlePending)
       .addCase(fetchRecipes.fulfilled, (state, action) => {
-        const { items } = action.payload;
-        state.items = items;
+        state.items = action.payload;
         state.loading = false;
         state.error = null;
       })

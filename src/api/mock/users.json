@@ -1,0 +1,18 @@
+[
+  {
+    "id": "3988ae89-5f2e-4d0b-b045-459ac9264343",
+    "name": "GoIT",
+    "avatar": null,
+    "email": "goit@gmail.com",
+    "createdAt": "2025-04-29T08:46:39.837Z",
+    "updatedAt": "2025-04-29T08:46:39.837Z"
+  },
+  {
+    "id": "513dd6bb-8ff7-407e-94d1-2d3ee1149081",
+    "name": "Foodies user",
+    "avatar": null,
+    "email": "user@gmail.com",
+    "createdAt": "2025-04-29T08:46:39.837Z",
+    "updatedAt": "2025-04-29T08:46:39.837Z"
+  }
+]

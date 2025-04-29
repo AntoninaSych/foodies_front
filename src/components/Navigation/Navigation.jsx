@@ -7,9 +7,11 @@ const buildClassName = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
 
-const Navigation = () => {
+const Navigation = ({theme}) => {
+  const className = clsx(css.wrapper, css[theme]);
+
   return (
-    <div className={css.wrapper}>
+    <div className={className}>
       <nav className={css.nav}>
         <NavLink className={buildClassName} to={ROUTERS.HOME}>
           Home
@@ -18,7 +20,7 @@ const Navigation = () => {
           Add recipe
         </NavLink>
       </nav>
-      <div>USER DROPDOWN</div>
+      <div className={css.accountPlaceholder}>CURRENT USER</div>
     </div>
   );
 };
