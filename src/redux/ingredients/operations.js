@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ingredientsFetch } from "../../api/ingredientsApi.js";
+import { ingredientsFetch } from "../../api/ingredientsApi";
 import {handleError} from "../utils";
 
 

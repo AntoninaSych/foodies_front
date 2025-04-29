@@ -1,5 +1,6 @@
 export const ROUTERS = {
   HOME: "/",
+  USER: "/user",
   ADD_RECIPE: "/recipe/add",
 };
 export const ROOT_CONTAINER = "#root";

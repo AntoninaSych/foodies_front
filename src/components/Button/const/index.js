@@ -3,6 +3,7 @@ export const VARIANTS = {
   SECONDARY: "secondary",
   SECONDARY_REVERSED: "secondaryReversed",
   TEXT: "text",
+  auth: "auth",
 };
 
 export const TYPES = {

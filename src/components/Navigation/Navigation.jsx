@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 import { ROUTERS } from "../../const";
 import css from "../styles/navigation.module.css";
+import Account from "./components/Account/Account.jsx";
 
 const buildClassName = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -20,7 +21,7 @@ const Navigation = ({theme}) => {
           Add recipe
         </NavLink>
       </nav>
-      <div className={css.accountPlaceholder}>CURRENT USER</div>
+      <Account theme={theme} />
     </div>
   );
 };

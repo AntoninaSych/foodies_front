@@ -5,7 +5,7 @@
   min-width: 156px;
   cursor: pointer;
   transition: all var(--trns-fast);
-  border-radius: 200px;
+  border-radius: 30px;
   text-decoration: none;
   display: inline-block;
   text-align: center;
@@ -50,3 +50,28 @@
   color: var(--color-main);
   border-color: var(--color-white);
 }
+
+.button.auth {
+  min-width: 104px;
+  padding: 14px 28px;
+  height: 46px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  color: var(--color-main);
+}
+
+.button.auth {
+  min-width: 104px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  color: var(--color-main);
+}
+
+.active.button.auth,
+.button.auth:hover,
+.button.auth:focus-visible {
+  background-color: var(--color-main);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+}
+

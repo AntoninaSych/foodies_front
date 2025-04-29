@@ -17,6 +17,7 @@
   font-weight: 700;
   text-decoration: none;
   padding: 14px;
+  white-space: nowrap;
 }
 
 .link.active {
@@ -25,12 +26,14 @@
 
 }
 
-.accountPlaceholder {
+.placeholder {
   background-color: var(--color-main);
   color: var(--color-white);
-  padding: 16px;
   border-radius: 30px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .dark .link {
@@ -41,7 +44,7 @@
   border-color: var(--color-secondary);
 }
 
-.dark .accountPlaceholder {
+.dark .placeholder {
   background-color: var(--color-white);
   color: var(--color-main);
 }
@@ -51,7 +54,7 @@
   .nav {
     display: flex;
   }
-  .accountPlaceholder {
+  .placeholder {
     margin-left: auto;
   }
 }

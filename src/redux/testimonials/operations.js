@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { testimonialsFetch } from "../../api/testimonialsApi.js";
+import { testimonialsFetch } from "../../api/testimonialsApi";
 import {handleError} from "../utils";
 
 

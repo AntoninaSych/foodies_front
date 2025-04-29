@@ -11,6 +11,8 @@ const Button = ({
   to,
   variant = VARIANTS.PRIMARY,
   type = TYPES.BUTTON,
+  className,
+  onMouseOver
 }) => {
   const clickHandler = (event) => {
     if (onClick) {
@@ -19,13 +21,13 @@ const Button = ({
     }
   };
 
-  const className = clsx(css.button, css[variant]);
+  const classNames = clsx(css.button, css[variant], css[className]);
 
   if (external) {
     return (
       <a
         href={href}
-        className={className}
+        className={classNames}
         rel="nofollow noopener"
         target="_blank"
       >
@@ -34,14 +36,14 @@ const Button = ({
     );
   } else if (to) {
     return (
-      <Link to={to} className={className}>
+      <Link to={to} className={classNames}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} onClick={clickHandler} className={className}>
+    <button type={type} onClick={clickHandler} onMouseOver={onMouseOver} className={classNames}>
       {children}
     </button>
   );
