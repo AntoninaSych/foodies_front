@@ -1,0 +1,144 @@
+:root {
+  --trns-slow: 600ms ease-out;
+  --trns-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --overlay: rgba(18, 20, 23, 0.4);
+  --box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  --color-main: #050505;
+  --color-text: #475467;
+  --color-grey: #6c717b;
+  --color-grey-light: #dadde1;
+  --color-error: #e44848;
+  --color-placeholder: #d0d0d0;
+  --color-badgets: #f2f4f7;
+  --color-button: #e44848;
+  --color-button-hover: #d84343;
+  --color-inputs: #f7f7f7;
+  --color-rating: #ffc531;
+  --color-white: #ffffff;
+}
+
+@font-face {
+  font-family: "Mulish Regular";
+  src: url("/fonts/mulish/Mulish-Regular.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mulish Medium";
+  src: url("/fonts/mulish/Mulish-Medium.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mulish Bold";
+  src: url("/fonts/mulish/Mulish-Bold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Mulish Regular", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  outline: none;
+}
+
+img {
+  display: block;
+}
+
+h1 {
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--color-main);
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+h2 {
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--color-main);
+}
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 70px;
+    line-height: 1.1;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 2;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  h1 {
+    font-size: 90px;
+    line-height: 1.1;
+  }
+  .hero {
+    padding: 260px 64px;
+  }
+}
