@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchRecipes } from "./operations";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchRecipes } from './operations';
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.loading = true;
 };
 
@@ -12,13 +12,13 @@ const handleRejected = (state, action) => {
 };
 
 const recipesSlice = createSlice({
-  name: "recipes",
+  name: 'recipes',
   initialState: {
     items: [],
     loading: false,
     error: null,
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(fetchRecipes.pending, handlePending)
       .addCase(fetchRecipes.fulfilled, (state, action) => {
@@ -26,9 +26,8 @@ const recipesSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchRecipes.rejected, handleRejected)
+      .addCase(fetchRecipes.rejected, handleRejected);
   },
 });
-
 
 export const recipesReducer = recipesSlice.reducer;

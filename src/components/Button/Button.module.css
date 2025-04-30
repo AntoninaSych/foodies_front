@@ -5,18 +5,32 @@
   min-width: 156px;
   cursor: pointer;
   transition: all var(--trns-fast);
-  border-radius: 200px;
+  border-radius: 30px;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   text-transform: uppercase;
   font-family: "Mulish Medium", Arial, sans-serif;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text);
+}
+
+.button:disabled {
+  cursor: default;
 }
 
 .button.primary {
   background-color: var(--color-main);
   color: var(--color-white);
   border: 1px solid var(--color-main);
+}
+
+.button.primary:disabled,
+.button.primary:disabled:hover{
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: 1px solid var(--color-secondary);
 }
 
 .button.primary:hover,
@@ -31,6 +45,13 @@
   border: 1px solid var(--color-text);
 }
 
+.button.secondary:disabled,
+.button.secondary:disabled:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
 .button.secondary:hover,
 .button.secondary:focus-visible {
   background-color: var(--color-main);
@@ -38,15 +59,23 @@
   border-color: var(--color-main);
 }
 
-.button.secondaryReversed {
+.button.secondary-reversed {
   background-color: var(--color-main);
   color: var(--color-white);
   border: 1px solid var(--color-white);
 }
 
-.button.secondaryReversed:hover,
-.button.secondaryReversed:focus-visible {
+.button.secondary-reversed:disabled,
+.button.secondary-reversed:disabled:hover{
+  background-color: var(--color-main);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.button.secondary-reversed:hover,
+.button.secondary-reversed:focus-visible {
   background-color: var(--color-white);
   color: var(--color-main);
   border-color: var(--color-white);
 }
+

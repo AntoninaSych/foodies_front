@@ -1,7 +1,6 @@
-
-import { CATALOG_LIMIT } from "../const";
-import mockData from "./mock/recipes.json";
-import axios, {useMockData} from './default'
+import { CATALOG_LIMIT } from '../const';
+import mockData from './mock/recipes.json';
+import axios, { useMockData } from './default';
 
 export const recipesFetch = async (options = {}) => {
   const params = {
@@ -13,15 +12,15 @@ export const recipesFetch = async (options = {}) => {
     return mockData;
   }
 
-  const response = await axios.get("/recipes", {
+  const response = await axios.get('/recipes', {
     params,
   });
   return response.data;
 };
 
-export const recipesDetailFetch = async (id) => {
+export const recipesDetailFetch = async id => {
   if (useMockData) {
-    return mockData["items"][0];
+    return mockData['items'][0];
   }
   const response = await axios.get(`/recipes/${id}`);
   return response.data;

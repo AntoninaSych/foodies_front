@@ -1,0 +1,26 @@
+.title {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form button {
+  flex-grow: 0;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.helper {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 14px;
+  text-decoration: none;
+}

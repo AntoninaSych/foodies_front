@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchTestimonials } from "./operations";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchTestimonials } from './operations';
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.loading = true;
 };
 
@@ -12,13 +12,13 @@ const handleRejected = (state, action) => {
 };
 
 const testimonialsSlice = createSlice({
-  name: "testimonials",
+  name: 'testimonials',
   initialState: {
     items: [],
     loading: false,
     error: null,
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(fetchTestimonials.pending, handlePending)
       .addCase(fetchTestimonials.fulfilled, (state, action) => {
@@ -26,7 +26,7 @@ const testimonialsSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchTestimonials.rejected, handleRejected)
+      .addCase(fetchTestimonials.rejected, handleRejected);
   },
 });
 

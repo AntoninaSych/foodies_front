@@ -1,11 +1,10 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { areasFetch } from "../../api/areasApi.js";
-import {handleError} from "../utils";
-
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { areasFetch } from '../../api/areasApi';
+import { handleError } from '../utils';
 
 export const fetchAreas = createAsyncThunk(
-  "areas/fetchAll",
-  async (options = {}, {rejectWithValue }) => {
+  'areas/fetchAll',
+  async (options = {}, { rejectWithValue }) => {
     try {
       return await areasFetch({
         ...options,
@@ -15,4 +14,3 @@ export const fetchAreas = createAsyncThunk(
     }
   }
 );
-

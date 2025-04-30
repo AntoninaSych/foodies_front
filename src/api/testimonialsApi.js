@@ -1,6 +1,5 @@
-
-import mockData from "./mock/testimonials.json";
-import axios, {useMockData} from './default'
+import mockData from './mock/testimonials.json';
+import axios, { useMockData } from './default';
 
 export const testimonialsFetch = async (options = {}) => {
   const params = {
@@ -10,9 +9,8 @@ export const testimonialsFetch = async (options = {}) => {
     return mockData;
   }
 
-  const response = await axios.get("/testimonials", {
+  const response = await axios.get('/testimonials', {
     params,
   });
   return response.data;
 };
-

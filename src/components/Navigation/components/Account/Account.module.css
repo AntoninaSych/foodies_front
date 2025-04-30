@@ -1,0 +1,70 @@
+.link {
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.active.dropdown {
+  transform: rotate(180deg);
+}
+
+.placeholder {
+  background-color: var(--color-text);
+  color: var(--color-white);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  padding-right: 14px;
+}
+
+.placeholder .name {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.placeholder .avatar {
+  border-radius: 30px;
+}
+
+.placeholder svg{
+  font-size: 16px;
+}
+.placeholder svg:hover{
+  cursor: pointer;
+}
+
+.menu {
+  min-width: 148px;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  border-radius: 15px;
+  padding: 16px;
+  border: 1px solid var(--color-main);
+  color: var(--color-main);
+  font-family: "Mulish Medium", Arial, sans-serif;
+}
+
+.dark .menu {
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+}
+
+.active.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+}

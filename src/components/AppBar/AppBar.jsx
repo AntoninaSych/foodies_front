@@ -5,11 +5,11 @@ import Navigation from "../Navigation/Navigation";
 import css from "./AppBar.module.css";
 import { ROUTERS } from "../../const";
 import {useSelector} from "react-redux";
-import {selectUser} from "../../redux/user/selectors";
 import AuthBar from "../AuthBar/AuthBar";
+import {selectIsLoggedIn} from "../../redux/auth/selectors";
 
 const AppBar = ({theme}) => {
-  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const className = clsx(css.header, css[theme]);
 
   return (
@@ -22,7 +22,7 @@ const AppBar = ({theme}) => {
             </Link>
           </div>
           <div className={css.nav}>
-            {user ? <Navigation theme={theme} /> : <AuthBar theme={theme} />}
+            {isLoggedIn ? <Navigation theme={theme} /> : <AuthBar theme={theme} />}
           </div>
         </div>
       </Container>

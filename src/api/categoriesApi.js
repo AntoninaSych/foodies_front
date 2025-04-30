@@ -1,6 +1,5 @@
-
-import mockData from "./mock/categories.json";
-import axios, {useMockData} from './default'
+import mockData from './mock/categories.json';
+import axios, { useMockData } from './default';
 
 export const categoriesFetch = async (options = {}) => {
   const params = {
@@ -10,9 +9,8 @@ export const categoriesFetch = async (options = {}) => {
     return mockData;
   }
 
-  const response = await axios.get("/categories", {
+  const response = await axios.get('/categories', {
     params,
   });
   return response.data;
 };
-
