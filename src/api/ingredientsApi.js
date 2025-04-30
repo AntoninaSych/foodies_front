@@ -1,6 +1,5 @@
-
-import mockData from "./mock/ingredients.json";
-import axios, {useMockData} from './default'
+import mockData from './mock/ingredients.json';
+import axios, { useMockData } from './default';
 
 export const ingredientsFetch = async (options = {}) => {
   const params = {
@@ -10,7 +9,7 @@ export const ingredientsFetch = async (options = {}) => {
     return mockData;
   }
 
-  const response = await axios.get("/ingredients", {
+  const response = await axios.get('/ingredients', {
     params,
   });
   return response.data;

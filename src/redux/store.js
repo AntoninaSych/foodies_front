@@ -1,17 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { recipesReducer } from "./recipes/slice";
-import { categoriesReducer } from "./categories/slice";
-import { areasReducer } from "./areas/slice";
-import { ingredientsReducer } from "./ingredients/slice";
-import { testimonialsReducer } from "./testimonials/slice";
-import { authReducer } from "./auth/slice";
-import storage from "redux-persist/lib/storage";
-import {persistReducer, persistStore} from "redux-persist";
+import { configureStore } from '@reduxjs/toolkit';
+import { recipesReducer } from './recipes/slice';
+import { categoriesReducer } from './categories/slice';
+import { areasReducer } from './areas/slice';
+import { ingredientsReducer } from './ingredients/slice';
+import { testimonialsReducer } from './testimonials/slice';
+import { authReducer } from './auth/slice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
 const persistAuthConfig = {
-  key: "auth",
+  key: 'auth',
   storage,
-  whitelist: ["token"],
+  whitelist: ['token'],
 };
 
 export const store = configureStore({
@@ -24,10 +24,10 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     testimonials: testimonialsReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
     }),
 });

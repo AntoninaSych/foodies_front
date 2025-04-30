@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import { errorNotification } from "../../utils/notification";
 import Button from "../Button/Button";
+import Link from "../Link/Link";
 import FieldInput from "../FieldInput/FieldInput";
 import { initialValues } from "./const";
 import { validationSchema } from "./const/validation";
@@ -38,14 +39,16 @@ const LoginForm = ({onSubmit, onChangeForm}) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form className={cssForm.form}>
+        {({ handleSubmit, isSubmitting, dirty }) => (
+        <Form className={cssForm.form} onSubmit={handleSubmit}>
           <FieldInput name="email" placeholder="Email*" />
           <FieldInput type="password" name="password" placeholder="Password*" />
           <div className={cssForm.actions}>
-            <Button type="submit">SIGN IN</Button>
+            <Button variant="primary" type="submit" disabled={isSubmitting || !dirty}>SIGN IN</Button>
           </div>
-          <div className={cssForm.helper}>Don&#39;t have an account? <a href="#" onClick={handleOnChangeForm}>Create an account</a></div>
+          <div className={cssForm.helper}>Don&#39;t have an account? <Link onClick={handleOnChangeForm}>Create an account</Link></div>
         </Form>
+      )}
       </Formik>
     </div>
   );

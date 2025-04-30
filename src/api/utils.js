@@ -1,2 +1,1 @@
-export const getAuthorizationHeader = (token) => `Bearer ${token}`
-
+export const getAuthorizationHeader = token => `Bearer ${token}`;

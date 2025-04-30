@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 const Button = ({
   onClick,
   children,
-  external,
   href,
   to,
-  variant = VARIANTS.PRIMARY,
-  type = TYPES.BUTTON,
+  variant,
   className,
-  onMouseOver
+  type = TYPES.BUTTON,
+  disabled = false
 }) => {
   const clickHandler = (event) => {
     if (onClick) {
@@ -23,7 +22,7 @@ const Button = ({
 
   const classNames = clsx(css.button, css[variant], css[className]);
 
-  if (external) {
+  if (href) {
     return (
       <a
         href={href}
@@ -43,7 +42,7 @@ const Button = ({
   }
 
   return (
-    <button type={type} onClick={clickHandler} onMouseOver={onMouseOver} className={classNames}>
+    <button className={classNames} type={type} onClick={clickHandler} disabled={disabled}>
       {children}
     </button>
   );

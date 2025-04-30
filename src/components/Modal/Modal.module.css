@@ -14,17 +14,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 561px;
+  max-width: 375px;
   width: 100%;
   overflow-y: auto;
   background: #ffffff;
   border: 1px solid var(--color-text);
   border-radius: 30px;
-  padding: 20px 20px 80px 20px;
+  padding: 20px 0 60px 0;
 }
 
 .header {
   display: flex;
+  padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 .closeIcon {
@@ -36,10 +38,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 60px 0 60px;
+  padding: 0 20px;
 }
 
 @media only screen and (min-width: 768px) {
+  .modal {
+    max-width: 561px;
+    padding: 20px 0 80px 0;
+  }
+  .header {
+    margin-bottom: 36px;
+  }
+  .content {
+    padding: 0 60px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .content {
+    padding: 0 80px;
+  }
 }
 
 @keyframes fade {

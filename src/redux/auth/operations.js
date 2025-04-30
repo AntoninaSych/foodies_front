@@ -1,8 +1,13 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchCurrentUser, usersLogin, usersLogout, usersSignup } from "../../api/authApi";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  fetchCurrentUser,
+  usersLogin,
+  usersLogout,
+  usersSignup,
+} from '../../api/authApi';
 
 export const register = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async (user, { rejectWithValue }) => {
     try {
       return await usersSignup(user);
@@ -11,24 +16,24 @@ export const register = createAsyncThunk(
         if (error.response?.data?.keyPattern) {
           const { email } = error.response.data.keyPattern;
           if (email) {
-            return rejectWithValue("The email is already taken");
+            return rejectWithValue('The email is already taken');
           }
         }
-        return rejectWithValue("User creation error");
+        return rejectWithValue('User creation error');
       }
-      return rejectWithValue("Server error");
+      return rejectWithValue('Server error');
     }
   }
 );
 
 export const login = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (user, { rejectWithValue }) => {
     try {
       return await usersLogin(user);
     } catch (error) {
       if (error.status === 400) {
-        return rejectWithValue("Login error, please check your credentials");
+        return rejectWithValue('Login error, please check your credentials');
       }
       return rejectWithValue(error.message);
     }
@@ -36,9 +41,8 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  "auth/logout",
+  'auth/logout',
   async (_, { rejectWithValue, getState }) => {
-
     const {
       auth: { token },
     } = getState();
@@ -52,7 +56,7 @@ export const logout = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+  'auth/refresh',
   async (_, { rejectWithValue, getState }) => {
     const {
       auth: { token },
@@ -65,7 +69,7 @@ export const refreshUser = createAsyncThunk(
         return rejectWithValue(message);
       }
     } else {
-      return rejectWithValue("Token is not available");
+      return rejectWithValue('Token is not available');
     }
   }
 );

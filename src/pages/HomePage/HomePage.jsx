@@ -6,7 +6,7 @@ import { ROUTERS } from "../../const";
 import { fetchCategories } from "../../redux/categories/operations";
 import CategoriesList from "../../components/CategoriesList/CategoriesList";
 import css from "./HomePage.module.css";
-import AppBar from "../../components/AppBar/AppBar.jsx";
+import AppBar from "../../components/AppBar/AppBar";
 
 const HomePage = () => {
   const dispatch = useDispatch();

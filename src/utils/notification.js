@@ -1,7 +1,7 @@
-import { toast } from "react-hot-toast";
+import { toast } from 'react-hot-toast';
 
 const defaultOptions = {
-  position: "bottom-right",
+  position: 'bottom-right',
   duration: 3000,
 };
 

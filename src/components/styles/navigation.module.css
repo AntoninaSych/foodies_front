@@ -36,6 +36,38 @@
   gap: 4px;
 }
 
+.placeholder button {
+  min-width: 104px;
+  padding: 14px 28px;
+  height: 46px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  color: var(--color-main);
+}
+
+.placeholder button {
+  min-width: 104px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  color: var(--color-main);
+}
+
+.placeholder:hover button,
+.placeholder:hover button:nth-child(2) {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-main);
+}
+
+.placeholder button:nth-child(2),
+.placeholder button:nth-child(2):hover,
+.placeholder button:hover,
+.placeholder button:focus-visible {
+  background-color: var(--color-main);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+}
+
 .dark .link {
   color: var(--color-white);
 }

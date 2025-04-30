@@ -1,5 +1,5 @@
-import * as yup from "yup";
-import { text } from "../../../utils/validation";
+import * as yup from 'yup';
+import { text } from '../../../utils/validation';
 
 export const validationSchema = yup.object().shape({
   password: yup
@@ -11,6 +11,6 @@ export const validationSchema = yup.object().shape({
     .string()
     .min(5, text.min(5))
     .max(50, text.max(50))
-    .email("Should be correct email")
+    .email('Should be correct email')
     .required(text.required()),
 });

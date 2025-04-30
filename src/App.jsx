@@ -5,9 +5,9 @@ import Layout from "./components/Layout/Layout";
 import HomeLayout from "./components/Layout/HomeLayout";
 import PrivateRoute from "./components/PrivateRoute";
 import {useDispatch, useSelector} from "react-redux";
-import Loader from "./components/Loader/Loader.jsx";
-import {selectIsRefreshing} from "./redux/auth/selectors.js";
-import {refreshUser} from "./redux/auth/operations.js";
+import Loader from "./components/Loader/Loader";
+import {selectIsRefreshing} from "./redux/auth/selectors";
+import {refreshUser} from "./redux/auth/operations";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));

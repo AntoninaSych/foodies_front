@@ -6,7 +6,7 @@ import css from "./AppBar.module.css";
 import { ROUTERS } from "../../const";
 import {useSelector} from "react-redux";
 import AuthBar from "../AuthBar/AuthBar";
-import {selectIsLoggedIn} from "../../redux/auth/selectors.js";
+import {selectIsLoggedIn} from "../../redux/auth/selectors";
 
 const AppBar = ({theme}) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);

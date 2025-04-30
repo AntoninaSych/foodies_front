@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 import { ROUTERS } from "../../const";
 import css from "../styles/navigation.module.css";
-import Account from "./components/Account/Account.jsx";
+import Account from "./components/Account/Account";
 
 const buildClassName = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
