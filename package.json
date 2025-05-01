@@ -12,6 +12,7 @@
     "lint:js": "eslint src/**/*.{js,jsx}",
     "preview": "vite preview",
     "precommit": "pretty-quick --staged",
+    "format": "prettier --log-level warn --write \"src/**/*.{js,jsx}\"",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
