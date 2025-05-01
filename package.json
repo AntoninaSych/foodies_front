@@ -9,7 +9,7 @@
     "build": "vite build",
     "audit": "npm audit --production --audit-level=critical",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:js": "eslint src",
+    "lint:js": "eslint src/**/*.{js,jsx}",
     "preview": "vite preview",
     "precommit": "pretty-quick --staged",
     "lint-staged": "lint-staged",
