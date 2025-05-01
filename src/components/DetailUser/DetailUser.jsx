@@ -1,11 +1,9 @@
-import css from "./DetailUser.module.css";
+import css from './DetailUser.module.css';
 
-const DetailUser = ({data}) => {
-  console.log('DetailUser / data', data)
-
+const DetailUser = () => {
   return (
     <div className={css.wrapper}>
-      <h2>Detail User Page</h2>
+      <h2>Detail User component</h2>
     </div>
   );
 };
