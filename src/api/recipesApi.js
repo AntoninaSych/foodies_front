@@ -2,6 +2,8 @@ import { CATALOG_LIMIT } from '../const';
 import mockData from './mock/recipes.json';
 import axios, { useMockData } from './default';
 
+// recipes
+
 export const recipesFetch = async (options = {}) => {
   const params = {
     limit: CATALOG_LIMIT,
