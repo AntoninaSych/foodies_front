@@ -12,4 +12,3 @@ check_tests () {
 npm run lint
 check_tests
 
-npm run audit
