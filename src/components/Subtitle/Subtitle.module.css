@@ -1,0 +1,14 @@
+.text {
+  margin-bottom: 32px;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .text {
+    margin-bottom: 40px;
+    max-width: 440px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}
