@@ -55,11 +55,12 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
 
   return (
     <section className={styles.container}>
-      <button className={styles.backBtn} onClick={onBack}>
-        ← <span>Back</span>
-      </button>
+      <div className={styles.desserts}>
+        <button className={styles.backBtn} onClick={onBack}>
+          <span className={styles.arrowLeft}></span>
+          <span>Back</span>
+        </button>
 
-      <div>
         <MainTitle>{category}</MainTitle>
         <Subtitle>
           Go on a taste journey, where every sip is a sophisticated creative

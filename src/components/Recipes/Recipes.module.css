@@ -1,79 +1,94 @@
 .container {
-	padding: 64px 0;
-  }
-  
-  @media screen and (min-width: 768px) {
-	.container {
-	  padding: 100px 0;
-	}
-  }
-  
-  @media screen and (min-width: 1440px) {
-	.container {
-	  padding: 120px 0;
-	}
-  }
-  
-  .backBtn {
-	color: var(--text-headers-color);
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.28px;
-	text-transform: uppercase;
-	background-color: white;
 	display: flex;
-	align-items: center;
-	gap: 6px;
-	margin-bottom: 20px;
-	border: none;
-	cursor: pointer;
+	flex-direction: column;
+	gap: 40px;
   }
   
-  .recipesCategory {
-	display: grid;
-	grid-template-columns: 1fr;
+  .desserts {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 540px;
+	max-height: 150px;
 	gap: 20px;
   }
   
-  @media screen and (min-width: 1440px) {
-	.recipesCategory {
-	  grid-template-columns: 330px 1fr;
-	  gap: 40px;
-	}
+  .backBtn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 700;
+	text-transform: uppercase;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #1A1A1A;
+  }
+  
+  .arrowLeft {
+	display: inline-block;
+	width: 7.5px;
+	height: 7.5px;
+	border-left: 2px solid #1A1A1A;
+	border-bottom: 2px solid #1A1A1A;
+	transform: rotate(45deg);
+	margin-top: 1px;
+  }
+  
+  .recipesCategory {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
   }
   
   .message {
+	font-size: 18px;
+	color: #1A1A1A;
 	text-align: center;
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 29px;
-	letter-spacing: -0.02em;
-	color: var(--text-headers-color);
-	margin-top: 20px;
+	margin-top: 40px;
   }
   
-  .filters {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-  }
+  /* Tablet styles */
+  @media (max-width: 1024px) {
+	.container {
+	  padding: 32px 16px;
+	}
   
-  @media screen and (min-width: 768px) {
-	.filters {
-	  flex-direction: row;
+	.desserts {
+	  margin-bottom: 32px;
+	}
+  
+	.recipesCategory {
+	  gap: 32px;
 	}
   }
   
-  .filters select {
-	border-radius: 30px;
-	padding: 12px 16px;
-	font-size: 14px;
-	border: 1px solid #bfbebe;
-	outline: none;
-	background-color: #fff;
-	cursor: pointer;
-	max-width: 330px;
-	width: 100%;
+  /* Mobile styles */
+  @media (max-width: 767px) {
+	.container {
+	  padding: 24px 16px;
+	}
+  
+	.desserts {
+	  margin-bottom: 24px;
+	}
+  
+	.backBtn {
+	  font-size: 12px;
+	  gap: 6px;
+	}
+  
+	.arrowLeft {
+	  width: 12px;
+	  height: 12px;
+	}
+  
+	.recipesCategory {
+	  gap: 24px;
+	}
+  
+	.message {
+	  font-size: 16px;
+	}
   }
   
