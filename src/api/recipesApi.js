@@ -1,6 +1,7 @@
 import { CATALOG_LIMIT } from '../const';
 import mockData from './mock/recipes.json';
 import axios, { useMockData } from './default';
+import { getAuthorizationHeader } from './utils';
 
 export const recipesFetch = async (options = {}) => {
   const params = {
@@ -23,5 +24,14 @@ export const recipesDetailFetch = async id => {
     return mockData['items'][0];
   }
   const response = await axios.get(`/recipes/${id}`);
+  return response.data;
+};
+
+export const recipeAdd = async (token, data = {}) => {
+  const response = await axios.post('/recipes', data, {
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
   return response.data;
 };
