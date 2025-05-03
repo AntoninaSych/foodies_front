@@ -7,6 +7,7 @@ import { fetchCategories } from '../../redux/categories/operations';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import css from './HomePage.module.css';
 import AppBar from '../../components/AppBar/AppBar';
+import Testimonials from '../../components/Testimonials/Testimonials.jsx';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ const HomePage = () => {
       </div>
       <Container>
         <CategoriesList />
+      </Container>
+      <Container>
+        <Testimonials></Testimonials>
       </Container>
     </div>
   );

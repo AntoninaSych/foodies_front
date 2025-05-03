@@ -1,0 +1,155 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+}
+
+.section {
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: 80px;
+  left: 8px;
+  width: 40px;
+  height: 32px;
+  background: url("/images/quote-icon.svg") no-repeat center/contain;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+  margin-bottom: 16px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 32px;
+  letter-spacing: -0.56px;
+  text-transform: uppercase;
+  margin-bottom: 64px;
+}
+
+.slide {
+  margin-bottom: 40px;
+}
+
+.quote {
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  margin-bottom: 64px;
+  color: var(--color-main);
+}
+
+.author {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.32px;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+.dot {
+  height: 14px;
+  width: 14px;
+  margin: 0 8px;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: var(--color-grey);
+}
+
+.active {
+  background-color: var(--color-main);
+}
+
+/* 📱 Tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    padding: 50px 0;
+  }
+
+  .section::before {
+    top: 76px;
+    left: 40px;
+    width: 59px;
+    height: 48px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.32px;
+  }
+
+  .title {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: -0.8px;
+    margin-bottom: 80px;
+  }
+
+  .quote {
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.48px;
+    margin-bottom: 80px;
+  }
+
+  .author {
+    font-size: 20px;
+    letter-spacing: -0.4px;
+  }
+
+  .dot {
+    margin: 0 12px;
+    height: 16px;
+    width: 16px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    padding: 60px 0;
+  }
+
+  .section {
+    max-width: 822px;
+    margin: 0 auto;
+  }
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
