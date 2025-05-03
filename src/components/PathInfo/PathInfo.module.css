@@ -1,0 +1,34 @@
+.wrapper {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  display: flex;
+  margin-bottom: 32px;
+  list-style: none outside none;
+  font-family: "Mulish Medium", Arial, sans-serif;
+  font-weight: 700;
+}
+
+.wrapper li:after {
+  padding: 0 8px;
+  content: "/"
+}
+
+.wrapper li:last-of-type:after {
+  content: "";
+  padding: 0;
+}
+
+.current {
+  color: var(--color-main);
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-bottom: 40px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}
