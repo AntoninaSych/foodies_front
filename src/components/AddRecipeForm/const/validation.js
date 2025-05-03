@@ -1,8 +1,6 @@
 import * as yup from 'yup';
 import { text } from '../../../utils/validation';
 
-// const MAX_FILE_SIZE = 2000000;
-
 export const validationSchema = yup.object().shape({
   title: yup
     .string()
@@ -14,6 +12,17 @@ export const validationSchema = yup.object().shape({
     .min(3, text.min(3))
     .max(200, text.max(200))
     .required(text.required()),
+  instructions: yup
+    .string()
+    .min(10, text.min(10))
+    .max(1000, text.max(1000))
+    .required(text.required()),
+  category: yup.object().required(text.required()),
+  time: yup.string().required(text.required()),
+  ingredients: yup
+    .array()
+    .of(yup.object())
+    .min(1, 'Add at least one ingredient'),
   // thumb: yup.object().shape({
   //   file: yup
   //     .mixed()

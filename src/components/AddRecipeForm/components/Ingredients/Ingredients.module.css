@@ -1,7 +1,6 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
 }
 
 .twoColumns {
@@ -14,21 +13,44 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  padding-top: 32px;
 }
 .actions {
+  margin-top: 32px;
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
+.errorMessage {
+  margin-top: 6px;
+}
+
+.ingredientCardWrapper {
+  position: relative;
+}
+
+.deleteButton {
+  border: none;
+  background: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
 /* tablet */
 @media only screen and (min-width: 768px) {
-  .wrapper {
-    gap: 40px;
+  .actions {
+    margin-top: 40px;
   }
 
   .twoColumns {
     flex-direction: row;
+  }
+  .wrapperIngredients {
+    padding-top: 40px;
   }
 }
 

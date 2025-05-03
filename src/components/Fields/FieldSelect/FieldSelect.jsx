@@ -1,43 +1,63 @@
 import clsx from 'clsx';
+import Select from 'react-select';
+import { Controller } from 'react-hook-form';
 import { useId } from 'react';
 import css from '../Fields.module.css';
+import ErrorField from '../ErrorField/ErrorField.jsx';
 
 const FieldSelect = ({
   name,
-  placeholder,
   label,
-  required,
-  register,
+  control,
   options,
   onChange,
+  placeholder,
+  value,
+  defaultValue,
+  error,
+  notShowErrorMessage,
   className = '',
 }) => {
   const fieldId = useId();
 
-  const handleChange = event => {
-    onChange && onChange(event.target.value);
+  const handleChange = data => {
+    onChange && onChange(data);
+  };
+
+  const defaultProps = {
+    classNamePrefix: 'select',
+    className: css.select,
+    options,
+    onChange: handleChange,
+    placeholder: placeholder,
+    value,
+    defaultValue,
+    ariaInvalid: error ? 'true' : 'false',
   };
 
   return (
-    <div className={clsx(css.field, className)}>
+    <div className={clsx(css.field, className, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
       <div className={clsx(css.inputWrapper)}>
-        <select
-          {...(register && register(name, { required }))}
-          onChange={handleChange}
-        >
-          {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
-          )}
-          {options.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        {control ? (
+          <Controller
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...defaultProps}
+                {...field}
+                value={value}
+                defaultValue={defaultValue}
+                placeholder={placeholder}
+              />
+            )}
+          />
+        ) : (
+          <Select {...defaultProps} />
+        )}
       </div>
+      {error && !notShowErrorMessage && <ErrorField>{error}</ErrorField>}
     </div>
   );
 };

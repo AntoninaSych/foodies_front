@@ -1,19 +1,10 @@
-import { useForm } from 'react-hook-form';
 import css from '../Fields.module.css';
 
-const ErrorField = ({ name }) => {
-  const {
-    formState: { errors },
-  } = useForm();
-
+const ErrorField = ({ children }) => {
   return (
-    <>
-      {errors[name] && (
-        <p className={css.error} role="alert">
-          {errors[name]?.message}
-        </p>
-      )}
-    </>
+    <p className={css.errorMessage} role="alert">
+      {children}
+    </p>
   );
 };
 

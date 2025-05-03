@@ -28,13 +28,16 @@ const AddRecipeForm = ({ onSubmit }) => {
 
   const {
     reset,
+    control,
     register,
     setValue,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
+    reValidateMode: 'onBlur',
+    mode: 'onChange',
   });
 
   const handleUploadedFile = file => {
@@ -45,10 +48,15 @@ const AddRecipeForm = ({ onSubmit }) => {
     setValue('ingredients', values);
   };
 
-  const onResetHandler = () => {
-    reset();
+  const handleChangeCategory = data => {
+    setValue('category', data.value);
   };
-  const handleTimeChange = value => setValue('time', value);
+
+  const onResetHandler = () => {
+    reset(defaultValues);
+  };
+
+  const handleTimeChange = value => setValue('time', `${value} min`);
 
   return (
     <div className={css.wrapper}>
@@ -66,6 +74,7 @@ const AddRecipeForm = ({ onSubmit }) => {
               name="title"
               register={register}
               placeholder="The name of the recipe"
+              error={errors.title && errors.title?.message}
               strong
               required
             />
@@ -73,6 +82,7 @@ const AddRecipeForm = ({ onSubmit }) => {
               name="description"
               register={register}
               placeholder="Enter a description of the dish"
+              error={errors.description && errors.description?.message}
               maxLength={200}
               required
             />
@@ -81,9 +91,11 @@ const AddRecipeForm = ({ onSubmit }) => {
             <FieldSelect
               label="CATEGORY"
               name="category"
-              register={register}
+              control={control}
               placeholder="Select a category"
               options={categoriesOptions}
+              onChange={handleChangeCategory}
+              error={errors.category && errors.category?.message}
               required
             />
             <FieldCount
@@ -93,6 +105,7 @@ const AddRecipeForm = ({ onSubmit }) => {
               placeholder="Enter a description of the dish"
               onChange={handleTimeChange}
               maxLength={200}
+              error={errors.time && errors.time?.message}
               required
             />
           </div>
@@ -100,12 +113,14 @@ const AddRecipeForm = ({ onSubmit }) => {
             ingredients={ingredients}
             name="ingredients"
             onChange={handleChangeIngredients}
+            error={errors.ingredients && errors.ingredients?.message}
           />
           <FieldTextarea
             name="instructions"
             register={register}
             placeholder="Enter recipe"
             label="RECIPE PREPARATION"
+            error={errors.instructions && errors.instructions?.message}
             maxLength={1000}
             required
           />

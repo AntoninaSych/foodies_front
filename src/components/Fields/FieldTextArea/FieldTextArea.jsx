@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useId, useState } from 'react';
 import css from '../Fields.module.css';
+import ErrorField from '../ErrorField/ErrorField.jsx';
 
 const FieldTextArea = ({
   name,
@@ -10,6 +11,7 @@ const FieldTextArea = ({
   required,
   placeholder,
   maxLength,
+  error,
 }) => {
   const [count, setCount] = useState(0);
   const fieldId = useId();
@@ -21,7 +23,7 @@ const FieldTextArea = ({
   };
 
   return (
-    <div className={clsx(css.field, className)}>
+    <div className={clsx(css.field, className, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
       <div
         className={clsx(css.inputWrapper, defaultMaxLength && css.withCount)}
@@ -31,6 +33,7 @@ const FieldTextArea = ({
           placeholder={placeholder}
           onChange={maxLength && handleCount}
           maxLength={defaultMaxLength}
+          aria-invalid={error ? 'true' : 'false'}
         />
 
         {maxLength && (
@@ -39,6 +42,7 @@ const FieldTextArea = ({
           </span>
         )}
       </div>
+      {error && <ErrorField>{error}</ErrorField>}
     </div>
   );
 };

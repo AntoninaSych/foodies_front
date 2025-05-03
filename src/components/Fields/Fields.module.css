@@ -53,6 +53,21 @@
   width: 100%;
 }
 
+.select {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.select .select__control {
+  border-radius: 30px;
+  height: 56px;
+}
+
+.select .select__menu {
+  border-radius: 30px;
+  background-color: #1A1A1A;
+}
+
 .inputWrapper.withCount {
   position: relative;
 }
@@ -88,12 +103,19 @@
 .field input::placeholder, .field textarea::placeholder {
   color: var(--color-placeholder);
 }
+.errorMessage {
+  color: var(--color-error);
+  margin-top: 4px;
+}
 
-.error {
+.error label {
   display: block;
   color: var(--color-error);
 }
 
+.field.error input, .field.error textarea {
+  border-color:  var(--color-error);
+}
 
 /* tablet */
 @media only screen and (min-width: 768px) {

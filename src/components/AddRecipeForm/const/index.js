@@ -1,7 +1,9 @@
 export const defaultValues = {
   title: '',
   description: '',
-  category: '',
+  category: null,
   instructions: '',
   thumb: '',
+  time: '10 min',
+  ingredients: [],
 };
