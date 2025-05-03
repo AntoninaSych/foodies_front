@@ -54,7 +54,7 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
   };
 
   return (
-    <section className={styles.container}>
+    <section className={styles.recipes}>
       <div className={styles.desserts}>
         <button className={styles.backBtn} onClick={onBack}>
           <span className={styles.arrowLeft}></span>

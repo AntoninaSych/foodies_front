@@ -8,7 +8,7 @@ const RecipeFilters = ({
   onFilterChange,
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.filters}>
       <div className={styles.selectContainer}>
         <select
           className={styles.select}

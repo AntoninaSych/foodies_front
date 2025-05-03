@@ -1,4 +1,4 @@
-.container {
+.recipes {
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
@@ -37,12 +37,11 @@
   
   .recipesCategory {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	gap: 40px;
   }
   
   .message {
-	font-size: 18px;
 	color: #1A1A1A;
 	text-align: center;
 	margin-top: 40px;
@@ -50,8 +49,8 @@
   
   /* Tablet styles */
   @media (max-width: 1024px) {
-	.container {
-	  padding: 32px 16px;
+	.recipes {
+	 
 	}
   
 	.desserts {
@@ -65,8 +64,8 @@
   
   /* Mobile styles */
   @media (max-width: 767px) {
-	.container {
-	  padding: 24px 16px;
+	.recipes {
+	  
 	}
   
 	.desserts {
