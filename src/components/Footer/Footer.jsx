@@ -29,16 +29,36 @@ const Footer = () => {
           </a>
           <ul className={css.list_social}>
             {socialLinks.map(({ href, iconId, label }) => (
-              <li key={label} className={css.item_social}>
+              <li key={iconId} className={css.item_social}>
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className={css.social_link}
                 >
-                  <svg className={css.icon} aria-hidden="true">
-                    <use xlinkHref={`/sprite.svg#${iconId}`} />
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    className={css.button_svg}
+                  >
+                    {/* рамка-кружечко */}
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="39"
+                      height="39"
+                      rx="19.5"
+                      stroke="currentColor"
+                      fill="none"
+                    />
+                    {/* символ із sprite.svg, займає весь viewBox */}
+                    <use
+                      xlinkHref={`/sprite.svg#${iconId}`}
+                      fill="currentColor"
+                    />
                   </svg>
                 </a>
               </li>
