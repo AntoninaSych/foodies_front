@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 32px;
+  }
+  
+  .selectContainer {
+	position: relative;
+	width: 100%;
+	max-width: 330px;
+  }
+  
+  .select {
+	position: relative;
+	width: 100%;
+	height: 56px;
+	padding: 16px 18px;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: 'Mulish', sans-serif;
+	color: #1a1a1a;
+	background-color: #fff;
+	border: 1px solid #bfbebe;
+	border-radius: 30px;
+	appearance: none;
+	cursor: pointer;
+  }
+  
+  .selectContainer::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	right: 18px;
+	width: 9px;
+	height: 9px;
+	fill: none;
+	border: solid #050505;
+	border-width: 0 1.8px 1.8px 0;
+	transform: translateY(-50%) rotate(45deg);
+	pointer-events: none;
+	margin-right: 18px;
+  }
+  
+  @media (min-width: 768px) {
+	.selectContainer {
+	  width: 345px;
+	}
+  
+	.select {
+	  height: 56px;
+	}
+  }
+  
+  @media (min-width: 1440px) {
+	.selectContainer {
+	  width: 330px;
+	}
+  }
+  

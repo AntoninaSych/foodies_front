@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
+import RecipeFilters from '../RecipeFilters/RecipeFilters';
 
 import styles from './Recipes.module.css';
 
@@ -25,15 +26,15 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
   }
 
   useEffect(() => {
-    const filters = {
-      category,
-      page: currentPage,
-      size: limit,
-      ...(selectedIngredient && { ingredient: selectedIngredient }),
-      ...(selectedArea && { area: selectedArea }),
-    };
-
-    dispatch(fetchRecipes(filters));
+    dispatch(
+      fetchRecipes({
+        category,
+        ingredient: selectedIngredient,
+        area: selectedArea,
+        page: currentPage,
+        size: limit,
+      })
+    );
   }, [
     dispatch,
     category,
@@ -52,17 +53,13 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
     setCurrentPage(1);
   };
 
-  const recipeArray = Array.isArray(recipes) ? recipes : recipes?.recipes || [];
-
-  console.log('recipes:', recipes);
-
   return (
     <section className={styles.container}>
       <button className={styles.backBtn} onClick={onBack}>
         ← <span>Back</span>
       </button>
 
-      <div className={styles.textWrapper}>
+      <div>
         <MainTitle>{category}</MainTitle>
         <Subtitle>
           Go on a taste journey, where every sip is a sophisticated creative
@@ -71,37 +68,23 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
         </Subtitle>
       </div>
 
-      <div className={styles.filters}>
-        <select
-          value={selectedIngredient}
-          onChange={e => handleFilterChange('ingredient', e.target.value)}
-        >
-          <option value="">Ingredients</option>
-          {ingredients.map(item => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+      <div className={styles.recipesCategory}>
+        <RecipeFilters
+          ingredients={ingredients}
+          areas={areas}
+          selectedIngredient={selectedIngredient}
+          selectedArea={selectedArea}
+          onFilterChange={handleFilterChange}
+        />
 
-        <select
-          value={selectedArea}
-          onChange={e => handleFilterChange('area', e.target.value)}
-        >
-          <option value="">Area</option>
-          {areas.map(area => (
-            <option key={area} value={area}>
-              {area}
-            </option>
-          ))}
-        </select>
+        <div>
+          {recipes?.recipes?.length ? (
+            <RecipeList recipes={recipes.recipes} />
+          ) : (
+            <p className={styles.message}>No recipes found.</p>
+          )}
+        </div>
       </div>
-
-      {recipeArray.length > 0 ? (
-        <RecipeList recipes={recipeArray} />
-      ) : (
-        <p className={styles.message}>No recipes found.</p>
-      )}
     </section>
   );
 };
