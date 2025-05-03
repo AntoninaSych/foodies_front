@@ -1,0 +1,131 @@
+.heroSection {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 111px;
+  padding-bottom: 29.5px;
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.title {
+  color: var(--color-white);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 327px;
+}
+
+.subtitle {
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.04em;
+  text-align: center;
+  max-width: 326px;
+}
+
+.heroButton {
+  min-width: 131px;
+  height: 44px;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.imgWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 100.76px;
+}
+
+.imgSmall {
+  max-width: 100%;
+  width: 77px;
+  padding-bottom: 26px;
+}
+
+.imgLarge {
+  max-width: 100%;
+  width: 190px;
+}
+
+@media (min-width: 768px) {
+  .textWrapper {
+    max-width: 768px;  
+    gap: 40px;
+    padding-top: 99px;
+    padding-bottom: 30.2px;
+  }
+
+  .title {
+    font-size: 70px;
+    max-width: 678px;
+    letter-spacing: -0.03em;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    max-width: 577px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+  }
+
+  .heroButton {
+    min-width: 159px;
+    height: 56px;
+    padding: 16px 32px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+ 
+  .imgWrapper {
+    padding-bottom: 90.97px;
+  }
+
+  .imgSmall {
+    width: 128px;
+    padding-bottom: 47px;
+  }
+
+  .imgLarge {
+    width: 302px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .textWrapper {
+    max-width: 1440px;  
+    padding-top: 24px;
+    padding-bottom: 40.21px;
+  }
+  
+  .title {
+    font-size: 90px;
+    max-width: 875px;
+    letter-spacing: -0.02em;
+  }
+
+  .imgWrapper {
+    padding-bottom: 81.97px;
+  } 
+}
