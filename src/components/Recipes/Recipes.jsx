@@ -1,42 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
-
-import MainTitle from '../MainTitle/MainTitle.jsx';
-import Subtitle from '../Subtitle/Subtitle.jsx';
-import RecipeList from '../RecipeList/RecipeList.jsx';
-import RecipeFilters from '../RecipeFilters/RecipeFilters.jsx';
-import categoryDescriptions from '../../constants/constants.js';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectArea } from '../../redux/areas/areaSlice';
-import { selectIngredient } from '../../redux/ingredients/ingredientSlice';
-import { selectCategory } from '../../redux/categories/categorySlice';
-import Pagination from '../Pagination/Pagination.jsx';
-import { fetchRecipesByFilters } from '../../redux/recipes/operations.js';
-import { useLocation, useNavigate } from 'react-router';
-import { selectLoading } from '../../redux/recipes/selectors.js';
-import Loader from '../Loader/Loader.jsx';
 
-import style from '../App.module.css';
-import css from './Recipes.module.css';
-import icons from '../../img/icons2.svg';
+import MainTitle from '../MainTitle/MainTitle';
+import Subtitle from '../Subtitle/Subtitle';
+import RecipeList from '../RecipeList/RecipeList';
 
-const Recipes = () => {
-  const categoriesListElement = useRef(null);
-  const navigate = useNavigate();
-  const location = useLocation();
+import styles from './Recipes.module.css';
+
+import { fetchRecipes } from '../../redux/recipes/operations';
+import { selectRecipes } from '../../redux/recipes/selectors';
+
+const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
-  const selectedCategory = useSelector(
-    state => state.categories.selectedCategory
-  );
-  const selectedArea = useSelector(state => state.areas.selectedArea);
-  const selectedIngredient = useSelector(
-    state => state.ingredients.selectedIngredient
-  );
-  const recipes = useSelector(state => state.recipes.list);
-  const prevLocation = location.state || '/';
+  const recipes = useSelector(selectRecipes);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(getLimit());
+  const [limit] = useState(getLimit());
+  const [selectedIngredient, setSelectedIngredient] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
 
   function getLimit() {
     const width = window.innerWidth;
@@ -44,93 +25,83 @@ const Recipes = () => {
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      setLimit(getLimit());
+    const filters = {
+      category,
+      page: currentPage,
+      size: limit,
+      ...(selectedIngredient && { ingredient: selectedIngredient }),
+      ...(selectedArea && { area: selectedArea }),
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handlePageChange = page => {
-    setCurrentPage(page);
-  };
-
-  const handleClick = () => {
-    navigate(prevLocation);
-    dispatch(selectArea(''));
-    dispatch(selectIngredient(''));
-    dispatch(selectCategory(''));
-  };
-
-  useEffect(() => {
-    dispatch(
-      fetchRecipesByFilters({
-        category: selectedCategory,
-        area: selectedArea,
-        ingredient: selectedIngredient,
-        page: currentPage,
-        size: limit,
-      })
-    );
+    dispatch(fetchRecipes(filters));
   }, [
     dispatch,
-    selectedCategory,
-    selectedArea,
+    category,
     selectedIngredient,
+    selectedArea,
     currentPage,
     limit,
   ]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedArea, selectedIngredient]);
-
-  useEffect(() => {
-    if (recipes.totalPages) {
-      setTotalPages(recipes.totalPages);
+  const handleFilterChange = (type, value) => {
+    if (type === 'ingredient') {
+      setSelectedIngredient(value);
+    } else if (type === 'area') {
+      setSelectedArea(value);
     }
-  }, [recipes]);
+    setCurrentPage(1);
+  };
+
+  const recipeArray = Array.isArray(recipes) ? recipes : recipes?.recipes || [];
+
+  console.log('recipes:', recipes);
 
   return (
-    <section className={css['recipes-section']}>
-      <div className={style.container}>
-        <button className={css.btn} onClick={handleClick}>
-          <svg className={css.icon}>
-            <use href={`${icons}#icon-arrow-up-right`}></use>
-          </svg>
-          back
-        </button>
-        <div ref={categoriesListElement}></div>
-        <MainTitle>
-          {!selectedCategory ? 'Recipes' : selectedCategory}
-        </MainTitle>
-        <Subtitle>{categoryDescriptions[selectedCategory]}</Subtitle>
-        <div className={css['recipes-category']}>
-          <div>
-            <RecipeFilters />
-          </div>
-          <div className={css.loader}>
-            {isLoading && <Loader />}
-            {recipes.recipes
-              ? !isLoading && <RecipeList recipes={recipes.recipes} />
-              : !isLoading && (
-                  <p className={css.message}>
-                    No recipes found for this category.
-                  </p>
-                )}
-            {recipes.totalItems === 0 ? (
-              !isLoading && <p className={css.message}>No recipes found.</p>
-            ) : (
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            )}
-          </div>
-        </div>
+    <section className={styles.container}>
+      <button className={styles.backBtn} onClick={onBack}>
+        ← <span>Back</span>
+      </button>
+
+      <div className={styles.textWrapper}>
+        <MainTitle>{category}</MainTitle>
+        <Subtitle>
+          Go on a taste journey, where every sip is a sophisticated creative
+          chord, and every dessert is an expression of the most refined
+          gastronomic desires.
+        </Subtitle>
       </div>
+
+      <div className={styles.filters}>
+        <select
+          value={selectedIngredient}
+          onChange={e => handleFilterChange('ingredient', e.target.value)}
+        >
+          <option value="">Ingredients</option>
+          {ingredients.map(item => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={selectedArea}
+          onChange={e => handleFilterChange('area', e.target.value)}
+        >
+          <option value="">Area</option>
+          {areas.map(area => (
+            <option key={area} value={area}>
+              {area}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {recipeArray.length > 0 ? (
+        <RecipeList recipes={recipeArray} />
+      ) : (
+        <p className={styles.message}>No recipes found.</p>
+      )}
     </section>
   );
 };

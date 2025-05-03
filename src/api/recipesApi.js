@@ -25,3 +25,18 @@ export const recipesDetailFetch = async id => {
   const response = await axios.get(`/recipes/${id}`);
   return response.data;
 };
+
+export const addRecipeToFavorites = async recipeId => {
+  const { data } = await axios.post(`/recipes/${recipeId}/favorite`);
+  return data;
+};
+
+export const removeRecipeFromFavorites = async recipeId => {
+  const { data } = await axios.delete(`/recipes/${recipeId}/favorite`);
+  return data;
+};
+
+export const getFavoritesApi = async () => {
+  const response = await axios.get('/favorites');
+  return response.data;
+};

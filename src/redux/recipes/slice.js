@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchRecipes } from './operations';
+import {
+  fetchRecipes,
+  addToFavorites,
+  removeFromFavorites,
+} from './operations';
 
 const handlePending = state => {
   state.loading = true;
@@ -15,6 +19,7 @@ const recipesSlice = createSlice({
   name: 'recipes',
   initialState: {
     items: [],
+    favorites: [],
     loading: false,
     error: null,
   },
@@ -26,7 +31,27 @@ const recipesSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchRecipes.rejected, handleRejected);
+      .addCase(fetchRecipes.rejected, handleRejected)
+
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        const updatedRecipe = action.payload;
+        const index = state.items.findIndex(
+          item => item.id === updatedRecipe.id
+        );
+        if (index !== -1) {
+          state.items[index].isFavorite = true;
+        }
+      })
+
+      .addCase(removeFromFavorites.fulfilled, (state, action) => {
+        const updatedRecipe = action.payload;
+        const index = state.items.findIndex(
+          item => item.id === updatedRecipe.id
+        );
+        if (index !== -1) {
+          state.items[index].isFavorite = false;
+        }
+      });
   },
 });
 

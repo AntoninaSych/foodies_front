@@ -1,5 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { recipesFetch } from '../../api/recipesApi';
+import {
+  recipesFetch,
+  addRecipeToFavorites,
+  removeRecipeFromFavorites,
+  getFavoritesApi,
+} from '../../api/recipesApi';
 import { handleError } from '../utils';
 
 export const fetchRecipes = createAsyncThunk(
@@ -9,6 +14,40 @@ export const fetchRecipes = createAsyncThunk(
       return await recipesFetch({
         ...options,
       });
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+export const addToFavorites = createAsyncThunk(
+  'recipes/addToFavorites',
+  async (recipeId, { rejectWithValue }) => {
+    try {
+      return await addRecipeToFavorites(recipeId);
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+export const removeFromFavorites = createAsyncThunk(
+  'recipes/removeFromFavorites',
+  async (recipeId, { rejectWithValue }) => {
+    try {
+      return await removeRecipeFromFavorites(recipeId);
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+export const getFavoriteRecipes = createAsyncThunk(
+  'recipes/getFavorites',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getFavoritesApi(); // <- async API виклик
+      return data;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
