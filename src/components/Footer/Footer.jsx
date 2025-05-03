@@ -1,14 +1,53 @@
-import Container from "../Container/Container";
+import Container from '../Container/Container';
+import css from './Footer.module.css';
 
-import css from "./Footer.module.css";
+const socialLinks = [
+  {
+    href: 'https://www.facebook.com/goITclub/',
+    iconId: 'facebook',
+    label: 'Facebook',
+  },
+  {
+    href: 'https://www.instagram.com/goitclub/',
+    iconId: 'instagram',
+    label: 'Instagram',
+  },
+  {
+    href: 'https://www.youtube.com/c/GoIT',
+    iconId: 'youtube',
+    label: 'YouTube',
+  },
+];
 
 const Footer = () => {
-  const year = (new Date()).getFullYear();
-
   return (
-    <footer className={css.footer}>
-      <Container>
-        <div className={css.wrapper}>@{year}, Foodies. All rights reserved</div>
+    <footer>
+      <Container className={css.container}>
+        <div className={css.wrap_footer}>
+          <a href="/" className={css.logo}>
+            foodies
+          </a>
+          <ul className={css.list_social}>
+            {socialLinks.map(({ href, iconId, label }) => (
+              <li key={label} className={css.item_social}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={css.social_link}
+                >
+                  <svg className={css.icon} aria-hidden="true">
+                    <use xlinkHref={`/sprite.svg#${iconId}`} />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className={css.copr}>
+          &copy; 2024, Foodies. All rights reserved
+        </div>
       </Container>
     </footer>
   );
