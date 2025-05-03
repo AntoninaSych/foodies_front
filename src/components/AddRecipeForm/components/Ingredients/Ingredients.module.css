@@ -1,0 +1,60 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.twoColumns {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
+.wrapperIngredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 32px;
+}
+.actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.errorMessage {
+  margin-top: 6px;
+}
+
+.ingredientCardWrapper {
+  position: relative;
+}
+
+.deleteButton {
+  border: none;
+  background: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .actions {
+    margin-top: 40px;
+  }
+
+  .twoColumns {
+    flex-direction: row;
+  }
+  .wrapperIngredients {
+    padding-top: 40px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+
+}

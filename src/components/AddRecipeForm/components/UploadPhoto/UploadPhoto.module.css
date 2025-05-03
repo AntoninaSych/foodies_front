@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.imagePlaceholder {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='1' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+.fileInput {
+  display: none;
+}
+
+.customFileUpload {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.placeholder {
+  font-size: 42px;
+  color: var(--color-placeholder);
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    gap: 20px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}

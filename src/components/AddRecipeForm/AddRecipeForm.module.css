@@ -1,0 +1,53 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.sidebar {
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+}
+
+.twoColumns {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actions {
+display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    gap: 80px;
+  }
+  .form {
+    gap: 60px;
+  }
+  .twoColumns {
+    flex-direction: row;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    flex-direction: row;
+  }
+  .sidebar {
+    max-width: 550px;
+  }
+}
