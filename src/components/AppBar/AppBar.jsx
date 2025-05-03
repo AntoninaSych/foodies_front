@@ -19,9 +19,7 @@ const AppBar = ({ theme }) => {
         <div className={css.wrapper}>
           <div className={css.brand}>
             <Logo />
-            <Link to={ROUTERS.HOME}>
-              <span>foodies</span>
-            </Link>
+            <Link to={ROUTERS.HOME}></Link>
           </div>
           <div className={css.nav}>
             {isLoggedIn ? (

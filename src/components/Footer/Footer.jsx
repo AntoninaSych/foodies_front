@@ -1,5 +1,6 @@
 import Container from '../Container/Container';
 import css from './Footer.module.css';
+import Logo from '../Logo/Logo';
 
 const socialLinks = [
   {
@@ -24,9 +25,7 @@ const Footer = () => {
     <footer>
       <Container className={css.container}>
         <div className={css.wrap_footer}>
-          <a href="/" className={css.logo}>
-            foodies
-          </a>
+          <Logo className={css.footerLogo} />
           <ul className={css.list_social}>
             {socialLinks.map(({ href, iconId, label }) => (
               <li key={iconId} className={css.item_social}>

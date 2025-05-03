@@ -9,9 +9,10 @@
   align-items: center;
   padding: 24px 16px;
   border-top: 1px solid var(--color-secondary);
+  --logo-color:var(--color-main);
 }
 
-.logo {
+.footerLogo {
   font-family: "Mulish Bold", Arial, sans-serif;
   font-size: 20px;
   font-weight: 800;
