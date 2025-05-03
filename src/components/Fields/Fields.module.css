@@ -1,0 +1,112 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+}
+
+.field label {
+  margin-bottom: 8px;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-bottom: 1px solid var(--color-secondary);
+  padding: 16px 18px 16px 0;
+  outline: none;
+}
+
+.field.strong input,
+.field.strong input:hover,
+.field.strong input:focus{
+  border-color: transparent;
+}
+
+.field.strong input {
+  text-transform: uppercase;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.field.strong input:hover,
+.field.strong input:focus{
+  border-color: transparent;
+}
+
+.field textarea {
+  overflow:hidden
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.inputWrapper.withCount {
+  position: relative;
+}
+
+.inputWrapper.withCount input, .inputWrapper.withCount textarea {
+  padding-right: 80px;
+}
+
+.inputCountWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  font-size: 24px;
+}
+
+.step {
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+
+.count {
+  color: var(--color-secondary);
+  position: absolute;
+  right: 0;
+}
+
+.field input:focus,
+.field input:hover {
+  border-bottom: 1px solid var(--color-main);
+}
+
+.field input::placeholder, .field textarea::placeholder {
+  color: var(--color-placeholder);
+}
+
+.error {
+  display: block;
+  color: var(--color-error);
+}
+
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .field label {
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  .field.strong input {
+    font-size: 24px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+
+}

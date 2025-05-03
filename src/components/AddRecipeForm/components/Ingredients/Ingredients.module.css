@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.twoColumns {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
+.wrapperIngredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    gap: 40px;
+  }
+
+  .twoColumns {
+    flex-direction: row;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+
+}
