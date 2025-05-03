@@ -1,7 +1,7 @@
-import clsx from "clsx";
-import { TYPES, VARIANTS } from "./const";
-import css from "./Button.module.css";
-import { Link } from "react-router-dom";
+import clsx from 'clsx';
+import { TYPES, VARIANTS } from './const';
+import css from './Button.module.css';
+import { Link } from 'react-router-dom';
 
 const Button = ({
   onClick,
@@ -11,16 +11,16 @@ const Button = ({
   variant,
   className,
   type = TYPES.BUTTON,
-  disabled = false
+  disabled = false,
 }) => {
-  const clickHandler = (event) => {
+  const clickHandler = event => {
     if (onClick) {
       event.preventDefault();
       onClick(event);
     }
   };
 
-  const classNames = clsx(css.button, css[variant], css[className]);
+  const classNames = clsx(css.button, variant && css[variant], className);
 
   if (href) {
     return (
@@ -42,7 +42,12 @@ const Button = ({
   }
 
   return (
-    <button className={classNames} type={type} onClick={clickHandler} disabled={disabled}>
+    <button
+      className={classNames}
+      type={type}
+      onClick={clickHandler}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

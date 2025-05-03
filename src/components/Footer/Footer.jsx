@@ -20,7 +20,6 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-
   return (
     <footer>
       <Container className={css.container}>
