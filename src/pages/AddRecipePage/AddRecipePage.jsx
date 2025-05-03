@@ -1,12 +1,15 @@
+import { useEffect } from 'react';
 import Container from '../../components/Container/Container';
 import css from './AddRecipePage.module.css';
 import AddRecipeForm from '../../components/AddRecipeForm/AddRecipeForm';
 import { recipeAdd } from '../../api/recipesApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToken } from '../../redux/auth/selectors';
-import { useEffect } from 'react';
 import { fetchCategories } from '../../redux/categories/operations';
 import { fetchIngredients } from '../../redux/ingredients/operations';
+import PathInfo from '../../components/PathInfo/PathInfo.jsx';
+import MainTitle from '../../components/MainTitle/MainTitle.jsx';
+import Subtitle from '../../components/Subtitle/Subtitle.jsx';
 
 const AddRecipePage = () => {
   const token = useSelector(selectToken);
@@ -37,12 +40,12 @@ const AddRecipePage = () => {
   return (
     <div className={css.wrapper}>
       <Container>
-        <div>HOME / ADD RECIPE</div>
-        <h2>Add recipe page</h2>
-        <div>
+        <PathInfo breadcrumbs={[{ name: 'add recipe' }]} />
+        <MainTitle>Add recipe</MainTitle>
+        <Subtitle>
           Reveal your culinary art, share your favorite recipe and create
           gastronomic masterpieces with us.
-        </div>
+        </Subtitle>
         <AddRecipeForm onSubmit={onSubmit} />
       </Container>
     </div>
