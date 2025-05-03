@@ -1,0 +1,10 @@
+.title {
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}
