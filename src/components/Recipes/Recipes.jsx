@@ -9,11 +9,19 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import styles from './Recipes.module.css';
 
 import { fetchRecipes } from '../../redux/recipes/operations';
-import { selectRecipes } from '../../redux/recipes/selectors';
+import { fetchIngredients } from '../../redux/ingredients/operations';
+import { fetchAreas } from '../../redux/areas/operations';
 
-const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
+import { selectRecipes } from '../../redux/recipes/selectors';
+import { selectIngredients } from '../../redux/ingredients/selectors';
+import { selectAreas } from '../../redux/areas/selectors';
+
+const Recipes = ({ category, onBack }) => {
   const dispatch = useDispatch();
+
   const recipes = useSelector(selectRecipes);
+  const ingredients = useSelector(selectIngredients);
+  const areas = useSelector(selectAreas);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit] = useState(getLimit());
@@ -24,6 +32,11 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
     const width = window.innerWidth;
     return width < 768 ? 8 : 12;
   }
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+    dispatch(fetchAreas());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
