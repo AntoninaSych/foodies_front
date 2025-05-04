@@ -12,9 +12,9 @@ const FieldSelect = ({
   options,
   onChange,
   placeholder,
-  value,
   defaultValue,
   error,
+  value,
   notShowErrorMessage,
   className = '',
 }) => {
@@ -28,9 +28,9 @@ const FieldSelect = ({
     classNamePrefix: 'select',
     className: css.select,
     options,
+    value,
     onChange: handleChange,
     placeholder: placeholder,
-    value,
     defaultValue,
     ariaInvalid: error ? 'true' : 'false',
   };
@@ -47,7 +47,6 @@ const FieldSelect = ({
               <Select
                 {...defaultProps}
                 {...field}
-                value={value}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
               />

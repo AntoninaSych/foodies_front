@@ -3,7 +3,7 @@ export const defaultValues = {
   description: '',
   category: null,
   instructions: '',
-  thumb: '',
-  time: '10 min',
+  thumb: null,
+  time: 10,
   ingredients: [],
 };
