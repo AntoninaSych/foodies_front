@@ -13,7 +13,7 @@ import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import AppBar from '../../components/AppBar/AppBar';
 import Hero from '../../components/Hero/Hero';
 import Recipes from '../../components/Recipes/Recipes';
-
+import { THEMES } from '../../const/index.js';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
@@ -41,7 +41,7 @@ const HomePage = () => {
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme="dark" />
+          <AppBar theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>

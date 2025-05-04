@@ -1,6 +1,8 @@
 import * as yup from 'yup';
 import { text } from '../../../utils/validation';
 
+const MAX_FILE_SIZE = 1024 * (1024 * 2); // max file size 2MB
+console.log(MAX_FILE_SIZE);
 export const validationSchema = yup.object().shape({
   title: yup
     .string()
@@ -18,20 +20,22 @@ export const validationSchema = yup.object().shape({
     .max(1000, text.max(1000))
     .required(text.required()),
   category: yup.object().required(text.required()),
-  time: yup.string().required(text.required()),
+  time: yup.number().required(text.required()),
   ingredients: yup
     .array()
     .of(yup.object())
     .min(1, 'Add at least one ingredient'),
-  // thumb: yup.object().shape({
-  //   file: yup
-  //     .mixed()
-  //     .test('required', 'You need to provide a file', file => {
-  //       return !!file;
-  //     })
-  //     .test('fileSize', 'The file is too large', file => {
-  //       //if u want to allow only certain file sizes
-  //       return file && file.size <= MAX_FILE_SIZE;
-  //     }),
-  // }),
+  thumb: yup
+    .mixed()
+    .required(text.required('You need to provide a photo'))
+    .test(
+      'size',
+      'The photo is too large, max fixe size is 2MB',
+      ({ file }) => {
+        return file && file.size <= MAX_FILE_SIZE;
+      }
+    )
+    .test('type', 'Allowed photo format: png, jpeg', ({ file }) => {
+      return file && ['image/png', 'image/jpeg'].includes(file.type);
+    }),
 });

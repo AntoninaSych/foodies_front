@@ -1,0 +1,18 @@
+.wrapper {
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding-bottom: 32px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    padding-bottom: 72px;
+  }
+}

@@ -1,16 +1,22 @@
 import { FaPlus } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../../Button/Button';
 import { FieldInput, FieldSelect } from '../../../Fields';
 import css from './Ingredients.module.css';
 import IngredientCard from '../../../IngredientCard/IngredientCard';
 import ErrorField from '../../../Fields/ErrorField/ErrorField';
 
-const Ingredients = ({ onChange, ingredients, error }) => {
+const Ingredients = ({
+  onChange,
+  onDelete,
+  ingredients,
+  addedIngredients,
+  error,
+  values,
+}) => {
   const [ingredient, setIngredient] = useState(null);
   const [measure, setMeasure] = useState('');
-  const [addedIngredients, setAddedIngredients] = useState([]);
   const options = ingredients.map(category => ({
     value: category.id,
     label: category.name,
@@ -25,23 +31,21 @@ const Ingredients = ({ onChange, ingredients, error }) => {
   };
 
   const handleOnDelete = id => {
-    const newIngredients = addedIngredients.filter(i => i.id !== id);
-    setAddedIngredients(newIngredients);
-    onChange(newIngredients);
+    onDelete(id);
   };
 
   const handleAdd = () => {
     if (ingredient && measure) {
-      const newIngredients = [
-        ...addedIngredients,
-        { id: ingredient.value, measure },
-      ];
-      setAddedIngredients(newIngredients);
-      onChange(newIngredients);
+      onChange({ ingredient, measure });
       setIngredient(null);
       setMeasure('');
     }
   };
+
+  useEffect(() => {
+    setIngredient(null);
+    setMeasure('');
+  }, [values]);
 
   return (
     <div className={css.wrapper}>
