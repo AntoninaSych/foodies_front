@@ -6,10 +6,6 @@ const socialLinks = [
     href: 'https://www.facebook.com/goITclub/',
     id: 'facebook',
     title: 'Facebook',
-    props: {
-      x: 3,
-      y: 3,
-    },
   },
   {
     href: 'https://www.instagram.com/goitclub/',
@@ -26,11 +22,11 @@ const socialLinks = [
 const NetworkLinks = () => {
   return (
     <ul className={css.list}>
-      {socialLinks.map(({ href, id, title, props = {} }) => (
+      {socialLinks.map(({ href, id, title }) => (
         <li key={id}>
           <Link href={href} title={title} className={css.link}>
             <svg className={css.icon}>
-              <use href={`/sprite.svg#${id}`} {...props} />
+              <use href={`/sprite.svg#${id}`} />
             </svg>
           </Link>
         </li>
