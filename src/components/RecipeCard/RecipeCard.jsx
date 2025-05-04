@@ -6,28 +6,31 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/recipes/operations';
+
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 export const RecipeCard = ({ recipe, isFavorite }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuth = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleFavoriteToggle = () => {
-    if (!isAuth) return alert('Please sign in to manage favorites');
+    if (!isLoggedIn) return alert('Please sign in to manage favorites');
     if (isFavorite) {
-      dispatch(removeFromFavorites(recipe._id));
+      dispatch(removeFromFavorites(recipe.id));
     } else {
-      dispatch(addToFavorites(recipe._id));
+      dispatch(addToFavorites(recipe.id));
     }
   };
 
   const handleAuthorClick = () => {
-    if (!isAuth) return alert('Sign in to view profile');
-    if (recipe.user?.id) navigate(`/user/${recipe.user.id}`);
+    if (!isLoggedIn) return alert('Sign in to view profile');
+    if (recipe.user?.id) {
+      navigate(`/user/${recipe.user.id}`);
+    }
   };
 
-  const handleViewRecipe = () => navigate(`/recipe/${recipe._id}`);
+  const handleViewRecipe = () => navigate(`/recipe/${recipe.id}`);
 
   return (
     <div className={styles.card}>
@@ -38,9 +41,11 @@ export const RecipeCard = ({ recipe, isFavorite }) => {
         <p className={styles.description}>{recipe.description}</p>
 
         <div className={styles.footer}>
-          <button className={styles.author} onClick={handleAuthorClick}>
-            by {recipe.user?.name || 'Anonymous'}
-          </button>
+          {recipe.user && (
+            <button className={styles.author} onClick={handleAuthorClick}>
+              by {recipe.user.name || 'Anonymous'}
+            </button>
+          )}
 
           <div className={styles.actions}>
             <button

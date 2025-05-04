@@ -16,9 +16,9 @@ const RecipeFilters = ({
           onChange={e => onFilterChange('ingredient', e.target.value)}
         >
           <option value="">Ingredients</option>
-          {ingredients.map(item => (
-            <option key={item} value={item}>
-              {item}
+          {ingredients.map(({ id, name }) => (
+            <option key={id} value={name}>
+              {name}
             </option>
           ))}
         </select>
@@ -31,9 +31,9 @@ const RecipeFilters = ({
           onChange={e => onFilterChange('area', e.target.value)}
         >
           <option value="">Area</option>
-          {areas.map(area => (
-            <option key={area} value={area}>
-              {area}
+          {areas.map(({ id, name }) => (
+            <option key={id} value={name}>
+              {name}
             </option>
           ))}
         </select>
