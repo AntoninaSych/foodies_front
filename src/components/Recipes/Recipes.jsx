@@ -84,7 +84,7 @@ const Recipes = ({ category, onBack }) => {
           onFilterChange={handleFilterChange}
         />
 
-        {recipes.length > 0 ? (
+        {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
           <p className={styles.message}>No recipes found.</p>
