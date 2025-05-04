@@ -6,20 +6,22 @@ import ErrorField from '../ErrorField/ErrorField.jsx';
 const FieldTextArea = ({
   name,
   label,
-  className = '',
   register,
   required,
   placeholder,
   maxLength,
   error,
+  onChange,
+  className = '',
 }) => {
   const [count, setCount] = useState(0);
   const fieldId = useId();
   const defaultMaxLength = maxLength && parseInt(maxLength, 10);
 
-  const handleCount = event => {
+  const handleOnChange = event => {
     const { value } = event.target;
-    setCount(value.length);
+    maxLength && setCount(value.length);
+    onChange && onChange(event);
   };
 
   return (
@@ -31,7 +33,7 @@ const FieldTextArea = ({
         <textarea
           {...register(name, { required })}
           placeholder={placeholder}
-          onChange={maxLength && handleCount}
+          onChange={handleOnChange}
           maxLength={defaultMaxLength}
           aria-invalid={error ? 'true' : 'false'}
         />

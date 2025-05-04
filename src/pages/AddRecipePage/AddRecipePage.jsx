@@ -13,6 +13,10 @@ import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import { ROUTERS } from '../../const/index';
+import {
+  errorNotification,
+  successNotification,
+} from '../../utils/notification.js';
 
 const AddRecipePage = () => {
   const token = useSelector(selectToken);
@@ -31,19 +35,25 @@ const AddRecipePage = () => {
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('instructions', data.instructions);
-    formData.append('time', data.time);
+    formData.append('time', `${data.time} min`);
     formData.append('categoryId', data.category?.value);
     formData.append('ingredients', JSON.stringify(data.ingredients));
+    formData.append('thumb', data.thumb);
     data.area && formData.append('areaId', data.area?.value);
-    data.thumb && formData.append('thumb', data.thumb.name);
     form.target.reset();
 
     try {
       await recipeAdd(token, formData);
-      // TODO redirect to user/:id
+      // TODO redirect to user/:id, id is still not available at the current user endpoint
       navigate(`${ROUTERS.USER}/${user.id}`, { state: location });
+      successNotification('New recipe successfully added!');
     } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        'Error while adding a new recipe...';
       console.log(error);
+      errorNotification(message);
     }
   };
 
@@ -51,7 +61,7 @@ const AddRecipePage = () => {
     <div className={css.wrapper}>
       <Container>
         <PathInfo breadcrumbs={[{ name: 'add recipe' }]} />
-        <MainTitle>Add recipe (DRAFT!)</MainTitle>
+        <MainTitle>Add recipe</MainTitle>
         <Subtitle>
           Reveal your culinary art, share your favorite recipe and create
           gastronomic masterpieces with us.
