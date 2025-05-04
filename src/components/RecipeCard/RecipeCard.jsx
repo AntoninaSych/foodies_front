@@ -1,18 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './RecipeCard.module.css';
 
 import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/recipes/operations';
-
-import { useAuth } from '../../hooks/useAuth';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 export const RecipeCard = ({ recipe, isFavorite }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
+  const isAuth = useSelector(selectIsLoggedIn);
 
   const handleFavoriteToggle = () => {
     if (!isAuth) return alert('Please sign in to manage favorites');

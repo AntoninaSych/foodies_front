@@ -9,8 +9,6 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import styles from './Recipes.module.css';
 
 import { fetchRecipes } from '../../redux/recipes/operations';
-import { fetchIngredients } from '../../redux/ingredients/operations';
-import { fetchAreas } from '../../redux/areas/operations';
 
 import { selectRecipes } from '../../redux/recipes/selectors';
 import { selectIngredients } from '../../redux/ingredients/selectors';
@@ -32,11 +30,6 @@ const Recipes = ({ category, onBack }) => {
     const width = window.innerWidth;
     return width < 768 ? 8 : 12;
   }
-
-  useEffect(() => {
-    dispatch(fetchIngredients());
-    dispatch(fetchAreas());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -91,8 +84,8 @@ const Recipes = ({ category, onBack }) => {
           onFilterChange={handleFilterChange}
         />
 
-        {recipes?.recipes?.length ? (
-          <RecipeList recipes={recipes.recipes} />
+        {recipes.length > 0 ? (
+          <RecipeList recipes={recipes} />
         ) : (
           <p className={styles.message}>No recipes found.</p>
         )}
