@@ -6,6 +6,7 @@ import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import css from './HomePage.module.css';
 import AppBar from '../../components/AppBar/AppBar';
 import Hero from '../../components/Hero/Hero';
+import { THEMES } from '../../const/index.js';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const HomePage = () => {
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme="dark" />
+          <AppBar theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>

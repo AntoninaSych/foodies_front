@@ -1,22 +1,16 @@
-import clsx from "clsx";
-import css from "./Link.module.css";
-import { Link as RouteLink } from "react-router-dom";
+import clsx from 'clsx';
+import css from './Link.module.css';
+import { Link as RouteLink } from 'react-router-dom';
 
-const Link = ({
-  onClick,
-  children,
-  href,
-  to,
-  className,
-}) => {
-  const clickHandler = (event) => {
+const Link = ({ onClick, children, href, to, className, title }) => {
+  const clickHandler = event => {
     if (onClick) {
       event.preventDefault();
       onClick(event);
     }
   };
 
-  const classNames = clsx(css.link, css[className]);
+  const classNames = clsx(css.link, className);
 
   if (href) {
     return (
@@ -25,6 +19,7 @@ const Link = ({
         className={classNames}
         rel="nofollow noopener"
         target="_blank"
+        title={title}
       >
         {children}
       </a>
