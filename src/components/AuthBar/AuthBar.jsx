@@ -13,7 +13,7 @@ const ACTIONS = {
 
 const AuthBar = ({ theme }) => {
   const [form, setForm] = useState(null);
-  const className = clsx(css.wrapper, css[theme]);
+  const className = clsx(css.wrapper, theme && css[theme]);
 
   const handleClick = action => () => {
     setForm(action);
