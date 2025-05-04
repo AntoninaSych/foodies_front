@@ -78,13 +78,11 @@ const Recipes = ({ category, onBack, ingredients = [], areas = [] }) => {
           onFilterChange={handleFilterChange}
         />
 
-        <div>
-          {recipes?.recipes?.length ? (
-            <RecipeList recipes={recipes.recipes} />
-          ) : (
-            <p className={styles.message}>No recipes found.</p>
-          )}
-        </div>
+        {recipes?.recipes?.length ? (
+          <RecipeList recipes={recipes.recipes} />
+        ) : (
+          <p className={styles.message}>No recipes found.</p>
+        )}
       </div>
     </section>
   );
