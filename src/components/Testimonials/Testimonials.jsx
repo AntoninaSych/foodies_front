@@ -64,6 +64,9 @@ const Testimonials = () => {
       <div className={styles.section}>
         <p className={styles.subtitle}>What our customers say</p>
         <h2 className={styles.title}>TESTIMONIALS</h2>
+        <svg className={styles.icon} aria-hidden="true">
+          <use xlinkHref={`/sprite.svg#quote`} />
+        </svg>
 
         {(!testimonials || testimonials.length === 0) && (
           <div className={styles.center}>

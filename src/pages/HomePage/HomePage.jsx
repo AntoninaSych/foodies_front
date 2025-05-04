@@ -25,9 +25,7 @@ const HomePage = () => {
       </div>
       <Container>
         <CategoriesList />
-      </Container>
-      <Container>
-        <Testimonials></Testimonials>
+        <Testimonials />
       </Container>
     </div>
   );
