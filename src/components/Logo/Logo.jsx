@@ -1,17 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
-import styles from './Logo.module.css';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+import css from './Logo.module.css';
 
-const Logo = () => {
-  const { pathname } = useLocation();
-  const isHome = pathname === '/';
+const Logo = ({ theme }) => {
+  const classNames = clsx(css.logo, theme && css[theme]);
 
   return (
-    <Link
-      to="/"
-      className={`${styles.logo} ${
-        isHome ? styles.logoHome : styles.logoInner
-      }`}
-    >
+    <Link to="/" className={classNames}>
       foodies
     </Link>
   );
