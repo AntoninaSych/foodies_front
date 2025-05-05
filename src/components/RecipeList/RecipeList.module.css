@@ -13,8 +13,4 @@
 	}
 }
 
-@media screen and (min-width: 1440px) {
-	.wrapper {
-		/*flex-basis: 290px;*/
-	}
-}
+@media screen and (min-width: 1440px) {}
