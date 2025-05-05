@@ -24,6 +24,10 @@
   outline: none;
 }
 
+.field textarea {
+  line-height: inherit;
+}
+
 .field.strong input,
 .field.strong input:hover,
 .field.strong input:focus{
@@ -107,6 +111,7 @@
 
 .inputWrapper.withCount {
   position: relative;
+  align-items: flex-start;
 }
 
 .inputWrapper.withCount input, .inputWrapper.withCount textarea {
@@ -130,6 +135,11 @@
   color: var(--color-secondary);
   position: absolute;
   right: 0;
+  top: 16px;
+}
+
+.currentCount {
+  color: var(--color-main);
 }
 
 .field input:focus,
