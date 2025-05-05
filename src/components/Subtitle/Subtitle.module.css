@@ -1,5 +1,6 @@
 .text {
   margin-bottom: 32px;
+  color: var(--color-secondary);
 }
 
 /* tablet */
@@ -7,6 +8,7 @@
   .text {
     margin-bottom: 40px;
     max-width: 440px;
+    color: var(--color-text);
   }
 }
 
