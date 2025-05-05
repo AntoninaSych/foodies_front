@@ -1,8 +1,8 @@
 import Container from '../Container/Container';
 import css from './Footer.module.css';
 import Logo from '../Logo/Logo';
-import NetworkLinks from '../NetworkLinks/NetworkLinks.jsx';
-import Copyright from '../Copyright/Copyright.jsx';
+import NetworkLinks from '../NetworkLinks/NetworkLinks';
+import Copyright from '../Copyright/Copyright';
 
 const Footer = () => {
   return (

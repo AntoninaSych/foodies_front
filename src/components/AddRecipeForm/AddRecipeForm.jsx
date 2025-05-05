@@ -4,15 +4,15 @@ import { useMemo, useState } from 'react';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import { FieldInput, FieldTextarea, FieldSelect, FieldCount } from '../Fields';
-import { defaultValues } from './const';
+import { defaultValues, resetValues } from './const';
 import { validationSchema } from './const/validation';
 import css from './AddRecipeForm.module.css';
 import UploadPhoto from './components/UploadPhoto/UploadPhoto';
 import { useSelector } from 'react-redux';
 import { selectCategories } from '../../redux/categories/selectors';
 import { selectIngredients } from '../../redux/ingredients/selectors';
-import ButtonIcon from '../ButtonIcon/ButtonIcon.jsx';
-import Ingredients from './components/Ingredients/Ingredients.jsx';
+import ButtonIcon from '../ButtonIcon/ButtonIcon';
+import Ingredients from './components/Ingredients/Ingredients';
 
 const AddRecipeForm = ({ onSubmit }) => {
   const categories = useSelector(selectCategories);
@@ -48,8 +48,7 @@ const AddRecipeForm = ({ onSubmit }) => {
   const values = getValues();
 
   const handleUploadedFile = file => {
-    console.log(file);
-    setValue('thumb', { file });
+    setValue('thumb', file);
   };
 
   const handleAddIngredients = values => {
@@ -63,12 +62,8 @@ const AddRecipeForm = ({ onSubmit }) => {
     clearErrors('ingredients');
   };
 
-  const handleChangeCategory = data => {
-    setValue('category', data.value);
-  };
-
   const onResetHandler = () => {
-    reset(defaultValues);
+    reset(resetValues);
     setAddedIngredients([]);
   };
 
@@ -80,16 +75,12 @@ const AddRecipeForm = ({ onSubmit }) => {
 
   const handleTimeChange = value => setValue('time', value);
 
-  console.log('values', values);
-  console.log('errors', errors);
-
   return (
     <div className={css.wrapper}>
       <FormProvider {...methods}>
         <div className={css.sidebar}>
           <UploadPhoto
             name="thumb"
-            register={register}
             error={errors.thumb && errors.thumb?.message}
             handleUploadedFile={handleUploadedFile}
           />
@@ -110,6 +101,7 @@ const AddRecipeForm = ({ onSubmit }) => {
                 register={register}
                 placeholder="Enter a description of the dish"
                 error={errors.description && errors.description?.message}
+                value={values.description}
                 maxLength={200}
                 required
               />
@@ -121,7 +113,6 @@ const AddRecipeForm = ({ onSubmit }) => {
                 control={control}
                 placeholder="Select a category"
                 options={categoriesOptions}
-                onChange={handleChangeCategory}
                 error={errors.category && errors.category?.message}
                 required
               />
@@ -148,6 +139,7 @@ const AddRecipeForm = ({ onSubmit }) => {
               register={register}
               placeholder="Enter recipe"
               label="RECIPE PREPARATION"
+              value={values.instructions}
               error={errors.instructions && errors.instructions?.message}
               maxLength={1000}
               required

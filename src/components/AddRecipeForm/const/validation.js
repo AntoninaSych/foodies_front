@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { text } from '../../../utils/validation';
 
 const MAX_FILE_SIZE = 1024 * (1024 * 2); // max file size 2MB
-console.log(MAX_FILE_SIZE);
+
 export const validationSchema = yup.object().shape({
   title: yup
     .string()
@@ -28,14 +28,10 @@ export const validationSchema = yup.object().shape({
   thumb: yup
     .mixed()
     .required(text.required('You need to provide a photo'))
-    .test(
-      'size',
-      'The photo is too large, max fixe size is 2MB',
-      ({ file }) => {
-        return file && file.size <= MAX_FILE_SIZE;
-      }
-    )
-    .test('type', 'Allowed photo format: png, jpeg', ({ file }) => {
+    .test('size', 'The photo is too large, max fixe size is 2MB', file => {
+      return file && file.size <= MAX_FILE_SIZE;
+    })
+    .test('type', 'Allowed photo format: png, jpeg', file => {
       return file && ['image/png', 'image/jpeg'].includes(file.type);
     }),
 });

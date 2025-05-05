@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { Controller } from 'react-hook-form';
 import { useId } from 'react';
 import css from '../Fields.module.css';
-import ErrorField from '../ErrorField/ErrorField.jsx';
+import ErrorField from '../ErrorField/ErrorField';
 
 const FieldSelect = ({
   name,

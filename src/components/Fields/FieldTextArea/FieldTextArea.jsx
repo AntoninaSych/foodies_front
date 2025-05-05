@@ -1,16 +1,17 @@
 import clsx from 'clsx';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
+import ErrorField from '../ErrorField/ErrorField';
 import css from '../Fields.module.css';
-import ErrorField from '../ErrorField/ErrorField.jsx';
 
 const FieldTextArea = ({
   name,
   label,
-  register,
   required,
   placeholder,
+  register,
   maxLength,
   error,
+  value,
   onChange,
   className = '',
 }) => {
@@ -18,11 +19,17 @@ const FieldTextArea = ({
   const fieldId = useId();
   const defaultMaxLength = maxLength && parseInt(maxLength, 10);
 
-  const handleOnChange = event => {
+  const handleOnKeyUp = event => {
     const { value } = event.target;
     maxLength && setCount(value.length);
-    onChange && onChange(event);
+    onChange && onChange(value);
   };
+
+  useEffect(() => {
+    if (value === null) {
+      setCount(0);
+    }
+  }, [value]);
 
   return (
     <div className={clsx(css.field, className, error && css.error)}>
@@ -31,9 +38,9 @@ const FieldTextArea = ({
         className={clsx(css.inputWrapper, defaultMaxLength && css.withCount)}
       >
         <textarea
+          onKeyUp={handleOnKeyUp}
           {...register(name, { required })}
           placeholder={placeholder}
-          onChange={handleOnChange}
           maxLength={defaultMaxLength}
           aria-invalid={error ? 'true' : 'false'}
         />

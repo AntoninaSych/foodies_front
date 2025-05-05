@@ -1,25 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
-import { MdAddAPhoto } from 'react-icons/md';
-import css from './UploadPhoto.module.css';
-import ErrorField from '../../../Fields/ErrorField/ErrorField.jsx';
+import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
+import clsx from 'clsx';
+import { MdAddAPhoto } from 'react-icons/md';
+import ErrorField from '../../../Fields/ErrorField/ErrorField';
+import css from './UploadPhoto.module.css';
 
-const UploadPhoto = ({ name, error, handleUploadedFile, register }) => {
-  const { getValues } = useFormContext();
+const UploadPhoto = ({ name, error, handleUploadedFile }) => {
+  const { getValues, clearErrors } = useFormContext();
   const [preview, setPreview] = useState(null);
-  const hiddenInputRef = useRef();
-  const { ref: registerRef, ...rest } = register(name);
 
   const values = getValues();
 
   const handleOnChange = event => {
-    const file = event.target.files[0];
-    const urlImage = URL.createObjectURL(file);
+    const blobFile = event.target.files[0];
+    const urlImage = URL.createObjectURL(blobFile);
     setPreview(urlImage);
-    handleUploadedFile(file);
-    if (hiddenInputRef.current) {
-      hiddenInputRef.current.click();
-    }
+    handleUploadedFile(blobFile);
+    clearErrors(name);
   };
 
   useEffect(() => {
@@ -42,22 +39,17 @@ const UploadPhoto = ({ name, error, handleUploadedFile, register }) => {
       </label>
       <input
         id="file-upload"
-        className={css.fileInput}
+        className={css.hiddenInput}
         name={name}
         type="file"
-        {...rest}
         onChange={handleOnChange}
-        ref={e => {
-          registerRef(e);
-          hiddenInputRef.current = e;
-        }}
       />
     </>
   );
 
   return (
     <div className={css.wrapper}>
-      <div className={css.imagePlaceholder}>
+      <div className={clsx(css.imagePlaceholder, preview && css.withPreview)}>
         {!preview && Photo}
         {preview && (
           <img className={css.image} src={preview} alt="Uploaded Image" />
