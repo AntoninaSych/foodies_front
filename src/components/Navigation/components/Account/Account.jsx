@@ -18,7 +18,7 @@ const Account = ({ theme }) => {
   const dispatch = useDispatch();
   const { name, id, avatarURL } = useSelector(selectUser);
 
-  const className = clsx(css.placeholder, css[theme]);
+  const className = clsx(css.placeholder, theme && css[theme]);
 
   const handleLogout = () => {
     setShowDialog(true);

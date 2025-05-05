@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import css from './PathInfo.module.css';
-import { ROUTERS } from '../../const/index.js';
+import { ROUTERS } from '../../const';
 
 const PathInfo = ({ breadcrumbs }) => {
   return (

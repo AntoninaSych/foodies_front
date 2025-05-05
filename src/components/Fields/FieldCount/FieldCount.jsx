@@ -1,21 +1,25 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import clsx from 'clsx';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import css from '../Fields.module.css';
 import ButtonIcon from '../../ButtonIcon/ButtonIcon';
-import ErrorField from '../ErrorField/ErrorField.jsx';
+import ErrorField from '../ErrorField/ErrorField';
+import { useFormContext } from 'react-hook-form';
 
 const FieldCount = ({
   label,
+  name,
   strong,
   onChange,
   error,
-  className = '',
+  value,
   step = 10,
-  defaultValue = 10,
+  className = '',
 }) => {
-  const [count, setCount] = useState(defaultValue);
+  const [count, setCount] = useState(value);
+  const { getValues } = useFormContext();
   const fieldId = useId();
+  const values = getValues();
 
   const handleOnChange = value => () => {
     const currentValue = count + value;
@@ -24,6 +28,12 @@ const FieldCount = ({
       setCount(currentValue);
     }
   };
+
+  useEffect(() => {
+    if (count !== values[name]) {
+      setCount(values[name]);
+    }
+  }, [count, name, values]);
 
   return (
     <div

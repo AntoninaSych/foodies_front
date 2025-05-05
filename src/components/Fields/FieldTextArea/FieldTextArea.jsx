@@ -1,44 +1,74 @@
 import clsx from 'clsx';
-import { useId, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useEffect, useId, useRef, useState } from 'react';
+import ErrorField from '../ErrorField/ErrorField';
 import css from '../Fields.module.css';
-import ErrorField from '../ErrorField/ErrorField.jsx';
 
 const FieldTextArea = ({
   name,
   label,
-  className = '',
-  register,
   required,
   placeholder,
+  register,
   maxLength,
   error,
+  onChange,
 }) => {
   const [count, setCount] = useState(0);
   const fieldId = useId();
+  const ref = useRef(null);
+  const { getValues } = useFormContext();
   const defaultMaxLength = maxLength && parseInt(maxLength, 10);
+  const { ref: registerRef, ...rest } = register(name, { required });
 
-  const handleCount = event => {
+  const values = getValues();
+
+  const handleOnInput = event => {
     const { value } = event.target;
-    setCount(value.length);
+    onChange && onChange(value);
+
+    if (maxLength) {
+      setCount(value.length);
+      if (ref.current) {
+        ref.current.style.height = '';
+        ref.current.style.height = ref.current.scrollHeight + 'px';
+      }
+    }
   };
 
+  useEffect(() => {
+    if (!values[name]) {
+      setCount(0);
+      if (maxLength && ref.current) {
+        ref.current.style.height = '';
+      }
+    }
+  }, [values, name, maxLength]);
+
   return (
-    <div className={clsx(css.field, className, error && css.error)}>
+    <div className={clsx(css.field, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
       <div
         className={clsx(css.inputWrapper, defaultMaxLength && css.withCount)}
       >
         <textarea
-          {...register(name, { required })}
+          ref={event => {
+            registerRef(event);
+            ref.current = event;
+          }}
+          onInput={handleOnInput}
+          {...rest}
           placeholder={placeholder}
-          onChange={maxLength && handleCount}
           maxLength={defaultMaxLength}
           aria-invalid={error ? 'true' : 'false'}
         />
 
-        {maxLength && (
+        {!!maxLength && (
           <span className={css.count}>
-            {count} / {defaultMaxLength}
+            <span className={count > 0 ? css.currentCount : undefined}>
+              {count}
+            </span>
+            /{defaultMaxLength}
           </span>
         )}
       </div>
