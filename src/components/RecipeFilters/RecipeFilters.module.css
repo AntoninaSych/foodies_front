@@ -1,0 +1,70 @@
+.filters {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	gap: 14px;
+  }
+  
+  .selectContainer {
+	position: relative;
+	width: 100%;
+	max-width: 330px;
+  }
+  
+  .select {
+	position: relative;
+	width: 100%;
+	height: 56px;
+	padding: 16px 18px;
+	
+	font-weight: 500;
+	color: var(--color-secondary);
+	background-color: #fff;
+	border: 1px solid #bfbebe;
+	border-radius: 30px;
+	appearance: none;
+	cursor: pointer;
+  }
+  
+  .selectContainer::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	right: 18px;
+	width: 9px;
+	height: 9px;
+	fill: none;
+	border: solid #050505;
+	border-width: 0 1.8px 1.8px 0;
+	transform: translateY(-50%) rotate(45deg);
+	pointer-events: none;
+	margin-right: 18px;
+  }
+  
+  @media (min-width: 768px) {
+	.selectContainer {
+	  width: 345px;
+	}
+  
+	.select {
+	  color: var(--color-text);
+	  height: 56px;
+	}
+  }
+  
+  @media (min-width: 1440px) {
+	.filters {
+		display: flex;
+		flex-direction: column;
+		width: 330px;
+	    height: 222px;
+	}	
+	.selectContainer {
+	  width: 330px;
+	}
+
+	.select {
+		color: var(--color-text);
+	  }
+  }
+  
