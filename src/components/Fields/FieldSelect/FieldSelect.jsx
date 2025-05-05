@@ -38,7 +38,7 @@ const FieldSelect = ({
   return (
     <div className={clsx(css.field, className, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
-      <div className={clsx(css.inputWrapper)}>
+      <div className={css.inputWrapper}>
         {control ? (
           <Controller
             name={name}

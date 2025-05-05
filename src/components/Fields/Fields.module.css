@@ -48,25 +48,35 @@
 }
 
 .inputWrapper {
-  display: flex;
-  align-items: center;
-  gap: 4px;
   width: 100%;
 }
 
-.select {
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.select .select__control {
+.select [class^="select__control"] {
   border-radius: 30px;
   height: 56px;
+  background-color: transparent;
+  border: 1px solid var(--color-secondary);
+  cursor: pointer;
+  box-shadow: none;
 }
 
-.select .select__menu {
-  border-radius: 30px;
-  background-color: #1A1A1A;
+.select [class^="select__control"]:focus,
+.select [class^="select__control"]:hover{
+  border-color: var(--color-secondary);
+}
+.select [class^="select__control"]:focus,
+.select [class^="select__control"].select__control--is-focused {
+  border-color: var(--color-secondary);
+}
+
+
+.select [class^="select__indicator-separator"] {
+  background-color: transparent;
+}
+
+.select [class^="select__menu"] {
+  border-radius: 15px;
+  background-color: var(--color-white);
 }
 
 .inputWrapper.withCount {
