@@ -1,15 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './RecipeCard.module.css';
-
+import { GoArrowUpRight } from 'react-icons/go';
+import { FaRegHeart } from 'react-icons/fa6';
+import { FaHeart } from 'react-icons/fa6';
 import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/recipes/operations';
 
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import css from './RecipeCard.module.css';
+import { ROUTERS } from '../../const/index.js';
 
-export const RecipeCard = ({ recipe, isFavorite }) => {
+export const RecipeCard = ({ recipe, isFavorite = true }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -24,43 +28,51 @@ export const RecipeCard = ({ recipe, isFavorite }) => {
   };
 
   const handleAuthorClick = () => {
+    // TODO show modal SignInModal if not isLoggedIn
     if (!isLoggedIn) return alert('Sign in to view profile');
-    if (recipe.user?.id) {
-      navigate(`/user/${recipe.user.id}`);
+    if (recipe.owner) {
+      navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
     }
   };
 
   const handleViewRecipe = () => navigate(`/recipe/${recipe.id}`);
 
   return (
-    <div className={styles.card}>
-      <img src={recipe.preview} alt={recipe.title} className={styles.image} />
+    <div className={css.card}>
+      <div className={css.imageWrapper}>
+        <img src={recipe.thumb} alt={recipe.title} className={css.image} />
+      </div>
+      <div className={css.content}>
+        <h4 className={css.title}>{recipe.title}</h4>
+        <p className={css.description}>{recipe.description}</p>
 
-      <div className={styles.content}>
-        <h4 className={styles.title}>{recipe.title}</h4>
-        <p className={styles.description}>{recipe.description}</p>
-
-        <div className={styles.footer}>
-          {recipe.user && (
-            <button className={styles.author} onClick={handleAuthorClick}>
-              by {recipe.user.name || 'Anonymous'}
+        <div className={css.footer}>
+          {recipe.owner && (
+            <button className={css.author} onClick={handleAuthorClick}>
+              <img
+                className={css.avatar}
+                src={recipe.owner.avatarURL || 'https://i.pravatar.cc/320'}
+                width={32}
+                height={32}
+              />
+              {recipe.owner.name}
             </button>
           )}
 
-          <div className={styles.actions}>
+          <div className={css.actions}>
             <button
-              className={`${styles.heart} ${isFavorite ? styles.active : ''}`}
+              className={clsx(css.actionButton, isFavorite && css.active)}
               onClick={handleFavoriteToggle}
               type="button"
             >
-              ❤️
+              {isFavorite ? <FaHeart /> : <FaRegHeart />}
             </button>
             <button
-              className={styles.arrow}
+              className={css.actionButton}
               onClick={handleViewRecipe}
               type="button"
             >
-              ➡️
+              <GoArrowUpRight />
             </button>
           </div>
         </div>

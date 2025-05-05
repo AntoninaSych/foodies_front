@@ -46,8 +46,7 @@ export const getFavoriteRecipes = createAsyncThunk(
   'recipes/getFavorites',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await getFavoritesApi(); // <- async API виклик
-      return data;
+      return await getFavoritesApi(); // <- async API виклик
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
