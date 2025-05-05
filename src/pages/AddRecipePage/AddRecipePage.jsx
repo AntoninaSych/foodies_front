@@ -12,11 +12,11 @@ import { fetchIngredients } from '../../redux/ingredients/operations';
 import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
-import { ROUTERS } from '../../const/index';
+import { ROUTERS } from '../../const';
 import {
   errorNotification,
   successNotification,
-} from '../../utils/notification.js';
+} from '../../utils/notification';
 
 const AddRecipePage = () => {
   const token = useSelector(selectToken);
@@ -35,7 +35,7 @@ const AddRecipePage = () => {
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('instructions', data.instructions);
-    formData.append('time', `${data.time} min`);
+    formData.append('time', data.time);
     formData.append('categoryId', data.category?.value);
     formData.append('ingredients', JSON.stringify(data.ingredients));
     formData.append('thumb', data.thumb);

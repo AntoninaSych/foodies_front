@@ -6,7 +6,7 @@ import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import css from './HomePage.module.css';
 import AppBar from '../../components/AppBar/AppBar';
 import Hero from '../../components/Hero/Hero';
-import { THEMES } from '../../const/index.js';
+import { THEMES } from '../../const';
 
 const HomePage = () => {
   const dispatch = useDispatch();

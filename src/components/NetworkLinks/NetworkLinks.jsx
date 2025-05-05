@@ -1,5 +1,5 @@
 import css from './NetworkLinks.module.css';
-import Link from '../Link/Link.jsx';
+import Link from '../Link/Link';
 
 const socialLinks = [
   {

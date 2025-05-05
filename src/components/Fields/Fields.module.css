@@ -43,7 +43,8 @@
 }
 
 .field textarea {
-  overflow:hidden
+  overflow: hidden;
+  resize: none;
 }
 
 .inputWrapper {
@@ -96,7 +97,9 @@
 }
 
 .field input:focus,
-.field input:hover {
+.field input:hover,
+.field textarea:focus,
+.field textarea:hover{
   border-bottom: 1px solid var(--color-main);
 }
 

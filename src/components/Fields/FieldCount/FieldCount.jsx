@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import css from '../Fields.module.css';
 import ButtonIcon from '../../ButtonIcon/ButtonIcon';
-import ErrorField from '../ErrorField/ErrorField.jsx';
+import ErrorField from '../ErrorField/ErrorField';
 import { useFormContext } from 'react-hook-form';
 
 const FieldCount = ({
