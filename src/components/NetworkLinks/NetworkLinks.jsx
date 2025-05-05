@@ -1,5 +1,4 @@
 import css from './NetworkLinks.module.css';
-import Link from '../Link/Link';
 
 const socialLinks = [
   {
@@ -22,13 +21,19 @@ const socialLinks = [
 const NetworkLinks = () => {
   return (
     <ul className={css.list}>
-      {socialLinks.map(({ href, id, title }) => (
+      {socialLinks.map(({ href, id, label }) => (
         <li key={id}>
-          <Link href={href} title={title} className={css.link}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className={css.link}
+          >
             <svg className={css.icon}>
               <use href={`/sprite.svg#${id}`} />
             </svg>
-          </Link>
+          </a>
         </li>
       ))}
     </ul>
