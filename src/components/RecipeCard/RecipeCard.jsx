@@ -40,12 +40,15 @@ export const RecipeCard = ({ recipe, isFavorite = true }) => {
   return (
     <div className={css.card}>
       <div className={css.imageWrapper}>
-        <img src={recipe.thumb} alt={recipe.title} className={css.image} />
+        <img
+          src={`https://placehold.co/290x275/png`}
+          alt={recipe.title}
+          className={css.image}
+        />
       </div>
       <div className={css.content}>
         <h4 className={css.title}>{recipe.title}</h4>
         <p className={css.description}>{recipe.description}</p>
-
         <div className={css.footer}>
           {recipe.owner && (
             <button className={css.author} onClick={handleAuthorClick}>

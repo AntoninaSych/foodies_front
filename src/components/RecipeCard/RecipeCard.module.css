@@ -2,11 +2,10 @@
   background-color: var(--color-white);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.3s ease;
-  height: 100%;
+  width: 100%;
 }
 
 .actionButton {
@@ -14,7 +13,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .image {
@@ -34,18 +33,24 @@
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  flex-grow: 1;
 }
 
 .title {
   color: var(--color-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 
 .description {
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
+  height: 3em;
+  line-height: 1.5em;
 }
 
 .footer {
@@ -76,7 +81,7 @@
 .actions {
   display: flex;
   gap: 4px;
-  margin-left: auto
+  margin-left: auto;
 }
 
 .actionButton {
@@ -89,7 +94,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--trns-fast);
   padding: 0;
 }
 
@@ -104,11 +109,20 @@
   background-color: var(--color-main);
 }
 
-@media (min-width: 768px) {
+/* Tablet styles */
+@media screen and (min-width: 768px) {
   .imageWrapper {
     height: 275px;
     border-radius: 30px;
   }
+  .card {
+    flex-basis: 342px;
+  }
 }
 
-@media (min-width: 1440px) { }
+/* Desktop styles */
+@media screen and (min-width: 1440px) {
+  .card {
+    flex-basis: 290px;
+  }
+}

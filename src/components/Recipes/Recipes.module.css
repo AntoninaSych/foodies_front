@@ -1,95 +1,40 @@
-.recipes {
+.navigation {
+	margin-bottom: 4px;
+}
+.content {
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
-  }
-  
-  .desserts {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-width: 540px;
-	max-height: 150px;
-	gap: 20px;
-  }
-  
-  .backBtn {
-	display: inline-flex;
+	gap: 32px;
+}
+.backBtn {
+	display:flex;
 	align-items: center;
-	gap: 8px;
+	gap: 6px;
 	font-weight: 700;
 	text-transform: uppercase;
 	background: none;
 	border: none;
 	cursor: pointer;
-	color: #1A1A1A;
-  }
-  
-  .arrowLeft {
-	display: inline-block;
-	width: 7.5px;
-	height: 7.5px;
-	border-left: 2px solid #1A1A1A;
-	border-bottom: 2px solid #1A1A1A;
-	transform: rotate(45deg);
-	margin-top: 1px;
-  }
-  
-  .recipesCategory {
-	display: flex;
-	flex-direction: row;
-	gap: 40px;
-  }
-  
-  .message {
-	color: #1A1A1A;
-	text-align: center;
-	margin-top: 40px;
-  }
-  
-  /* Tablet styles */
-  @media (max-width: 1024px) {
-	.recipes {
-	 
+	color: var(--color-main);
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+	.navigation {
+	  margin-bottom: 14px;
 	}
-  
-	.desserts {
-	  margin-bottom: 32px;
+	.content {
+	  gap: 40px;
 	}
-  
-	.recipesCategory {
-	  gap: 32px;
-	}
-  }
-  
-  /* Mobile styles */
-  @media (max-width: 767px) {
-	.recipes {
-	  
-	}
-  
-	.desserts {
-	  margin-bottom: 24px;
-	}
-  
+}
+
+/* Desktop styles */
+@media screen and (min-width: 1440px) {
 	.backBtn {
 	  font-size: 12px;
 	  gap: 6px;
 	}
-  
-	.arrowLeft {
-	  width: 12px;
-	  height: 12px;
+	.content {
+		flex-direction: row;
 	}
-  
-	.recipesCategory {
-	  display: flex;
-	  flex-direction: column;	
-	  gap: 24px;
-	}
-  
-	.message {
-	  font-size: 16px;
-	}
-  } 
-  
+}

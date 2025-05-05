@@ -21,7 +21,7 @@ const RecipeFilters = ({
   }, [dispatch]);
 
   return (
-    <div className={styles.filters}>
+    <div className={styles.wrapper}>
       <div className={styles.selectContainer}>
         <select
           className={styles.select}
