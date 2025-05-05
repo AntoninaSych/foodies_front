@@ -101,7 +101,6 @@ const AddRecipeForm = ({ onSubmit }) => {
                 register={register}
                 placeholder="Enter a description of the dish"
                 error={errors.description && errors.description?.message}
-                value={values.description}
                 maxLength={200}
                 required
               />
@@ -139,7 +138,6 @@ const AddRecipeForm = ({ onSubmit }) => {
               register={register}
               placeholder="Enter recipe"
               label="RECIPE PREPARATION"
-              value={values.instructions}
               error={errors.instructions && errors.instructions?.message}
               maxLength={1000}
               required
