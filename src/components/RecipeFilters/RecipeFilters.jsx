@@ -1,10 +1,10 @@
 import styles from './RecipeFilters.module.css';
-import { useEffect } from 'react';
-import { fetchIngredients } from '../../redux/ingredients/operations.js';
-import { fetchAreas } from '../../redux/areas/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIngredients } from '../../redux/ingredients/selectors.js';
-import { selectAreas } from '../../redux/areas/selectors.js';
+import { useEffect } from 'react';
+import { fetchIngredients } from '../../redux/ingredients/operations';
+import { fetchAreas } from '../../redux/areas/operations';
+import { selectIngredients } from '../../redux/ingredients/selectors';
+import { selectAreas } from '../../redux/areas/selectors';
 
 const RecipeFilters = ({
   selectedIngredient,
