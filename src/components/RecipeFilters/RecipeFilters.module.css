@@ -1,22 +1,21 @@
-.filters {
+.wrapper {
 	display: flex;
-	flex-direction: row;
-	width: 100%;
+	flex-direction: column;
 	gap: 14px;
-  }
-  
-  .selectContainer {
+	width: 100%;
+	flex-shrink: 0;
+}
+
+.selectContainer {
 	position: relative;
 	width: 100%;
-	max-width: 330px;
-  }
-  
-  .select {
+}
+
+.select {
 	position: relative;
 	width: 100%;
 	height: 56px;
 	padding: 16px 18px;
-	
 	font-weight: 500;
 	color: var(--color-secondary);
 	background-color: #fff;
@@ -24,9 +23,9 @@
 	border-radius: 30px;
 	appearance: none;
 	cursor: pointer;
-  }
-  
-  .selectContainer::after {
+}
+
+.selectContainer::after {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -39,32 +38,38 @@
 	transform: translateY(-50%) rotate(45deg);
 	pointer-events: none;
 	margin-right: 18px;
-  }
-  
-  @media (min-width: 768px) {
-	.selectContainer {
-	  width: 345px;
+}
+
+@media screen and (min-width: 768px) {
+	.wrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
-  
+
+	.selectContainer {
+		position: relative;
+		flex-basis: 50%;
+	}
+
 	.select {
 	  color: var(--color-text);
 	  height: 56px;
 	}
-  }
-  
-  @media (min-width: 1440px) {
-	.filters {
-		display: flex;
+}
+
+@media screen and (min-width: 1440px) {
+	.wrapper {
 		flex-direction: column;
+		justify-content: flex-start;
 		width: 330px;
-	    height: 222px;
-	}	
+	}
+
 	.selectContainer {
-	  width: 330px;
+		flex-basis: auto;
 	}
 
 	.select {
 		color: var(--color-text);
-	  }
-  }
-  
+	}
+}

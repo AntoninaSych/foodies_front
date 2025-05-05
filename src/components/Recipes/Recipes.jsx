@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { IoArrowBack } from 'react-icons/io5';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
@@ -51,22 +51,21 @@ const Recipes = ({ category, onBack }) => {
   };
 
   return (
-    <section className={styles.recipes}>
-      <div className={styles.desserts}>
+    <section>
+      <div className={styles.navigation}>
         <button className={styles.backBtn} onClick={onBack}>
-          <span className={styles.arrowLeft}></span>
-          <span>Back</span>
+          <IoArrowBack /> Back
         </button>
-
-        <MainTitle>{category}</MainTitle>
-        <Subtitle>
-          Go on a taste journey, where every sip is a sophisticated creative
-          chord, and every dessert is an expression of the most refined
-          gastronomic desires.
-        </Subtitle>
       </div>
 
-      <div className={styles.recipesCategory}>
+      <MainTitle>{category}</MainTitle>
+      <Subtitle>
+        Go on a taste journey, where every sip is a sophisticated creative
+        chord, and every dessert is an expression of the most refined
+        gastronomic desires.
+      </Subtitle>
+
+      <div className={styles.content}>
         <RecipeFilters
           selectedArea={selectedArea}
           selectedIngredient={selectedIngredient}
@@ -76,7 +75,7 @@ const Recipes = ({ category, onBack }) => {
         {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
-          <p className={styles.message}>No recipes found.</p>
+          <p>No recipes found.</p>
         )}
       </div>
     </section>
