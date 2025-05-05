@@ -10,8 +10,8 @@ import {
 } from '../../redux/recipes/operations';
 
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
-import { ROUTERS } from '../../const/index.js';
 
 export const RecipeCard = ({ recipe, isFavorite = true }) => {
   const dispatch = useDispatch();

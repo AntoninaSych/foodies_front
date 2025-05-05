@@ -24,13 +24,13 @@
 }
 
 .button.primary {
-  background-color: var(--color-main);
+  background-color: var(--color-text);
   color: var(--color-white);
-  border: 1px solid var(--color-main);
+  border: 1px solid var(--color-text);
 }
 
 .button.primary:disabled,
-.button.primary:disabled:hover{
+.button.primary:disabled:hover {
   background-color: var(--color-secondary);
   color: var(--color-white);
   border: 1px solid var(--color-secondary);

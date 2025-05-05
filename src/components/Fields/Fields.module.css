@@ -53,31 +53,57 @@
 
 .select [class^="select__control"] {
   border-radius: 30px;
-  height: 56px;
-  background-color: transparent;
-  border: 1px solid var(--color-secondary);
   cursor: pointer;
   box-shadow: none;
 }
-
-.select [class^="select__control"]:focus,
-.select [class^="select__control"]:hover{
-  border-color: var(--color-secondary);
-}
-.select [class^="select__control"]:focus,
-.select [class^="select__control"].select__control--is-focused {
-  border-color: var(--color-secondary);
+.select [class^="select__control"],
+.select [class^="select__value-container"] {
+  height: 56px;
 }
 
+.select [class^="select__input-container"] {
+  min-height: 100%;
+}
+
+.select [class^="select__control"],
+.select [class^="select__control"]:focus,
+.select [class^="select__control"]:hover,
+.select [class*="select__control--is-focused"] {
+  border: 1px solid var(--color-secondary);
+}
 
 .select [class^="select__indicator-separator"] {
-  background-color: transparent;
+  display: none;
 }
 
-.select [class^="select__menu"] {
-  border-radius: 15px;
-  background-color: var(--color-white);
+.select [class^="select__indicator"] {
+  color: var(--color-main);
 }
+
+.select [class*="select__control--menu-is-open"] [class^="select__indicator"] svg {
+  transform: rotate(-180deg);
+}
+
+.select [class^="select__option"] {
+  cursor: pointer;
+}
+
+.select [class*="select__option--is-focused"] {
+  cursor: pointer;
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.select [class^="select__option"]:active,
+.select [class*="select__option--is-selected"] {
+  background-color: var(--color-main);
+}
+
+.select [class^="select__menu"] {}
+.select [class^="select__placeholder"] {
+  color: var(--color-secondary);
+}
+
 
 .inputWrapper.withCount {
   position: relative;
