@@ -1,52 +1,49 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMediaQuery } from '@mui/material';
 import { IoArrowBack } from 'react-icons/io5';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeFilters from '../RecipeFilters/RecipeFilters';
-import { fetchRecipes } from '../../redux/recipes/operations';
-import { selectRecipes } from '../../redux/recipes/selectors';
+import { recipesFetch } from '../../api/recipesApi';
+import { errorHandler } from '../../utils/notification';
+import { CATALOG_LIMIT } from '../../const';
 import styles from './Recipes.module.css';
 
-const Recipes = ({ category, onBack }) => {
-  const dispatch = useDispatch();
-  const recipes = useSelector(selectRecipes);
+const Recipes = ({ category, onBack, data = [] }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [recipes, setRecipes] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit] = useState(getLimit());
-  const [selectedIngredient, setSelectedIngredient] = useState('');
-  const [selectedArea, setSelectedArea] = useState('');
-
-  function getLimit() {
-    const width = window.innerWidth;
-    return width < 768 ? 8 : 12;
-  }
+  const [filters, setFilters] = useState({});
+  const limit = isMobile ? 8 : CATALOG_LIMIT;
+  const { area, ingredient } = filters;
 
   useEffect(() => {
-    dispatch(
-      fetchRecipes({
-        category,
-        ingredient: selectedIngredient,
-        area: selectedArea,
-        page: currentPage,
-        size: limit,
-      })
-    );
-  }, [
-    dispatch,
-    category,
-    selectedIngredient,
-    selectedArea,
-    currentPage,
-    limit,
-  ]);
+    const fetchData = async () => {
+      try {
+        const response = await recipesFetch({
+          category,
+          ingredient,
+          area,
+          page: currentPage,
+          size: limit,
+        });
+
+        setRecipes(response);
+      } catch (error) {
+        errorHandler(error, 'Error while fetching recipes.');
+        console.log(error);
+      }
+    };
+
+    // TODO fetch new data only if there is at least one filter is set
+    // if (Object.keys(filters) > 0) {
+    fetchData();
+    // }
+  }, [category, ingredient, area, currentPage, limit]);
 
   const handleFilterChange = (type, value) => {
-    if (type === 'ingredient') {
-      setSelectedIngredient(value);
-    } else if (type === 'area') {
-      setSelectedArea(value);
-    }
+    setFilters({ ...filters, [type]: value });
     setCurrentPage(1);
   };
 
@@ -66,11 +63,7 @@ const Recipes = ({ category, onBack }) => {
       </Subtitle>
 
       <div className={styles.content}>
-        <RecipeFilters
-          selectedArea={selectedArea}
-          selectedIngredient={selectedIngredient}
-          onFilterChange={handleFilterChange}
-        />
+        <RecipeFilters filters={filters} onFilterChange={handleFilterChange} />
 
         {recipes.length ? (
           <RecipeList recipes={recipes} />

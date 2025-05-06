@@ -27,12 +27,13 @@ const FieldSelect = ({
   const defaultProps = {
     classNamePrefix: 'select',
     className: css.select,
+    ariaInvalid: error ? 'true' : 'false',
+    onChange: handleChange,
+    name,
     options,
     value,
-    onChange: handleChange,
-    placeholder: placeholder,
+    placeholder,
     defaultValue,
-    ariaInvalid: error ? 'true' : 'false',
   };
 
   return (
@@ -41,7 +42,6 @@ const FieldSelect = ({
       <div className={css.inputWrapper}>
         {control ? (
           <Controller
-            name={name}
             control={control}
             render={({ field }) => (
               <Select

@@ -1,19 +1,33 @@
 import styles from './RecipeFilters.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { fetchIngredients } from '../../redux/ingredients/operations';
 import { fetchAreas } from '../../redux/areas/operations';
 import { selectIngredients } from '../../redux/ingredients/selectors';
 import { selectAreas } from '../../redux/areas/selectors';
+import { FILTER_TYPES } from './const';
+import { FieldSelect } from '../Fields';
 
-const RecipeFilters = ({
-  selectedIngredient,
-  selectedArea,
-  onFilterChange,
-}) => {
+const RecipeFilters = ({ onFilterChange }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(selectIngredients);
   const areas = useSelector(selectAreas);
+  const areasOptions = useMemo(
+    () => areas.map(({ id, name }) => ({ value: id, label: name })),
+    [areas]
+  );
+  const ingredientsOptions = useMemo(
+    () => ingredients.map(({ id, name }) => ({ value: id, label: name })),
+    [ingredients]
+  );
+
+  const handleChangeIngredients = ({ label }) => {
+    onFilterChange(FILTER_TYPES.INGREDIENT, label);
+  };
+
+  const handleChangeArea = ({ label }) => {
+    onFilterChange(FILTER_TYPES.AREA, label);
+  };
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -22,35 +36,18 @@ const RecipeFilters = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.selectContainer}>
-        <select
-          className={styles.select}
-          value={selectedIngredient}
-          onChange={e => onFilterChange('ingredient', e.target.value)}
-        >
-          <option value="">Ingredients</option>
-          {ingredients.map(item => (
-            <option key={item.id} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.selectContainer}>
-        <select
-          className={styles.select}
-          value={selectedArea}
-          onChange={e => onFilterChange('area', e.target.value)}
-        >
-          <option value="">Area</option>
-          {areas.map(area => (
-            <option key={area.id} value={area.name}>
-              {area.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <FieldSelect
+        name="ingredients"
+        placeholder="Ingredients"
+        options={ingredientsOptions}
+        onChange={handleChangeIngredients}
+      />
+      <FieldSelect
+        name="area"
+        placeholder="Area"
+        options={areasOptions}
+        onChange={handleChangeArea}
+      />
     </div>
   );
 };
