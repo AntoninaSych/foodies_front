@@ -2,10 +2,11 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Container from '../../components/Container/Container';
 import { fetchCategories } from '../../redux/categories/operations';
-import CategoriesList from '../../components/CategoriesList/CategoriesList';
+// import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import css from './HomePage.module.css';
 import AppBar from '../../components/AppBar/AppBar';
 import Hero from '../../components/Hero/Hero';
+import Categories from '../../components/Categories/Categories';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const HomePage = () => {
         </Container>
       </div>
       <Container>
-        <CategoriesList />
+        <Categories />
       </Container>
     </div>
   );
