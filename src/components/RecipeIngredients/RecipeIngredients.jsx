@@ -1,7 +1,9 @@
 import css from './RecipeIngredients.module.css';
 
-const RecipeIngredients = ({ ingredients }) => {
-  if (!ingredients?.length) return null;
+const RecipeIngredients = ({ ingredients = [] }) => {
+  if (!ingredients.length) {
+    return null;
+  }
 
   return (
     <section className={css.ingredientsBlock}>

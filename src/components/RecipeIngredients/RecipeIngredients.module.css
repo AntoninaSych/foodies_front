@@ -33,18 +33,18 @@
   height: 75px;
   padding: 10px;
   border-radius: 15px;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--color-secondary);
 }
 
 .ingredientsName {
-  color: var(--extra-black);
+  color: var(--color-main);
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.28px;
 }
 
 .ingredientsMeasure {
-  color: var(--gray);
+  color: var(--color-secondary);
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.28px;
