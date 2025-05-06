@@ -1,0 +1,10 @@
+name: development
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  dev-qa-checks:
+    uses: ./.github/workflows/qa-checks.yml
