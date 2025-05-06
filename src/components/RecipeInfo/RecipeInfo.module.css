@@ -1,0 +1,26 @@
+.recipeInfoContainer {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  @media (min-width: 768px) {
+    .recipeInfoContainer {
+      padding: 40px 32px;
+      gap: 60px;
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    .recipeInfoContainer {
+      max-width: 1280px;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 80px;
+    }
+  }
+  
