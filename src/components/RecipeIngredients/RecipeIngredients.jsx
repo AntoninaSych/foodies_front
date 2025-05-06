@@ -1,28 +1,28 @@
-import styles from './RecipeIngredients.module.css';
+import css from './RecipeIngredients.module.css';
 
 const RecipeIngredients = ({ ingredients }) => {
+  if (!ingredients?.length) return null;
+
   return (
-    <section className="container">
-      <div className={styles.ingredients}>
-        <h3 className={styles.title}>Ingredients</h3>
-        <ul className={styles.list}>
-          {ingredients.map(item => (
-            <li key={item.id} className={styles.item}>
-              <div className={styles.imageWrapper}>
-                <img
-                  src={item.img || '/placeholder.png'}
-                  alt={item.name}
-                  className={styles.image}
-                />
+    <section className={css.ingredientsBlock}>
+      <h2 className={css.sectionTitle}>Ingredients:</h2>
+      <ul className={css.ingredientsList}>
+        {ingredients.map(ingredient => (
+          <li key={ingredient.id || ingredient.name}>
+            <div className={css.ingredientsItem}>
+              <img
+                src={ingredient.image || '/placeholder.png'}
+                alt={ingredient.name}
+                className={css.ingredientsImg}
+              />
+              <div>
+                <p className={css.ingredientsName}>{ingredient.name}</p>
+                <p className={css.ingredientsMeasure}>{ingredient.measure}</p>
               </div>
-              <div className={styles.textBlock}>
-                <p className={styles.name}>{item.name}</p>
-                <p className={styles.amount}>{item.amount}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };
