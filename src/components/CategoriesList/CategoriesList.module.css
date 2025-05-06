@@ -4,6 +4,19 @@
   gap: 16px;
   flex-wrap: wrap;
 }
+.btnLoadAll {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  width: 343px;
+  height: 250px;
+  border-radius: 30px;
+  color: var(--color-white);
+  background: var(--color-main);
+  margin-top: 16px;
+}
+.showAll {}
 
 /* tablet */
 @media only screen and (min-width: 768px) {
