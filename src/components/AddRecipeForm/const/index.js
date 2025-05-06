@@ -3,7 +3,17 @@ export const defaultValues = {
   description: '',
   category: null,
   instructions: '',
-  thumb: '',
-  time: '10 min',
+  thumb: null,
+  time: 10,
+  ingredients: [],
+};
+
+export const resetValues = {
+  title: null,
+  description: null,
+  category: null,
+  instructions: null,
+  thumb: null,
+  time: 10,
   ingredients: [],
 };

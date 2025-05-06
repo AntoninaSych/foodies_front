@@ -1,19 +1,29 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import clsx from 'clsx';
 import { MdAddAPhoto } from 'react-icons/md';
+import ErrorField from '../../../Fields/ErrorField/ErrorField';
 import css from './UploadPhoto.module.css';
 
-const UploadPhoto = ({ name, handleUploadedFile, register }) => {
-  const [preview, setPreview] = useState('');
-  const hiddenInputRef = useRef();
-  const { ref: registerRef, ...rest } = register(name);
+const UploadPhoto = ({ name, error, handleUploadedFile }) => {
+  const { getValues, clearErrors } = useFormContext();
+  const [preview, setPreview] = useState(null);
+
+  const values = getValues();
 
   const handleOnChange = event => {
-    const file = event.target.files[0];
-    const urlImage = URL.createObjectURL(file);
+    const blobFile = event.target.files[0];
+    const urlImage = URL.createObjectURL(blobFile);
     setPreview(urlImage);
-    handleUploadedFile(file);
-    hiddenInputRef.current && hiddenInputRef.current.click();
+    handleUploadedFile(blobFile);
+    clearErrors(name);
   };
+
+  useEffect(() => {
+    if (!values[name]) {
+      setPreview(null);
+    }
+  }, [values, name]);
 
   const uploadLabel = preview ? 'Upload another photo' : 'Upload a photo';
 
@@ -29,28 +39,24 @@ const UploadPhoto = ({ name, handleUploadedFile, register }) => {
       </label>
       <input
         id="file-upload"
-        className={css.fileInput}
+        className={css.hiddenInput}
         name={name}
         type="file"
-        {...rest}
         onChange={handleOnChange}
-        ref={e => {
-          registerRef(e);
-          hiddenInputRef.current = e;
-        }}
       />
     </>
   );
 
   return (
     <div className={css.wrapper}>
-      <div className={css.imagePlaceholder}>
+      <div className={clsx(css.imagePlaceholder, preview && css.withPreview)}>
         {!preview && Photo}
         {preview && (
           <img className={css.image} src={preview} alt="Uploaded Image" />
         )}
       </div>
       {preview && Photo}
+      {error && <ErrorField>{error}</ErrorField>}
     </div>
   );
 };

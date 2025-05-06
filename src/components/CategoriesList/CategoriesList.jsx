@@ -9,15 +9,20 @@ import CategoryCard from '../CategoryCard/CategoryCard';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
 
-const CategoriesList = () => {
+const CategoriesList = ({ handleChangeCategory }) => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const categories = useSelector(selectCategories);
+
   const compareCategories = (a, b) => {
     return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
   };
 
   const sortedCategories = [...categories].sort(compareCategories);
+
+  const handleOnCardChange = category => {
+    handleChangeCategory(category);
+  };
 
   if (loading) {
     return <Loader />;
@@ -27,7 +32,7 @@ const CategoriesList = () => {
     <ul className={css.wrapper}>
       {error && <Message>{error}</Message>}
       {sortedCategories.map(card => (
-        <CategoryCard key={card.id} data={card} />
+        <CategoryCard onChange={handleOnCardChange} key={card.id} data={card} />
       ))}
     </ul>
   );

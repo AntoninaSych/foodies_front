@@ -1,31 +1,36 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import Container from '../../components/Container/Container';
-import { fetchCategories } from '../../redux/categories/operations';
-// import CategoriesList from '../../components/CategoriesList/CategoriesList';
-import css from './HomePage.module.css';
+import Categories from '../../components/Categories/Categories';
 import AppBar from '../../components/AppBar/AppBar';
 import Hero from '../../components/Hero/Hero';
-import Categories from '../../components/Categories/Categories';
+import Recipes from '../../components/Recipes/Recipes';
+import { THEMES } from '../../const';
+import css from './HomePage.module.css';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const [category, setCategory] = useState(null);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  const handleChangeCategory = value => {
+    setCategory(value);
+  };
 
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme="dark" />
+          <AppBar theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>
-      <Container>
-        <Categories />
-      </Container>
+      <div className={css.main}>
+        <Container>
+          {!category ? (
+            <Categories handleChangeCategory={handleChangeCategory} />
+          ) : (
+            <Recipes category={category} />
+          )}
+        </Container>
+      </div>
     </div>
   );
 };

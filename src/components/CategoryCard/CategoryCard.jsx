@@ -1,6 +1,6 @@
 import css from './CategoryCard.module.css';
 
-const CategoryCard = ({ data }) => {
+const CategoryCard = ({ data, onChange }) => {
   const { name, thumb } = data;
 
   return (
@@ -9,7 +9,7 @@ const CategoryCard = ({ data }) => {
         <img className={css.categoryImg} src={thumb} alt={name} />
         <div className={css.categoryInfo}>
           <div className={css.categoryName}>{name}</div>
-          <button className={css.arrowButton}>
+          <button onClick={() => onChange(name)} className={css.arrowButton}>
             <svg
               className={css.svgArrow}
               viewBox="0 0 18 18"

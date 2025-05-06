@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { Controller } from 'react-hook-form';
 import { useId } from 'react';
 import css from '../Fields.module.css';
-import ErrorField from '../ErrorField/ErrorField.jsx';
+import ErrorField from '../ErrorField/ErrorField';
 
 const FieldSelect = ({
   name,
@@ -12,9 +12,9 @@ const FieldSelect = ({
   options,
   onChange,
   placeholder,
-  value,
   defaultValue,
   error,
+  value,
   notShowErrorMessage,
   className = '',
 }) => {
@@ -27,18 +27,18 @@ const FieldSelect = ({
   const defaultProps = {
     classNamePrefix: 'select',
     className: css.select,
-    options,
-    onChange: handleChange,
-    placeholder: placeholder,
-    value,
-    defaultValue,
     ariaInvalid: error ? 'true' : 'false',
+    onChange: handleChange,
+    options,
+    value,
+    placeholder,
+    defaultValue,
   };
 
   return (
     <div className={clsx(css.field, className, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
-      <div className={clsx(css.inputWrapper)}>
+      <div className={css.inputWrapper}>
         {control ? (
           <Controller
             name={name}
@@ -47,14 +47,13 @@ const FieldSelect = ({
               <Select
                 {...defaultProps}
                 {...field}
-                value={value}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
               />
             )}
           />
         ) : (
-          <Select {...defaultProps} />
+          <Select name={name} {...defaultProps} />
         )}
       </div>
       {error && !notShowErrorMessage && <ErrorField>{error}</ErrorField>}

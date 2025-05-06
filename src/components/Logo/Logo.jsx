@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import styles from './Logo.module.css';
+import clsx from 'clsx';
+import css from './Logo.module.css';
 
-const Logo = () => {
+const Logo = ({ theme }) => {
+  const classNames = clsx(css.logo, theme && css[theme]);
+
   return (
-    <Link to="/" className={styles.logo}>
+    <Link to="/" className={classNames}>
       foodies
     </Link>
   );
