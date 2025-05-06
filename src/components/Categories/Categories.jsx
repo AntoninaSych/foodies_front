@@ -16,9 +16,9 @@ const Categories = ({ handleChangeCategory }) => {
   }, [dispatch]);
 
   return (
-    <section className={styles.categorySection}>
-      <MainTitle className={styles.title}>Categories</MainTitle>
-      <Subtitle className={styles.subtitle}>
+    <section>
+      <MainTitle>Categories</MainTitle>
+      <Subtitle>
         Discover a limitless world of culinary possibilities and enjoy exquisite
         recipes that combine taste, style and the warm atmosphere of the
         kitchen.
