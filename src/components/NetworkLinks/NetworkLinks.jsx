@@ -4,17 +4,17 @@ const socialLinks = [
   {
     href: 'https://www.facebook.com/goITclub/',
     id: 'facebook',
-    title: 'Facebook',
+    label: 'Facebook',
   },
   {
     href: 'https://www.instagram.com/goitclub/',
     id: 'instagram',
-    title: 'Instagram',
+    label: 'Instagram',
   },
   {
     href: 'https://www.youtube.com/c/GoIT',
     id: 'youtube',
-    title: 'YouTube',
+    label: 'YouTube',
   },
 ];
 
