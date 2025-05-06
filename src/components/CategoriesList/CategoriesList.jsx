@@ -1,12 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import css from './CategoriesList.module.css';
 import CategoryCard from '../CategoryCard/CategoryCard';
 import { fetchRecipes } from '../../redux/recipes/operations';
 import { errorNotification } from '../../utils/notification';
-import styles from '../Categories/Categories.module.css';
 import Button from '../Button/Button';
+import css from './CategoriesList.module.css';
 
 const CategoriesList = ({ categories, handleChangeCategory }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -49,7 +48,7 @@ const CategoriesList = ({ categories, handleChangeCategory }) => {
       ))}
       {showAll && (
         <li className={css.showAll}>
-          <Button onClick={handleOnShowAll} className={styles.btnLoadAll}>
+          <Button onClick={handleOnShowAll} className={css.btnLoadAll}>
             All categories
           </Button>
         </li>
