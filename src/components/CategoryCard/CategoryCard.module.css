@@ -27,15 +27,16 @@
 }
 
 .categoryName {
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--color-white-opacity20);
   border-radius: 30px;
   padding: 8px 12px;
   text-align: center;
-  font-weight: 600;
+  font-family: "Mulish Medium", Arial, sans-serif;
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-white-opacity20);
 }
 
 .arrowButton {
@@ -44,26 +45,20 @@
   background: none;
   border: 1px solid;
   border-color: var(--color-white-opacity20);
-  padding: 11px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition: border-color var(--trns-fast);
+  color: var(--color-white);
+  font-size: 20px;
 }
 
 .arrowButton:hover,
 .arrowButton:focus {
-  background: var(--color-main);
-  border: none;
-}
-
-.svgArrow {
-  width: 18px;
-  height: 18px;
-  fill: none;
+  border-color: var(--color-white);
 }
 
 /* tablet */

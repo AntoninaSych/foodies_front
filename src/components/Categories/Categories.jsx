@@ -1,19 +1,31 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCategories } from '../../redux/categories/operations';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';
-import Button from '../Button/Button';
-
+import {
+  selectCategories,
+  selectError,
+  selectLoading,
+} from '../../redux/categories/selectors';
+import Loader from '../Loader/Loader';
+import Message from '../Message/Message';
 import styles from './Categories.module.css';
 
 const Categories = ({ handleChangeCategory }) => {
   const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const categories = useSelector(selectCategories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <section className={styles.categorySection}>
@@ -23,8 +35,14 @@ const Categories = ({ handleChangeCategory }) => {
         recipes that combine taste, style and the warm atmosphere of the
         kitchen.
       </Subtitle>
-      <CategoriesList handleChangeCategory={handleChangeCategory} />
-      <Button className={styles.btnLoadAll}>All categories</Button>
+      {error ? (
+        <Message>{error}</Message>
+      ) : (
+        <CategoriesList
+          handleChangeCategory={handleChangeCategory}
+          categories={categories}
+        />
+      )}
     </section>
   );
 };

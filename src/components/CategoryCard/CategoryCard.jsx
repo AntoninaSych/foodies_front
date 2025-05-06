@@ -1,6 +1,7 @@
+import { LuArrowUpRight } from 'react-icons/lu';
 import css from './CategoryCard.module.css';
 
-const CategoryCard = ({ data, onChange }) => {
+const CategoryCard = ({ data, handleOnCLick }) => {
   const { name, thumb } = data;
 
   return (
@@ -9,27 +10,11 @@ const CategoryCard = ({ data, onChange }) => {
         <img className={css.categoryImg} src={thumb} alt={name} />
         <div className={css.categoryInfo}>
           <div className={css.categoryName}>{name}</div>
-          <button onClick={() => onChange(name)} className={css.arrowButton}>
-            <svg
-              className={css.svgArrow}
-              viewBox="0 0 18 18"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5.25 12.75L12.75 5.25"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5.25 5.25H12.75V12.75"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <button
+            onClick={() => handleOnCLick(name)}
+            className={css.arrowButton}
+          >
+            <LuArrowUpRight />
           </button>
         </div>
       </div>

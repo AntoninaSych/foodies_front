@@ -27,7 +27,7 @@ const HomePage = () => {
           {!category ? (
             <Categories handleChangeCategory={handleChangeCategory} />
           ) : (
-            <Recipes category={category} />
+            <Recipes category={category} onBack={() => setCategory(null)} />
           )}
         </Container>
       </div>

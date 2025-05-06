@@ -1,39 +1,59 @@
-import { useSelector } from 'react-redux';
-import {
-  selectLoading,
-  selectError,
-  selectCategories,
-} from '../../redux/categories/selectors';
+import { useDispatch } from 'react-redux';
+import { useMemo, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
 import css from './CategoriesList.module.css';
 import CategoryCard from '../CategoryCard/CategoryCard';
-import Loader from '../Loader/Loader';
-import Message from '../Message/Message';
+import { fetchRecipes } from '../../redux/recipes/operations';
+import { errorNotification } from '../../utils/notification';
+import styles from '../Categories/Categories.module.css';
+import Button from '../Button/Button';
 
-const CategoriesList = ({ handleChangeCategory }) => {
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  const categories = useSelector(selectCategories);
+const CategoriesList = ({ categories, handleChangeCategory }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [limit, setLimit] = useState(isMobile ? 7 : 10);
+  const dispatch = useDispatch();
+  const sortedCategories = useMemo(() => {
+    const sorted = []
+      .concat(categories)
+      .sort((a, b) => (a.name > b.name ? 1 : -1));
 
-  const compareCategories = (a, b) => {
-    return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    return limit ? sorted.slice(0, limit + 1) : sorted;
+  }, [categories, limit]);
+  const showAll = sortedCategories.length !== categories.length;
+
+  const handleOnCategoryClick = category => {
+    if (category) {
+      dispatch(fetchRecipes({ category }))
+        .unwrap()
+        .then(() => {
+          handleChangeCategory(category);
+        })
+        .catch(error => {
+          errorNotification(error);
+        });
+    }
   };
 
-  const sortedCategories = [...categories].sort(compareCategories);
-
-  const handleOnCardChange = category => {
-    handleChangeCategory(category);
+  const handleOnShowAll = () => {
+    setLimit(0);
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <ul className={css.wrapper}>
-      {error && <Message>{error}</Message>}
       {sortedCategories.map(card => (
-        <CategoryCard onChange={handleOnCardChange} key={card.id} data={card} />
+        <CategoryCard
+          handleOnCLick={handleOnCategoryClick}
+          key={card.id}
+          data={card}
+        />
       ))}
+      {showAll && (
+        <li className={css.showAll}>
+          <Button onClick={handleOnShowAll} className={styles.btnLoadAll}>
+            All categories
+          </Button>
+        </li>
+      )}
     </ul>
   );
 };
