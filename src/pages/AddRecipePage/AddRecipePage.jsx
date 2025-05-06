@@ -49,7 +49,7 @@ const AddRecipePage = () => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <section className={css.wrapper}>
       <Container>
         <PathInfo breadcrumbs={[{ name: 'add recipe' }]} />
         <MainTitle>Add recipe</MainTitle>
@@ -59,7 +59,7 @@ const AddRecipePage = () => {
         </Subtitle>
         <AddRecipeForm onSubmit={onSubmit} />
       </Container>
-    </div>
+    </section>
   );
 };
 

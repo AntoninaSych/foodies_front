@@ -8,15 +8,15 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
-import styles from './Recipes.module.css';
+import css from './Recipes.module.css';
 
 const Recipes = ({ category, onBack, data = [] }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [recipes, setRecipes] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({ ingredient: '', area: '' });
   const limit = isMobile ? 8 : CATALOG_LIMIT;
-  const { area, ingredient } = filters;
+  const { ingredient, area } = filters;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,10 +36,11 @@ const Recipes = ({ category, onBack, data = [] }) => {
       }
     };
 
-    // TODO fetch new data only if there is at least one filter is set
-    // if (Object.keys(filters) > 0) {
-    fetchData();
-    // }
+    // TODO fetch new data only if there is at least one filter is set.
+    // Comment the condition to fetch recipes if passing recipes as a prop not implemented yet
+    if (area || ingredient) {
+      fetchData();
+    }
   }, [category, ingredient, area, currentPage, limit]);
 
   const handleFilterChange = (type, value) => {
@@ -49,8 +50,8 @@ const Recipes = ({ category, onBack, data = [] }) => {
 
   return (
     <section>
-      <div className={styles.navigation}>
-        <button className={styles.backBtn} onClick={onBack}>
+      <div className={css.navigation}>
+        <button className={css.backBtn} onClick={onBack}>
           <IoArrowBack /> Back
         </button>
       </div>
@@ -62,7 +63,7 @@ const Recipes = ({ category, onBack, data = [] }) => {
         gastronomic desires.
       </Subtitle>
 
-      <div className={styles.content}>
+      <div className={css.content}>
         <RecipeFilters filters={filters} onFilterChange={handleFilterChange} />
 
         {recipes.length ? (

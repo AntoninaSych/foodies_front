@@ -33,13 +33,15 @@ const HomePage = () => {
           <Hero />
         </Container>
       </div>
-      <Container>
-        {!category ? (
-          <CategoriesList onChangeCategory={onChangeCategory} />
-        ) : (
-          <Recipes category={category} onBack={handleBack} />
-        )}
-      </Container>
+      <div className={css.main}>
+        <Container>
+          {!category ? (
+            <CategoriesList onChangeCategory={onChangeCategory} />
+          ) : (
+            <Recipes category={category} onBack={handleBack} />
+          )}
+        </Container>
+      </div>
     </div>
   );
 };
