@@ -8,7 +8,6 @@ import {
 } from '../../redux/testimonials/selectors.js';
 import { fetchTestimonials } from '../../redux/testimonials/operations.js';
 import Loader from '../Loader/Loader.jsx';
-import css from '../CategoriesList/CategoriesList.module.css';
 import Message from '../Message/Message.jsx';
 
 const AUTO_SLIDE_INTERVAL = 5000;
@@ -22,30 +21,37 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const indexRef = useRef(0);
 
   useEffect(() => {
     dispatch(fetchTestimonials());
   }, [dispatch]);
 
   useEffect(() => {
-    if (testimonials && testimonials.length > 0) {
-      setCurrentIndex(prev => prev % testimonials.length);
-    }
+    setCurrentIndex(0);
+    indexRef.current = 0;
   }, [testimonials]);
 
   useEffect(() => {
-    if (testimonials && testimonials.length > 0) {
+    if (testimonials.length > 1) {
       intervalRef.current = setInterval(() => {
-        slideTo((currentIndex + 1) % testimonials.length);
+        const nextIndex = (indexRef.current + 1) % testimonials.length;
+        slideTo(nextIndex);
       }, AUTO_SLIDE_INTERVAL);
     }
-    return () => clearInterval(intervalRef.current);
-  }, [testimonials, currentIndex]);
+    return () => {
+      clearInterval(intervalRef.current);
+      clearTimeout(timeoutRef.current);
+    };
+  }, [testimonials.length]);
 
   const slideTo = index => {
+    clearTimeout(timeoutRef.current);
     setFade(false);
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setCurrentIndex(index);
+      indexRef.current = index;
       setFade(true);
     }, 300);
   };
@@ -56,42 +62,42 @@ const Testimonials = () => {
   };
 
   if (loading) return <Loader />;
+  if (error) return <Message>{error}</Message>;
 
+  if (testimonials.length === 0) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.center}>There are no testimonials here yet.</div>
+      </div>
+    );
+  }
   return (
-    <div className={css.wrapper}>
-      {error && <Message>{error}</Message>}
-
+    <div className={styles.wrapper}>
       <div className={styles.section}>
         <p className={styles.subtitle}>What our customers say</p>
         <h2 className={styles.title}>TESTIMONIALS</h2>
         <svg className={styles.icon} aria-hidden="true">
-          <use xlinkHref={`/sprite.svg#quote`} />
+          <use href="/sprite.svg#quote" />
         </svg>
 
-        {(!testimonials || testimonials.length === 0) && (
-          <div className={styles.center}>
-            There are no testimonials here yet.
-          </div>
-        )}
-
-        {testimonials && testimonials.length > 0 && (
-          <div
-            className={`${styles.slide} ${fade ? styles.fadeIn : styles.fadeOut}`}
-          >
+        <div className={styles.slide} aria-live="polite">
+          <div className={fade ? styles.fadeIn : styles.fadeOut}>
             <p className={styles.quote}>
-              “{testimonials[currentIndex]?.text ?? 'Loading…'}”
+              “{testimonials[currentIndex]?.testimonial ?? 'Loading…'}”
             </p>
             <p className={styles.author}>
               {testimonials[currentIndex]?.author ?? ''}
             </p>
           </div>
-        )}
+        </div>
+
         <div>
-          {testimonials.map((_, idx) => (
-            <span
-              key={idx}
+          {testimonials.map((testimonial, idx) => (
+            <button
+              key={testimonial.id ?? idx}
               className={`${styles.dot} ${currentIndex === idx ? styles.active : ''}`}
               onClick={() => handleDotClick(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
             />
           ))}
         </div>
