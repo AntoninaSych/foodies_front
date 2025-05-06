@@ -46,6 +46,7 @@ export const recipeAdd = async (token, data = {}) => {
   const response = await axios.post('/recipes', data, {
     headers: {
       Authorization: getAuthorizationHeader(token),
+      'Content-Type': 'multipart/form-data',
     },
   });
   return response.data;
