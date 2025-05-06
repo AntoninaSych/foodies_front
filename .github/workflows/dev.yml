@@ -1,4 +1,4 @@
-name: development
+name: dev
 
 on:
   push:
@@ -8,3 +8,5 @@ on:
 jobs:
   dev-qa-checks:
     uses: ./.github/workflows/qa-checks.yml
+    with:
+      ENV: dev

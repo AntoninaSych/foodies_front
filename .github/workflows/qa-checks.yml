@@ -1,5 +1,12 @@
 name: qa-checks
 
+on:
+  workflow_call:
+    inputs:
+      ENV:
+        required: true
+        type: string
+
 jobs:
   qa-checks:
     name: qa-checks
