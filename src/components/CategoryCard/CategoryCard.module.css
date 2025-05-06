@@ -43,7 +43,7 @@
   height: 40px;
   background: none;
   border: 1px solid;
-  border-color: var(--color-round-btn);
+  border-color: var(--color-white-opacity20);
   padding: 11px;
   cursor: pointer;
   display: flex;
