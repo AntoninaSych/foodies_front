@@ -27,12 +27,12 @@ const FieldSelect = ({
   const defaultProps = {
     classNamePrefix: 'select',
     className: css.select,
+    ariaInvalid: error ? 'true' : 'false',
+    onChange: handleChange,
     options,
     value,
-    onChange: handleChange,
-    placeholder: placeholder,
+    placeholder,
     defaultValue,
-    ariaInvalid: error ? 'true' : 'false',
   };
 
   return (
@@ -53,7 +53,7 @@ const FieldSelect = ({
             )}
           />
         ) : (
-          <Select {...defaultProps} />
+          <Select name={name} {...defaultProps} />
         )}
       </div>
       {error && !notShowErrorMessage && <ErrorField>{error}</ErrorField>}
