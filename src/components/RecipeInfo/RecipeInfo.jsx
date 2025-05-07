@@ -1,25 +1,19 @@
 import RecipeMainInfo from '../RecipeMainInfo/RecipeMainInfo';
 import RecipeIngredients from '../RecipeIngredients/RecipeIngredients';
 //import RecipePreparation from '../RecipePreparation/RecipePreparation';
-
 import css from './RecipeInfo.module.css';
 
 const RecipeInfo = ({ recipe }) => {
   if (!recipe) return null;
 
   return (
-    <div className={css.recipeInfoContainer}>
-      <div>
-        <RecipeMainInfo
-          title={recipe.title}
-          category={recipe.category}
-          time={recipe.time}
-          description={recipe.description}
-          recipe={recipe}
-        />
+    <div className={css.wrapper}>
+      <div className={css.sidebar}>ЗОБРАЖЕННЯ</div>
+      <div className={css.content}>
+        <RecipeMainInfo recipe={recipe} />
         <RecipeIngredients ingredients={recipe.ingredients} />
+        {/*<RecipePreparation steps={recipe.instructions} />*/}
       </div>
-      {/*<RecipePreparation steps={recipe.instructions} />*/}
     </div>
   );
 };

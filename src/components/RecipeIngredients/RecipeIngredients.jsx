@@ -13,7 +13,7 @@ const RecipeIngredients = ({ ingredients = [] }) => {
           <li key={ingredient.id || ingredient.name}>
             <div className={css.ingredientsItem}>
               <img
-                src={ingredient.image || '/placeholder.png'}
+                src={ingredient.thumb || '/placeholder.png'}
                 alt={ingredient.name}
                 className={css.ingredientsImg}
               />

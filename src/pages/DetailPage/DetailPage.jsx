@@ -1,81 +1,80 @@
 import { useEffect, useState } from 'react';
 import css from './DetailPage.module.css';
 import { useParams } from 'react-router-dom';
-//import { recipesDetailFetch } from '../../api/recipesApi';
+import { recipesDetailFetch } from '../../api/recipesApi';
 import Container from '../../components/Container/Container';
 import Loader from '../../components/Loader/Loader';
-import Message from '../../components/Message/Message';
 
 import PathInfo from '../../components/PathInfo/PathInfo';
 import RecipeInfo from '../../components/RecipeInfo/RecipeInfo';
+import { errorHandler } from '../../utils/notification.js';
 //import PopularRecipes from '../../components/PopularRecipes/PopularRecipes';
 
-const mokrecipe = {
-  id: '37d2d47b-cb9a-4903-a92c-8c4a8194143b',
-  title: 'Shawarma',
-  description:
-    'A Middle Eastern wrap filled with tender strips of marinated meat',
-  instructions:
-    'Combine the marinade ingredients in a large ziplock bag (or bowl).\r\nAdd the chicken and use your hands to make sure each piece is coated. If using a ziplock bag, I find it convenient to close the bag then massage the bag to disperse the rub all over each chicken piece.\r\nMarinate overnight or up to 24 hours.\r\nCombine the Yoghurt Sauce ingredients in a bowl and mix. Cover and put in the fridge until required (it will last for 3 days in the fridge).\r\nHeat grill/BBQ (or large heavy based pan on stove) on medium high. You should not need to oil it because the marinade has oil in it and also thigh fillets have fat. But if you are worried then oil your hotplate/grill. (See notes for baking)\r\nPlace chicken on the grill and cook the first side for 4 to 5 minutes until nicely charred, then turn and cook the other side for 3 to 4 minutes (the 2nd side takes less time).\r\nRemove chicken from the grill and cover loosely with foil. Set aside to rest for 5 minutes.\r\nTO SERVE\r\nSlice chicken and pile onto platter alongside flatbreads, Salad and the Yoghurt Sauce.\r\nTo make a wrap, get a piece of flatbread and smear with Yoghurt Sauce. Top with a bit of lettuce and tomato and Chicken Shawarma. Roll up and enjoy!',
-  thumb: 'http://localhost:5000/public/images/recipies/Shawarma.jpg',
-  time: '24',
-  areaId: '104f50b1-1efe-4ab7-8e1b-ead3a2020988',
-  ownerId: 'd26b9a3f-81ed-401e-9011-9d03dfac52db',
-  categoryId: '17163542-9eb1-4f45-849c-3a60a72d442e',
-  createdAt: '2025-05-07T19:22:10.655Z',
-  updatedAt: '2025-05-07T19:22:10.655Z',
+const mockRecipe = {
+  id: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6',
+  title: 'Chicken Curry',
+  description: 'Delicious spicy chicken curry recipe.',
+  instructions: 'Mix spices, cook chicken, and simmer for 30 minutes.',
+  thumb: 'https://example.com/images/chicken-curry.jpg',
+  time: 45,
   area: {
-    id: '104f50b1-1efe-4ab7-8e1b-ead3a2020988',
-    name: 'Egyptian',
+    id: 'b2a3c4d5-f6g7-8h9i-j0k1-l2m3n4o5p6q7',
+    name: 'Indian',
   },
   owner: {
-    id: 'd26b9a3f-81ed-401e-9011-9d03dfac52db',
-    name: 'Foodies Admin',
-    email: 'admin@foodies.com',
+    id: '123e4567-e89b-12d3-a456-426614174000',
+    name: 'John Doe',
+    email: 'john@example.com',
   },
-  category: {
-    id: '17163542-9eb1-4f45-849c-3a60a72d442e',
-    name: 'Chicken',
-    thumb: 'images/categories/Chicken.jpg',
-  },
+  ingredients: [
+    {
+      id: '789e0123-f456-789a-bcde-1234567890ab',
+      name: 'Chicken',
+      thumb:
+        'https://ftp.goit.study/img/so-yummy/ingredients/640c2dd963a319ea671e3824.png',
+    },
+    {
+      id: '228855e1-0635-4438-9fe2-527a3bd7b6a2',
+      name: 'Rose water',
+      thumb:
+        'https://ftp.goit.study/img/so-yummy/ingredients/640c2dd963a319ea671e386c.png',
+    },
+  ],
 };
 
 const DetailPage = () => {
   const { id } = useParams();
-  const [recipe] = useState(mokrecipe);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [recipe, setRecipe] = useState(mockRecipe);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        // const recipeData = await recipesDetailFetch(id);
-        // setRecipe(recipeData);
-
+        const recipeData = await recipesDetailFetch(id);
+        setRecipe(recipeData);
         // const popularData = await fetchPopularRecipes();
-      } catch {
-        setError('Failed to load recipe');
+      } catch (error) {
+        errorHandler(error, 'Failed to load recipe');
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
+    if (id === 'TEST') {
       fetchData();
     }
   }, [id]);
 
-  if (loading) return <Loader />;
-  if (error) return <Message>{error}</Message>;
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <section className={css.wrapper}>
       <Container>
         <PathInfo breadcrumbs={[{ name: recipe.title }]} />
-        <RecipeInfo recipe={recipe} />
-
+        {recipe && <RecipeInfo recipe={recipe} />}
         {/*<PopularRecipes recipes={popularRecipes}  />*/}
       </Container>
     </section>

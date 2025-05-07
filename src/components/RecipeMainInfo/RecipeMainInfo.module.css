@@ -1,104 +1,103 @@
 .title {
-    color: var(--color-main);
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 12px;
+  color: var(--color-main);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  background-color: var(--color-placeholder);
+  border-radius: 16px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-secondary);
+  margin-bottom: 28px;
+  max-width: 700px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.textLabel {
+  font-size: 13px;
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  gap: 10px;
+  transition: transform 0.2s ease;
+}
+
+.author:hover {
+  transform: scale(1.05);
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--color-placeholder);
+  width: 32px;
+  height: 32px;
+}
+
+.avatarName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-main);
+}
+
+.authorName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-main);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.authorName:hover {
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
   }
-  
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  
-  .tag {
-    background-color: var(--color-placeholder);
-    border-radius: 16px;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--color-secondary);
-  }
-  
+
   .description {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-secondary);
-    margin-bottom: 28px;
-    max-width: 700px;
-  }
-  
-  .authorInfo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-  }
-  
-  .textLabel {
-    font-size: 13px;
-    color: var(--color-secondary);
-    font-weight: 500;
-  }
-  
-  .author {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    gap: 10px;
-    transition: transform 0.2s ease;
-  }
-  
-  .author:hover {
-    transform: scale(1.05);
-  }
-  
-  .avatar {
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: var(--color-placeholder);
-    width: 32px;
-    height: 32px;
-  }
-  
-  .avatarName {
     font-size: 14px;
-    font-weight: 600;
-    color: var(--color-main);
   }
-  
+
+  .avatarName,
   .authorName {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-main);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.2s ease;
+    font-size: 13px;
   }
-  
-  .authorName:hover {
-    color: var(--color-white);
-  }
-  
-  @media (max-width: 768px) {
-    .title {
-      font-size: 22px;
-    }
-  
-    .description {
-      font-size: 14px;
-    }
-  
-    .avatarName,
-    .authorName {
-      font-size: 13px;
-    }
-  }
-  
+}
