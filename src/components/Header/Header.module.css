@@ -12,7 +12,7 @@
   align-items: center;
   padding: 40px 0;
   height: 46px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .nav {
@@ -38,8 +38,5 @@
 @media only screen and (min-width: 1440px) {
   .header {
     padding: 24px 0;
-  }
-  .brand {
-    width: 50%;
   }
 }

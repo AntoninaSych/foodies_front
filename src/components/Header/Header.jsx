@@ -21,12 +21,10 @@ const Header = ({ theme }) => {
           </div>
 
           {isLoggedIn ? (
-            <div className={css.nav}>
-              <>
-                <Nav theme={theme} />
-                <UserBar theme={theme} />
-              </>
-            </div>
+            <>
+              <Nav theme={theme} />
+              <UserBar theme={theme} />
+            </>
           ) : (
             <AuthBar theme={theme} />
           )}
