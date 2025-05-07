@@ -41,7 +41,7 @@ const DetailPage = () => {
   return (
     <section className={css.wrapper}>
       <Container>
-        <PathInfo breadcrumbs={[{ name: 'recipe' }]} />
+        <PathInfo breadcrumbs={[{ name: 'Recipe' }]} />
         <RecipeInfo recipe={recipe} />
 
         {/*<PopularRecipes recipes={popularRecipes}  />*/}

@@ -1,19 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ROUTERS } from '../../const';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { SignInModal } from '../SignInModal/SignInModal';
 
 import css from './RecipeMainInfo.module.css';
 
-const RecipeMainInfo = ({ title, category, time, description, author }) => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+const RecipeMainInfo = ({ title, category, time, description, recipe }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-    const handleAuthorClick = () => {
-        if (isLoggedIn) {
-          navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
-        } else {
-          dispatch(openModal('signIn'));
-        }
-      };
+  const handleAuthorClick = () => {
+    if (isLoggedIn) {
+      navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
+    } else {
+      dispatch(SignInModal('signIn'));
+    }
+  };
 
   return (
     <div>
@@ -26,31 +30,26 @@ const RecipeMainInfo = ({ title, category, time, description, author }) => {
 
       <p className={css.description}>{description}</p>
 
-      <div className={css.authorInfo}>
-        {recipe.owner && (
-                    <button className={css.author} onClick={handleAuthorClick}>
-                      <img
-                        className={css.avatar}
-                        src={recipe.owner.avatarURL}
-                        alt={`Avatar ${recipe.owner.name}`}
-                        width={32}
-                        height={32}
-                      />
-                      <p className={css.avatarName}>{recipe.owner.name}</p>
-                    </button>
-                  )}
-        
-        <div>
-          <span className={css.textLabel}>Created by:</span><br />
+      {recipe.owner && (
+        <div className={css.authorInfo}>
+          <span className={css.textLabel}>Created by:</span>
+          <br />
           <button
             type="button"
             className={css.authorName}
-            onClick={author.onClick} 
+            onClick={handleAuthorClick}
           >
-            {author.name}
+            <img
+              className={css.avatar}
+              src={recipe.owner.avatarURL}
+              alt={`Avatar ${recipe.owner.name}`}
+              width={32}
+              height={32}
+            />
+            <p className={css.avatarName}>{recipe.owner.name}</p>
           </button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
