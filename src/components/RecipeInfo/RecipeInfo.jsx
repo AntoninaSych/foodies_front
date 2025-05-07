@@ -1,4 +1,4 @@
-//import RecipeMainInfo from '../RecipeMainInfo/RecipeMainInfo';
+import RecipeMainInfo from '../RecipeMainInfo/RecipeMainInfo';
 import RecipeIngredients from '../RecipeIngredients/RecipeIngredients';
 //import RecipePreparation from '../RecipePreparation/RecipePreparation';
 
@@ -10,7 +10,7 @@ const RecipeInfo = ({ recipe }) => {
   return (
     <div className={css.recipeInfoContainer}>
       <div>
-        {/* <RecipeMainInfo recipe={recipe} onUserAvatarClick={() => {}} /> */}
+        <RecipeMainInfo recipe={recipe} onUserAvatarClick={() => {}} />
         <RecipeIngredients ingredients={recipe.ingredients} />
       </div>
       {/*<RecipePreparation steps={recipe.instructions} />*/}
