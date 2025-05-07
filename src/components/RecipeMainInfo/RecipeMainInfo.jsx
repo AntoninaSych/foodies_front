@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTERS } from '../../const';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { SignInModal } from '../SignInModal/SignInModal';
+import { openModal } from '../../redux/modal/slice';
 
 import css from './RecipeMainInfo.module.css';
 
@@ -15,7 +15,7 @@ const RecipeMainInfo = ({ title, category, time, description, recipe }) => {
     if (isLoggedIn) {
       navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
     } else {
-      dispatch(SignInModal('signIn'));
+      dispatch(openModal('signIn'));
     }
   };
 
