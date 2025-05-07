@@ -6,7 +6,6 @@ import ErrorField from '../ErrorField/ErrorField';
 const FieldInput = ({
   name,
   label,
-  className = '',
   register,
   required,
   placeholder,
@@ -15,6 +14,8 @@ const FieldInput = ({
   error,
   strong,
   value,
+  style,
+  className = '',
 }) => {
   const [count, setCount] = useState(0);
   const fieldId = useId();
@@ -26,10 +27,39 @@ const FieldInput = ({
     onChange && onChange(value);
   };
 
+  const renderInput = () => {
+    const defaultProps = {
+      placeholder,
+      maxLength: defaultMaxLength,
+      'aria-invalid': error ? 'true' : 'false',
+    };
+
+    if (register) {
+      const { onChange: regOnChange, ...field } = register(name, {
+        required,
+      });
+
+      return (
+        <input
+          value={value}
+          {...field}
+          onChange={e => {
+            regOnChange(e);
+            handleOnChange(e);
+          }}
+          {...defaultProps}
+        />
+      );
+    }
+
+    return <input value={value} onChange={handleOnChange} {...defaultProps} />;
+  };
+
   return (
     <div
       className={clsx(
         css.field,
+        style && css[style],
         className,
         strong && css.strong,
         error && css.error
@@ -39,15 +69,7 @@ const FieldInput = ({
       <div
         className={clsx(css.inputWrapper, defaultMaxLength && css.withCount)}
       >
-        <input
-          value={value}
-          {...(register && register(name, { required }))}
-          placeholder={placeholder}
-          onChange={handleOnChange}
-          maxLength={defaultMaxLength}
-          aria-invalid={error ? 'true' : 'false'}
-        />
-
+        {renderInput()}
         {maxLength && (
           <span className={css.count}>
             {count} / {defaultMaxLength}
