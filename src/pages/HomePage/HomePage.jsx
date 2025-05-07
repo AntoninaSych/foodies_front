@@ -1,32 +1,38 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import Container from '../../components/Container/Container';
-import { fetchCategories } from '../../redux/categories/operations';
-import CategoriesList from '../../components/CategoriesList/CategoriesList';
-import css from './HomePage.module.css';
-import AppBar from '../../components/AppBar/AppBar';
+import Categories from '../../components/Categories/Categories';
+import Header from '../../components/Header/Header';
 import Hero from '../../components/Hero/Hero';
+import Recipes from '../../components/Recipes/Recipes';
+import { THEMES } from '../../const';
+import css from './HomePage.module.css';
 import Testimonials from '../../components/Testimonials/Testimonials.jsx';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const [category, setCategory] = useState(null);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  const handleChangeCategory = value => {
+    setCategory(value);
+  };
 
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme="dark" />
+          <Header theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>
-      <Container>
-        <CategoriesList />
-        <Testimonials />
-      </Container>
+      <div className={css.main}>
+        <Container>
+          {!category ? (
+            <Categories handleChangeCategory={handleChangeCategory} />
+          ) : (
+            <Recipes category={category} onBack={() => setCategory(null)} />
+          )}
+          <Testimonials />
+        </Container>
+      </div>
     </div>
   );
 };

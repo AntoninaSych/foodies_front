@@ -1,0 +1,45 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-secondary);
+  border-radius: 50%;
+  transition: border-color var(--trns-fast), background-color var(--trns-fast);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color:var(--color-main);
+  transition: fill var(--trns-fast);
+}
+
+.link:hover  {
+  border-color: var(--color-main);
+  background-color: var(--color-main);
+}
+
+.link:hover .icon {
+  fill: var(--color-white);
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .link {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {}

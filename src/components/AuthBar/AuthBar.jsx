@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import css from '../styles/navigation.module.css';
 import Button from '../Button/Button';
-import Modal from '../Modal/Modal';
-import RegisterForm from '../RegisterForm/RegisterForm';
-import LoginForm from '../LoginForm/LoginForm';
+import SignUpModal from '../SignUpModal/SignUpModal';
+import SignInModal from '../SignInModal/SignInModal';
+import css from '../styles/navigation.module.css';
 
 const ACTIONS = {
   SIGN_IN: 'sign-in',
@@ -13,7 +12,7 @@ const ACTIONS = {
 
 const AuthBar = ({ theme }) => {
   const [form, setForm] = useState(null);
-  const className = clsx(css.wrapper, css[theme]);
+  const className = clsx(css.wrapper, theme && css[theme]);
 
   const handleClick = action => () => {
     setForm(action);
@@ -35,19 +34,18 @@ const AuthBar = ({ theme }) => {
           SIGN UP
         </Button>
       </div>
-      <Modal open={form === ACTIONS.SIGN_UP} onClose={handleSubmit}>
-        <RegisterForm
-          onSubmit={handleSubmit}
-          onChangeForm={handleChangeForm(ACTIONS.SIGN_IN)}
-        />
-      </Modal>
 
-      <Modal open={form === ACTIONS.SIGN_IN} onClose={handleSubmit}>
-        <LoginForm
-          onSubmit={handleSubmit}
-          onChangeForm={handleChangeForm(ACTIONS.SIGN_UP)}
-        />
-      </Modal>
+      <SignUpModal
+        isOpen={form === ACTIONS.SIGN_UP}
+        onClose={handleSubmit}
+        handleOnChangeForm={handleChangeForm(ACTIONS.SIGN_IN)}
+      />
+
+      <SignInModal
+        isOpen={form === ACTIONS.SIGN_IN}
+        onClose={handleSubmit}
+        handleOnChangeForm={handleChangeForm(ACTIONS.SIGN_UP)}
+      />
     </div>
   );
 };

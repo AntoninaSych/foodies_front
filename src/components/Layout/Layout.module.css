@@ -6,4 +6,24 @@
 
 .layout main {
   flex-grow: 1;
+  padding: 64px 0 80px 0;
+}
+
+.layout.homeLayout main {
+  padding-top: 0;
+}
+
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+  .layout main {
+    padding: 64px 0 100px 0;
+  }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 1440px) {
+  .layout main {
+    padding:80px 0 120px 0;
+  }
 }

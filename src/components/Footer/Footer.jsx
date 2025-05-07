@@ -1,53 +1,21 @@
 import Container from '../Container/Container';
 import css from './Footer.module.css';
-
-const socialLinks = [
-  {
-    href: 'https://www.facebook.com/goITclub/',
-    iconId: 'facebook',
-    label: 'Facebook',
-  },
-  {
-    href: 'https://www.instagram.com/goitclub/',
-    iconId: 'instagram',
-    label: 'Instagram',
-  },
-  {
-    href: 'https://www.youtube.com/c/GoIT',
-    iconId: 'youtube',
-    label: 'YouTube',
-  },
-];
+import Logo from '../Logo/Logo';
+import NetworkLinks from '../NetworkLinks/NetworkLinks';
+import Copyright from '../Copyright/Copyright';
 
 const Footer = () => {
   return (
     <footer>
-      <Container className={css.container}>
-        <div className={css.wrap_footer}>
-          <a href="/" className={css.logo}>
-            foodies
-          </a>
-          <ul className={css.list_social}>
-            {socialLinks.map(({ href, iconId, label }) => (
-              <li key={label} className={css.item_social}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className={css.social_link}
-                >
-                  <svg className={css.icon} aria-hidden="true">
-                    <use xlinkHref={`/sprite.svg#${iconId}`} />
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
+      <Container>
+        <div className={css.wrapper}>
+          <Logo />
+          <NetworkLinks />
         </div>
-        <div className={css.copr}>
-          &copy; 2024, Foodies. All rights reserved
-        </div>
+      </Container>
+      <hr className={css.separator} />
+      <Container>
+        <Copyright />
       </Container>
     </footer>
   );

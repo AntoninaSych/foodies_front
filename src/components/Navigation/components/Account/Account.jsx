@@ -3,14 +3,13 @@ import { FaAngleDown } from 'react-icons/fa6';
 import { GoArrowUpRight } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { ROUTERS } from '../../../../const';
-import css from './Account.module.css';
-import cssNavigation from '../../../styles/navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { ROUTERS } from '../../../../const';
 import { selectUser } from '../../../../redux/auth/selectors';
 import { logout } from '../../../../redux/auth/operations';
-import Modal from '../../../Modal/Modal';
-import LogoutDialog from '../../../LogoutDialog/LogoutDialog';
+import LogOutModal from '../../../LogOutModal/LogOutModal';
+import css from './Account.module.css';
+import cssNavigation from '../../../styles/navigation.module.css';
 
 const Account = ({ theme }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +17,7 @@ const Account = ({ theme }) => {
   const dispatch = useDispatch();
   const { name, id, avatarURL } = useSelector(selectUser);
 
-  const className = clsx(css.placeholder, css[theme]);
+  const className = clsx(css.placeholder, theme && css[theme]);
 
   const handleLogout = () => {
     setShowDialog(true);
@@ -70,9 +69,11 @@ const Account = ({ theme }) => {
         </div>
       </div>
 
-      <Modal open={showDialog} onClose={handleCloseDialog}>
-        <LogoutDialog onSubmit={onDialogSubmit} onCancel={handleCloseDialog} />
-      </Modal>
+      <LogOutModal
+        isOpen={showDialog}
+        onSubmit={onDialogSubmit}
+        onClose={handleCloseDialog}
+      />
     </>
   );
 };

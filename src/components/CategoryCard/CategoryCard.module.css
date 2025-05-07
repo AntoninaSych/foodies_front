@@ -1,14 +1,111 @@
-.wrapper {
+.categoryImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  object-fit: cover;
+}
+
+.categoryCard {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.categoryInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  color: var(--color-white);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.categoryName {
+  border: 1px solid var(--color-white-opacity20);
+  border-radius: 30px;
+  padding: 8px 12px;
+  text-align: center;
+  font-family: "Mulish Medium", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  background: var(--color-white-opacity20);
+}
+
+.arrowButton {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid;
+  border-color: var(--color-white-opacity20);
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 24px;
-  border-radius: 20px;
-  flex-direction: column;
+  justify-content: center;
+  outline: none;
+  border-radius: 50%;
+  transition: border-color var(--trns-fast);
+  color: var(--color-white);
+  font-size: 20px;
+}
+
+.arrowButton:hover,
+.arrowButton:focus {
+  border-color: var(--color-white);
 }
 
 /* tablet */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+  .wrapperItems {
+    flex-basis: calc((100% - 20px) / 2);
+  }
+
+  .wrapperItems:nth-child(3),
+  .wrapperItems:nth-child(8) {
+    flex-basis: calc((100%) / 1);
+  }
+
+  .categoryName {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    padding: 10px 14px;
+  }
+
+  .categoryCard {
+    border-radius: 30px;
+    height: 369px;
+  }
+
+  .categoryImg {
+    height: 100%;
+  }
+
+  .arrowButton {
+    width: 44px;
+    height: 44px;
+  }
+}
 
 /* desktop */
-@media only screen and (min-width: 1440px) {}
+@media only screen and (min-width: 1440px) {
+  .wrapperItems {
+    flex: 0 0 325px;
+    max-width: 325px;
+  }
+
+  .wrapperItems:nth-child(3),
+  .wrapperItems:nth-child(4),
+  .wrapperItems:nth-child(8),
+  .wrapperItems:nth-child(10) {
+    flex: 0 0 590px;
+    max-width: 590px;
+  }
+}
