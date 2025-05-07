@@ -5,6 +5,7 @@ import RecipeIngredients from '../RecipeIngredients/RecipeIngredients';
 import RecipePreparation from '../RecipePreparation/RecipePreparation';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
+import { recipesDetailFetch } from '../../api/recipesApi';
 
 import css from './RecipeInfo.module.css';
 
@@ -18,12 +19,10 @@ const RecipeInfo = () => {
     const fetchRecipe = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/recipes/${id}`);
-        if (!res.ok) throw new Error('Failed to load recipe');
-        const data = await res.json();
+        const data = await recipesDetailFetch(id);
         setRecipe(data);
-      } catch (err) {
-        setError(err.message || 'Something went wrong');
+      } catch {
+        setError('Failed to load recipe');
       } finally {
         setLoading(false);
       }
