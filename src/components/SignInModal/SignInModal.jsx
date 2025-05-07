@@ -9,10 +9,13 @@ const SignInModal = ({ isOpen, onClose, handleOnChangeForm }) => {
       <div className={css.wrapper}>
         <h2 className={css.title}>SIGN IN</h2>
         <SignInForm onSuccess={onClose} />
-        <div className={css.footer}>
-          <span>Don&#39;t have an account?</span>{' '}
-          <Link onClick={handleOnChangeForm}>Create an account</Link>
-        </div>
+
+        {handleOnChangeForm && (
+          <div className={css.footer}>
+            <span>Don&#39;t have an account?</span>{' '}
+            <Link onClick={handleOnChangeForm}>Create an account</Link>
+          </div>
+        )}
       </div>
     </Modal>
   );
