@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { IoArrowBack } from 'react-icons/io5';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
@@ -8,10 +9,12 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
+import { selectRecipes } from '../../redux/recipes/selectors';
 import css from './Recipes.module.css';
 
-const Recipes = ({ category, onBack, data = [] }) => {
+const Recipes = ({ category, onBack }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const data = useSelector(selectRecipes);
   const [recipes, setRecipes] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({ ingredient: '', area: '' });

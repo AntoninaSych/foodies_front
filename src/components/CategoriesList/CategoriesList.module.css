@@ -1,16 +1,28 @@
 .wrapper {
   display: flex;
-  gap: 32px;
-  padding: 80px 24px;
   flex-direction: column;
-  width: 100%;
+  gap: 16px;
+  flex-wrap: wrap;
 }
+.btnLoadAll {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  width: 343px;
+  height: 250px;
+  border-radius: 30px;
+  color: var(--color-white);
+  background: var(--color-main);
+  margin-top: 16px;
+}
+.showAll {}
 
 /* tablet */
 @media only screen and (min-width: 768px) {
   .wrapper {
     flex-direction: row;
-    flex-wrap: wrap;
+    gap: 20px;
   }
 }
 

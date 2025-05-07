@@ -1,11 +1,24 @@
-import css from "./CategoryCard.module.css";
+import { LuArrowUpRight } from 'react-icons/lu';
+import css from './CategoryCard.module.css';
 
-const CategoryCard = ({data}) => {
-  const {name} = data
+const CategoryCard = ({ data, handleOnCLick }) => {
+  const { name, thumb } = data;
+
   return (
-    <div className={css.wrapper}>
-      <div>{name}</div>
-    </div>
+    <li className={css.wrapperItems}>
+      <div className={css.categoryCard}>
+        <img className={css.categoryImg} src={thumb} alt={name} />
+        <div className={css.categoryInfo}>
+          <div className={css.categoryName}>{name}</div>
+          <button
+            onClick={() => handleOnCLick(name)}
+            className={css.arrowButton}
+          >
+            <LuArrowUpRight />
+          </button>
+        </div>
+      </div>
+    </li>
   );
 };
 
