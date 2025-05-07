@@ -1,3 +1,7 @@
+.wrapper {
+  flex-shrink: 0;
+}
+
 .link {
   padding: 4px 0;
   display: flex;
@@ -63,6 +67,9 @@
 
 /* tablet */
 @media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-left: auto;
+  }
 }
 
 /* desktop */

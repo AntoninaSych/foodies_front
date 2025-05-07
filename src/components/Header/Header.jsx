@@ -1,11 +1,12 @@
 import clsx from 'clsx';
-import Container from '../Container/Container';
-import Navigation from '../Navigation/Navigation';
-import css from './Header.module.css';
 import { useSelector } from 'react-redux';
+import Container from '../Container/Container';
+import Nav from '../Nav/Nav';
 import AuthBar from '../AuthBar/AuthBar';
+import UserBar from '../UserBar/UserBar';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import Logo from '../Logo/Logo';
+import css from './Header.module.css';
 
 const Header = ({ theme }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -18,13 +19,17 @@ const Header = ({ theme }) => {
           <div className={css.brand}>
             <Logo theme={theme} />
           </div>
-          <div className={css.nav}>
-            {isLoggedIn ? (
-              <Navigation theme={theme} />
-            ) : (
-              <AuthBar theme={theme} />
-            )}
-          </div>
+
+          {isLoggedIn ? (
+            <div className={css.nav}>
+              <>
+                <Nav theme={theme} />
+                <UserBar theme={theme} />
+              </>
+            </div>
+          ) : (
+            <AuthBar theme={theme} />
+          )}
         </div>
       </Container>
     </header>
