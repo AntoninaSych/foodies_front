@@ -13,7 +13,7 @@ import { selectRecipes } from '../../redux/recipes/selectors';
 import css from './Recipes.module.css';
 
 const Recipes = ({ category, onBack }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const data = useSelector(selectRecipes);
   const [recipes, setRecipes] = useState(data);
   const [currentPage, setCurrentPage] = useState(1);

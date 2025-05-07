@@ -6,7 +6,7 @@ import css from './LogOutModal.module.css';
 import cssModal from '../styles/modal.module.css';
 
 const LogOutModal = ({ isOpen, onSubmit, onClose }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const title = isMobile ? 'LOG OUT' : 'ARE YOU LOGGING OUT?';
 
