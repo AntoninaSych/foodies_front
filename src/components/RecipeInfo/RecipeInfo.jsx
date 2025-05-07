@@ -10,7 +10,13 @@ const RecipeInfo = ({ recipe }) => {
   return (
     <div className={css.recipeInfoContainer}>
       <div>
-        <RecipeMainInfo recipe={recipe} onUserAvatarClick={() => {}} />
+        <RecipeMainInfo
+          title={recipe.title}
+          category={recipe.category}
+          time={recipe.time}
+          description={recipe.description}
+          recipe={recipe}
+        />
         <RecipeIngredients ingredients={recipe.ingredients} />
       </div>
       {/*<RecipePreparation steps={recipe.instructions} />*/}

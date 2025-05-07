@@ -30,26 +30,17 @@ const RecipeMainInfo = ({ title, category, time, description, recipe }) => {
 
       <p className={css.description}>{description}</p>
 
-      {recipe.owner && (
-        <div className={css.authorInfo}>
-          <span className={css.textLabel}>Created by:</span>
-          <br />
-          <button
-            type="button"
-            className={css.authorName}
-            onClick={handleAuthorClick}
-          >
+      <div className={css.authorInfo}>
+        {recipe.owner && (
+          <button className={css.author} onClick={handleAuthorClick}>
             <img
-              className={css.avatar}
               src={recipe.owner.avatarURL}
               alt={`Avatar ${recipe.owner.name}`}
-              width={32}
-              height={32}
             />
-            <p className={css.avatarName}>{recipe.owner.name}</p>
+            <p>{recipe.owner.name}</p>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
