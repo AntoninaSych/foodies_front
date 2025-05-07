@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import css from './CategoriesList.module.css';
 
 const CategoriesList = ({ categories, handleChangeCategory }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const [limit, setLimit] = useState(isMobile ? 7 : 10);
   const dispatch = useDispatch();
   const sortedCategories = useMemo(() => {

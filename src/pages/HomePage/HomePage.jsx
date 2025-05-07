@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Container from '../../components/Container/Container';
 import Categories from '../../components/Categories/Categories';
-import AppBar from '../../components/AppBar/AppBar';
+import Header from '../../components/Header/Header';
 import Hero from '../../components/Hero/Hero';
 import Recipes from '../../components/Recipes/Recipes';
 import { THEMES } from '../../const';
@@ -18,7 +18,7 @@ const HomePage = () => {
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme={THEMES.DARK} />
+          <Header theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>

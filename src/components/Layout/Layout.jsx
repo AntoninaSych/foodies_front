@@ -1,16 +1,16 @@
-import { Suspense } from "react";
-import { Toaster } from "react-hot-toast";
-import AppBar from "../AppBar/AppBar";
-import Loader from "../Loader/Loader";
-import css from "./Layout.module.css";
-import ScrollUp from "../ScrollUp/ScrollUp";
-import { Outlet } from "react-router-dom";
-import Footer from "../Footer/Footer";
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import Header from '../Header/Header';
+import Loader from '../Loader/Loader';
+import ScrollUp from '../ScrollUp/ScrollUp';
+import Footer from '../Footer/Footer';
+import css from './Layout.module.css';
 
 const Layout = () => {
   return (
     <div className={css.layout}>
-      <AppBar />
+      <Header />
       <main>
         <Suspense fallback={<Loader />}>
           <Outlet />

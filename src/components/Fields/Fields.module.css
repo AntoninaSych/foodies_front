@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.field.rounded:not(:last-child) {
+  margin-bottom: 14px;
+}
+
 .field label {
   margin-bottom: 8px;
   font-family: "Mulish Bold", Arial, sans-serif;
@@ -24,14 +28,15 @@
   outline: none;
 }
 
-.field textarea {
-  line-height: inherit;
+.field.rounded input,
+.field.rounded textarea {
+  border: 1px solid var(--color-secondary);
+  padding: 16px 18px;
+  border-radius: 30px;
 }
 
-.field.strong input,
-.field.strong input:hover,
-.field.strong input:focus{
-  border-color: transparent;
+.field textarea {
+  line-height: inherit;
 }
 
 .field.strong input {
@@ -41,6 +46,7 @@
   font-size: 18px;
 }
 
+.field.strong input,
 .field.strong input:hover,
 .field.strong input:focus{
   border-color: transparent;
@@ -146,7 +152,7 @@
 .field input:hover,
 .field textarea:focus,
 .field textarea:hover{
-  border-bottom: 1px solid var(--color-main);
+  border-color: 1px solid var(--color-main);
 }
 
 .field input::placeholder, .field textarea::placeholder {

@@ -30,7 +30,7 @@ const AddRecipeForm = ({ onSubmit }) => {
   const methods = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
-    reValidateMode: 'onBlur',
+    reValidateMode: 'onChange',
     mode: 'onSubmit',
   });
 
