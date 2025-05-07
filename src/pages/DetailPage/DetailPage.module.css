@@ -1,13 +1,9 @@
 .wrapper {
-  padding-top: 32px;
-  padding-bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  height: 100%;
 }
 
-@media only screen and (min-width: 768px) {
-  .wrapper {
-    gap: 32px;
-  }
-}
+/* tablet */
+@media only screen and (min-width: 768px) {}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}
