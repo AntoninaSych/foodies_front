@@ -3,13 +3,14 @@ import {
   fetchRecipes,
   addToFavorites,
   removeFromFavorites,
+  getFavoriteRecipes,
 } from './operations';
 
 const handlePending = state => {
   state.loading = true;
 };
 
-const handleRejected = (state, action) => {
+const handleRecipesRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
   state.items = [];
@@ -25,6 +26,11 @@ const recipesSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    clearFavorites(state) {
+      state.favorites = [];
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchRecipes.pending, handlePending)
@@ -35,28 +41,29 @@ const recipesSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchRecipes.rejected, handleRejected)
+      .addCase(fetchRecipes.rejected, handleRecipesRejected)
 
       .addCase(addToFavorites.fulfilled, (state, action) => {
-        const updatedRecipe = action.payload;
-        const index = state.items.findIndex(
-          item => item.id === updatedRecipe.id
+        const recipeId = action.payload;
+        const foundFavoriteRecipe = state.favorites.find(
+          item => item.id === recipeId
         );
-        if (index !== -1) {
-          state.items[index].isFavorite = true;
+
+        if (!foundFavoriteRecipe) {
+          state.favorites.push({ id: recipeId });
         }
+      })
+      .addCase(getFavoriteRecipes.fulfilled, (state, action) => {
+        state.favorites = action.payload;
       })
 
       .addCase(removeFromFavorites.fulfilled, (state, action) => {
-        const updatedRecipe = action.payload;
-        const index = state.items.findIndex(
-          item => item.id === updatedRecipe.id
-        );
-        if (index !== -1) {
-          state.items[index].isFavorite = false;
-        }
+        const recipeId = action.payload;
+        state.favorites = state.favorites.filter(item => item.id !== recipeId);
       });
   },
 });
+
+export const { clearFavorites } = recipesSlice.actions;
 
 export const recipesReducer = recipesSlice.reducer;
