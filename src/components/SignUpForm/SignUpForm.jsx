@@ -12,8 +12,10 @@ import { defaultValues } from './const';
 import { validationSchema } from './const/validation';
 import css from './SignUpForm.module.css';
 import cssForm from '../styles/form.module.css';
+import { useState } from 'react';
 
 const SignUpForm = ({ onSuccess }) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const methods = useForm({
@@ -21,6 +23,7 @@ const SignUpForm = ({ onSuccess }) => {
     defaultValues,
     reValidateMode: 'onChange',
     mode: 'onSubmit',
+    disabled: loading,
   });
 
   const {
@@ -30,14 +33,17 @@ const SignUpForm = ({ onSuccess }) => {
   } = methods;
 
   const onSubmit = values => {
+    setLoading(true);
     dispatch(register(values))
       .unwrap()
       .then(() => {
         reset();
+        setLoading(false);
         onSuccess && onSuccess();
         successNotification('Success registration');
       })
       .catch(error => {
+        setLoading(false);
         errorNotification(error);
       });
   };
@@ -75,7 +81,8 @@ const SignUpForm = ({ onSuccess }) => {
             <Button
               type="submit"
               variant="primary"
-              disabled={isSubmitting || !isDirty}
+              isLoading={loading}
+              disabled={loading || isSubmitting || !isDirty}
             >
               CREATE
             </Button>

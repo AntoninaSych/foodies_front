@@ -1,74 +1,89 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
+
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeFilters from '../RecipeFilters/RecipeFilters';
+
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
-import { selectRecipes } from '../../redux/recipes/selectors';
+
 import css from './Recipes.module.css';
 
-const Recipes = ({ category, onBack }) => {
+const Recipes = ({ category }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const data = useSelector(selectRecipes);
-  const [recipes, setRecipes] = useState(data);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({ ingredient: '', area: '' });
-  const limit = isMobile ? 8 : CATALOG_LIMIT;
-  const { ingredient, area } = filters;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchArea = searchParams.get('area') || '';
+  const searchIngredient = searchParams.get('ingredient') || '';
 
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchData = async () => {
+  const [recipes, setRecipes] = useState([]);
+  const [, setTotal] = useState(0);
+  const [page] = useState(1); // Пока не используем пагинацию, фиксированная страница 1
+  const limit = isMobile ? 8 : CATALOG_LIMIT;
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const response = await recipesFetch({
           category,
-          ingredient,
-          area,
-          page: currentPage,
-          limit: limit,
+          ingredient: searchIngredient,
+          area: searchArea,
+          page,
+          limit,
         });
 
-        setRecipes(response.items || []);
-  } catch (error) {
-    errorHandler(error, 'Error while fetching recipes.');
-  }
-};
-
-    // TODO fetch new data only if there is at least one filter is set.
-    // Comment the condition to fetch recipes if passing recipes as a prop not implemented yet
-    useEffect(() => {
-      if (category) {
-        fetchData();
+        const { items = [], total = 0 } = response;
+        setRecipes(items);
+        setTotal(total);
+      } catch (error) {
+        errorHandler(error, 'Error while fetching recipes.');
       }
-    }, [category, ingredient, area, currentPage, limit, fetchData]);
+    };
 
-  const handleFilterChange = (type, value) => {
-    setFilters({ ...filters, [type]: value });
-    setCurrentPage(1);
+    if (category) {
+      fetchData();
+    }
+  }, [category, searchIngredient, searchArea, page, limit]);
+
+  const handleFilterChange = (name, value) => {
+    const params = {
+      category,
+      area: searchArea,
+      ingredient: searchIngredient,
+    };
+    params[name] = value;
+    setSearchParams(params);
+  };
+
+  const handleBackClick = () => {
+    setSearchParams({});
   };
 
   return (
     <section>
       <div className={css.navigation}>
-        <button className={css.backBtn} onClick={onBack}>
+        <button className={css.backBtn} onClick={handleBackClick}>
           <IoArrowBack /> Back
         </button>
       </div>
 
       <MainTitle>{category}</MainTitle>
-      <Subtitle>
+      <Subtitle className={css.subtitle}>
         Go on a taste journey, where every sip is a sophisticated creative
         chord, and every dessert is an expression of the most refined
         gastronomic desires.
       </Subtitle>
 
       <div className={css.content}>
-        <RecipeFilters filters={filters} onFilterChange={handleFilterChange} />
+        <RecipeFilters
+          areaValue={searchArea}
+          ingredientValue={searchIngredient}
+          onFilterChange={handleFilterChange}
+        />
 
         {recipes.length ? (
           <RecipeList recipes={recipes} />

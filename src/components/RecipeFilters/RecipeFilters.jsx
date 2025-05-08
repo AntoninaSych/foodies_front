@@ -8,25 +8,25 @@ import { selectAreas } from '../../redux/areas/selectors';
 import { FILTER_TYPES } from './const';
 import { FieldSelect } from '../Fields';
 
-const RecipeFilters = ({ onFilterChange }) => {
+const RecipeFilters = ({ onFilterChange, areaValue, ingredientValue }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(selectIngredients);
   const areas = useSelector(selectAreas);
   const areasOptions = useMemo(
-    () => areas.map(({ id, name }) => ({ value: id, label: name })),
+    () => areas.map(({ name }) => ({ value: name, label: name })),
     [areas]
   );
   const ingredientsOptions = useMemo(
-    () => ingredients.map(({ id, name }) => ({ value: id, label: name })),
+    () => ingredients.map(({ name }) => ({ value: name, label: name })),
     [ingredients]
   );
 
-  const handleChangeIngredients = ({ label }) => {
-    onFilterChange(FILTER_TYPES.INGREDIENT, label);
+  const handleChangeIngredients = ({ value }) => {
+    onFilterChange(FILTER_TYPES.INGREDIENT, value);
   };
 
-  const handleChangeArea = ({ label }) => {
-    onFilterChange(FILTER_TYPES.AREA, label);
+  const handleChangeArea = ({ value }) => {
+    onFilterChange(FILTER_TYPES.AREA, value);
   };
 
   useEffect(() => {
@@ -39,14 +39,23 @@ const RecipeFilters = ({ onFilterChange }) => {
       <FieldSelect
         name="ingredients"
         placeholder="Ingredients"
-        options={ingredientsOptions}
+        options={[{ value: '', label: 'All Ingredients' }].concat(
+          ingredientsOptions
+        )}
+        value={
+          ingredientsOptions.find(option => option.value === ingredientValue) ||
+          null
+        }
         onChange={handleChangeIngredients}
+        isClearable
       />
       <FieldSelect
         name="area"
         placeholder="Area"
-        options={areasOptions}
+        options={[{ value: '', label: 'All Areas' }].concat(areasOptions)}
+        value={areasOptions.find(option => option.value === areaValue) || null}
         onChange={handleChangeArea}
+        isClearable
       />
     </div>
   );
