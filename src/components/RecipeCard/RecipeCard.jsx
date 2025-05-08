@@ -14,7 +14,7 @@ import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
 
 // TODO remove background color for images when backend provides them, recipe.thumb, owner.avatarURL
-export const RecipeCard = ({ recipe, isFavorite = true }) => {
+export const RecipeCard = ({ recipe, onUnAuthClick, isFavorite = true }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -22,7 +22,7 @@ export const RecipeCard = ({ recipe, isFavorite = true }) => {
   const handleFavoriteToggle = () => {
     // TODO show modal SignInModal if not isLoggedIn
     if (!isLoggedIn) {
-      return alert('Please sign in to manage favorites');
+      return onUnAuthClick();
     }
     if (isFavorite) {
       dispatch(removeFromFavorites(recipe.id));
@@ -34,8 +34,9 @@ export const RecipeCard = ({ recipe, isFavorite = true }) => {
   const handleAuthorClick = () => {
     // TODO show modal SignInModal if not isLoggedIn
     if (!isLoggedIn) {
-      return alert('Sign in to view profile');
+      return onUnAuthClick();
     }
+
     if (recipe.owner) {
       navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
     }

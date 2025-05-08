@@ -13,12 +13,14 @@ const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
   state.items = [];
+  state.total = 0;
 };
 
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState: {
     items: [],
+    total: 0,
     favorites: [],
     loading: false,
     error: null,
@@ -27,7 +29,9 @@ const recipesSlice = createSlice({
     builder
       .addCase(fetchRecipes.pending, handlePending)
       .addCase(fetchRecipes.fulfilled, (state, action) => {
-        state.items = action.payload;
+        const { recipes, totalItems } = action.payload;
+        state.items = recipes;
+        state.total = totalItems;
         state.loading = false;
         state.error = null;
       })

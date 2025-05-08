@@ -19,6 +19,7 @@ const Recipes = ({ category }) => {
 
   const [page] = useState(1);
   const [recipes, setRecipes] = useState([]);
+  const [, setTotal] = useState(0);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
 
   useEffect(() => {
@@ -31,8 +32,9 @@ const Recipes = ({ category }) => {
           page,
           limit,
         });
-
-        setRecipes(response);
+        const { recipes, totalItems } = response;
+        setRecipes(recipes);
+        setTotal(totalItems);
       } catch (error) {
         errorHandler(error, 'Error while fetching recipes.');
         console.log(error);
