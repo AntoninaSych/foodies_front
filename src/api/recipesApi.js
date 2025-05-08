@@ -41,7 +41,7 @@ export const addRecipeToFavorites = async (token, recipeId) => {
 };
 
 export const removeRecipeFromFavorites = async (token, recipeId) => {
-  const { data } = await axios.delete(`/recipes/${recipeId}/unfavorite`, {
+  const { data } = await axios.delete(`/recipes/${recipeId}/favorite`, {
     headers: {
       Authorization: getAuthorizationHeader(token),
     },
