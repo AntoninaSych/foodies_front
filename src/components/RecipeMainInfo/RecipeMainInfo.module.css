@@ -58,6 +58,10 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  background-color: var(--color-placeholder);
+  flex-shrink: 0;
 }
 
 .authorText {
