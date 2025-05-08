@@ -32,9 +32,9 @@ const Recipes = ({ category }) => {
           page,
           limit,
         });
-        const { recipes, totalItems } = response;
-        setRecipes(recipes);
-        setTotal(totalItems);
+        const { items, total } = response;
+        setRecipes(items);
+        setTotal(total);
       } catch (error) {
         errorHandler(error, 'Error while fetching recipes.');
         console.log(error);
