@@ -1,14 +1,18 @@
 .wrapper {
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
 .sidebar img {
-  width: 343px;
   height: 318px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
   border-radius: 30px;
+  overflow: hidden;
 }
 
 .content {
