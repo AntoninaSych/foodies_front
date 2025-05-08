@@ -59,7 +59,7 @@ export const RecipeCard = ({ recipe, onUnAuthClick, isFavorite = true }) => {
             <span className={css.tag}>{recipe.area.name}</span>
           )}
         </div>
-        <p className={css.description}>{recipe.instructions}</p>
+        <p className={css.description}>{recipe.description}</p>
         <div className={css.footer}>
           {recipe.owner && (
             <button className={css.author} onClick={handleAuthorClick}>
