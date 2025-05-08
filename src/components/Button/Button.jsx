@@ -50,7 +50,7 @@ const Button = ({
       onClick={clickHandler}
       disabled={disabled}
     >
-      {isLoading ? <FiLoader class={css.iconLoading} /> : children}
+      {isLoading ? <FiLoader className={css.iconLoading} /> : children}
     </button>
   );
 };
