@@ -1,5 +1,6 @@
 :root {
   --trns-slow: 600ms ease-out;
+  --trns-slow-linear: 600ms linear;
   --trns-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --overlay: rgba(18, 20, 23, 0.4);
   --box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
