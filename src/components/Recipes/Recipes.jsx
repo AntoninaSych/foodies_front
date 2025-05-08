@@ -21,30 +21,31 @@ const Recipes = ({ category, onBack }) => {
   const limit = isMobile ? 8 : CATALOG_LIMIT;
   const { ingredient, area } = filters;
 
-  useEffect(() => {
-    const fetchData = async () => {
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchData = async () => {
       try {
         const response = await recipesFetch({
           category,
           ingredient,
           area,
           page: currentPage,
-          size: limit,
+          limit: limit,
         });
 
-        setRecipes(response);
-      } catch (error) {
-        errorHandler(error, 'Error while fetching recipes.');
-        console.log(error);
-      }
-    };
+        setRecipes(response.items || []);
+  } catch (error) {
+    errorHandler(error, 'Error while fetching recipes.');
+  }
+};
 
     // TODO fetch new data only if there is at least one filter is set.
     // Comment the condition to fetch recipes if passing recipes as a prop not implemented yet
-    if (area || ingredient) {
-      fetchData();
-    }
-  }, [category, ingredient, area, currentPage, limit]);
+    useEffect(() => {
+      if (category) {
+        fetchData();
+      }
+    }, [category, ingredient, area, currentPage, limit, fetchData]);
 
   const handleFilterChange = (type, value) => {
     setFilters({ ...filters, [type]: value });

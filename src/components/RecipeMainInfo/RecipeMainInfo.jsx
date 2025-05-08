@@ -12,7 +12,7 @@ const RecipeMainInfo = ({ recipe }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const { title, time, description, category, owner } = recipe;
+  const { title, time, instructions, category, owner } = recipe;
 
   const handleAuthorClick = () => {
     if (isLoggedIn) {
@@ -35,7 +35,7 @@ const RecipeMainInfo = ({ recipe }) => {
         <span className={css.tag}>{`${time} min`}</span>
       </div>
 
-      <p className={css.description}>{description}</p>
+      <p className={css.description}>{instructions}</p>
 
       <div className={css.authorInfo}>
         {owner && (

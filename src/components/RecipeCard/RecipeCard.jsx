@@ -50,7 +50,11 @@ export const RecipeCard = ({ recipe, isFavorite = true }) => {
       </div>
       <div className={css.content}>
         <h4 className={css.title}>{recipe.title}</h4>
-        <p className={css.description}>{recipe.description}</p>
+        <div className={css.tags}>
+          {recipe.category?.name && <span className={css.tag}>{recipe.category.name}</span>}
+          {recipe.area?.name && <span className={css.tag}>{recipe.area.name}</span>}
+        </div>
+        <p className={css.description}>{recipe.instructions}</p>
         <div className={css.footer}>
           {recipe.owner && (
             <button className={css.author} onClick={handleAuthorClick}>
