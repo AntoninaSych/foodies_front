@@ -1,19 +1,6 @@
-.subtitle {
-  letter-spacing: -0.02em;
-  color: var(--color-secondary);
-}
-
 /* tablet */
 @media only screen and (min-width: 768px) {
   .subtitle {
-    max-width: 531px;
-    color: var(--color-text);
+    max-width: 530px;
   }
 }
-
-/* desktop */
-@media only screen and (min-width: 1440px) {
-    .subtitle {
-      padding-top: 4px;
-    }
-  }
