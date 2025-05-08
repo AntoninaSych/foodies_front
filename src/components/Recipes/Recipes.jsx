@@ -70,7 +70,7 @@ const Recipes = ({ category }) => {
       </div>
 
       <MainTitle>{category}</MainTitle>
-      <Subtitle>
+      <Subtitle className={css.subtitle}>
         Go on a taste journey, where every sip is a sophisticated creative
         chord, and every dessert is an expression of the most refined
         gastronomic desires.
