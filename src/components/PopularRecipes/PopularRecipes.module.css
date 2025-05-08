@@ -1,0 +1,49 @@
+.popularWrapper {
+  padding-top: 64px;
+}
+
+.title {
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .popularWrapper {
+    padding-top: 100px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  .list {
+    flex-direction: row;
+    row-gap: 40px;
+    column-gap: 20px;
+  }
+
+  .listItem {
+    flex-basis: calc((100% - 20px) / 2);
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .popularWrapper {
+    padding-top: 120px;
+  }
+
+  .list {
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+}
