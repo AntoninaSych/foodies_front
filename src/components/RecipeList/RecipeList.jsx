@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { selectFavoriteRecipes } from '../../redux/recipes/selectors';
 import { getFavoriteRecipes } from '../../redux/recipes/operations';
 import RecipeCard from '../RecipeCard/RecipeCard';
+import SignInModal from '../SignInModal/SignInModal';
 import css from './RecipeList.module.css';
 
 const RecipeList = ({ recipes }) => {
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const dispatch = useDispatch();
   const favoriteRecipes = useSelector(selectFavoriteRecipes);
 
@@ -13,9 +15,17 @@ const RecipeList = ({ recipes }) => {
     dispatch(getFavoriteRecipes());
   }, [dispatch]);
 
+  const onUnAuthClick = () => {
+    setShowAuthModal(true);
+  };
+  const handleOnCloseModal = () => {
+    setShowAuthModal(false);
+  };
+
   const isFavorite = id => {
-    if (!Array.isArray(favoriteRecipes)) return false;
-    return favoriteRecipes.some(fav => fav.recipeId === id);
+    return !Array.isArray(favoriteRecipes)
+      ? false
+      : favoriteRecipes.some(fav => fav.id === id);
   };
 
   return (
@@ -24,9 +34,12 @@ const RecipeList = ({ recipes }) => {
         <RecipeCard
           key={recipe.id}
           recipe={recipe}
+          onUnAuthClick={onUnAuthClick}
           isFavorite={isFavorite(recipe.id)}
         />
       ))}
+
+      <SignInModal isOpen={showAuthModal} onClose={handleOnCloseModal} />
     </div>
   );
 };

@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { Suspense, lazy } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
-import Categories from '../../components/Categories/Categories';
 import Header from '../../components/Header/Header';
 import Hero from '../../components/Hero/Hero';
-import Recipes from '../../components/Recipes/Recipes';
+
 import { THEMES } from '../../const';
 import css from './HomePage.module.css';
 import Testimonials from '../../components/Testimonials/Testimonials.jsx';
 
-const HomePage = () => {
-  const [category, setCategory] = useState(null);
+const Recipes = lazy(() => import('../../components/Recipes/Recipes'));
+const Categories = lazy(() => import('../../components/Categories/Categories'));
 
-  const handleChangeCategory = value => {
-    setCategory(value);
+const HomePage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get('category') || '';
+
+  const handleChangeCategory = category => {
+    setSearchParams({ category });
   };
 
   return (
@@ -25,11 +29,13 @@ const HomePage = () => {
       </div>
       <div className={css.main}>
         <Container>
-          {!category ? (
-            <Categories handleChangeCategory={handleChangeCategory} />
-          ) : (
-            <Recipes category={category} onBack={() => setCategory(null)} />
-          )}
+          <Suspense>
+            {!category ? (
+              <Categories handleChangeCategory={handleChangeCategory} />
+            ) : (
+              <Recipes category={category} />
+            )}
+          </Suspense>
           <Testimonials />
         </Container>
       </div>

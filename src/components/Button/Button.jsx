@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { FiLoader } from 'react-icons/fi';
 import { TYPES, VARIANTS } from './const';
 import css from './Button.module.css';
 import { Link } from 'react-router-dom';
@@ -10,6 +11,7 @@ const Button = ({
   to,
   variant,
   className,
+  isLoading,
   type = TYPES.BUTTON,
   disabled = false,
 }) => {
@@ -48,7 +50,7 @@ const Button = ({
       onClick={clickHandler}
       disabled={disabled}
     >
-      {children}
+      {isLoading ? <FiLoader className={css.iconLoading} /> : children}
     </button>
   );
 };

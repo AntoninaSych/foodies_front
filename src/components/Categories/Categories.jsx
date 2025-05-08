@@ -11,6 +11,7 @@ import {
 } from '../../redux/categories/selectors';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
+import css from './Categories.module.css';
 
 const Categories = ({ handleChangeCategory }) => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Categories = ({ handleChangeCategory }) => {
   return (
     <section>
       <MainTitle>Categories</MainTitle>
-      <Subtitle>
+      <Subtitle className={css.subtitle}>
         Discover a limitless world of culinary possibilities and enjoy exquisite
         recipes that combine taste, style and the warm atmosphere of the
         kitchen.
