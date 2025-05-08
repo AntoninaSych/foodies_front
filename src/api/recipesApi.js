@@ -27,18 +27,34 @@ export const recipesDetailFetch = async id => {
   return response.data;
 };
 
-export const addRecipeToFavorites = async recipeId => {
-  const { data } = await axios.post(`/recipes/${recipeId}/favorite`);
+export const addRecipeToFavorites = async (token, recipeId) => {
+  const { data } = await axios.post(
+    `/recipes/${recipeId}/favorite`,
+    {},
+    {
+      headers: {
+        Authorization: getAuthorizationHeader(token),
+      },
+    }
+  );
   return data;
 };
 
-export const removeRecipeFromFavorites = async recipeId => {
-  const { data } = await axios.delete(`/recipes/${recipeId}/favorite`);
+export const removeRecipeFromFavorites = async (token, recipeId) => {
+  const { data } = await axios.delete(`/recipes/${recipeId}/unfavorite`, {
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
   return data;
 };
 
-export const getFavoritesApi = async () => {
-  const response = await axios.get('/favorites');
+export const getFavoritesApi = async token => {
+  const response = await axios.get('/recipes/favorites', {
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
   return response.data;
 };
 
