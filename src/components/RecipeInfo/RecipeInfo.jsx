@@ -8,7 +8,7 @@ const RecipeInfo = ({ recipe }) => {
 
   return (
     <div className={css.wrapper}>
-      <div className={css.sidebar}>ЗОБРАЖЕННЯ</div>
+      <div className={css.sidebar}><img src={recipe.thumb} alt={recipe.title} /></div>
       <div className={css.content}>
         <RecipeMainInfo recipe={recipe} />
         <RecipeIngredients ingredients={recipe.ingredients} />

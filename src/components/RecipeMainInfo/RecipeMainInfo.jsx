@@ -12,7 +12,7 @@ const RecipeMainInfo = ({ recipe }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const { title, category, time, description, owner } = recipe;
+  const { title, time, description, category, owner } = recipe;
 
   const handleAuthorClick = () => {
     if (isLoggedIn) {
@@ -31,7 +31,7 @@ const RecipeMainInfo = ({ recipe }) => {
       <h2 className={css.title}>{title}</h2>
 
       <div className={css.tags}>
-        <span className={css.tag}>{category}</span>
+        <span className={css.tag}>{category?.name}</span>
         <span className={css.tag}>{`${time} min`}</span>
       </div>
 
@@ -39,10 +39,10 @@ const RecipeMainInfo = ({ recipe }) => {
 
       <div className={css.authorInfo}>
         {owner && (
-          <button className={css.author} onClick={handleAuthorClick}>
-            <img src={owner.avatarURL} alt={`Avatar ${owner.name}`} />
-            <p>{owner.name}</p>
-          </button>
+      <button className={css.author} onClick={handleAuthorClick}>
+      <img src={owner?.avatarURL || '/default-avatar.png'} alt={`Avatar ${owner?.name}`} />
+      <p>{owner?.name}</p>
+      </button>
         )}
       </div>
       <SignInModal isOpen={isOpen} onClose={handleOnClose} />
