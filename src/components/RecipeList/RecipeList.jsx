@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { selectFavoriteRecipes } from '../../redux/recipes/selectors';
 import { getFavoriteRecipes } from '../../redux/recipes/operations';
 import RecipeCard from '../RecipeCard/RecipeCard';
+import SignInModal from '../SignInModal/SignInModal';
 import css from './RecipeList.module.css';
-import SignInModal from '../SignInModal/SignInModal.jsx';
 
 const RecipeList = ({ recipes }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
