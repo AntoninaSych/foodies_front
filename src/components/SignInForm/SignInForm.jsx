@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
@@ -11,6 +12,7 @@ import css from './SignInForm.module.css';
 import cssForm from '../styles/form.module.css';
 
 const SignInForm = ({ onSuccess }) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const methods = useForm({
@@ -18,6 +20,7 @@ const SignInForm = ({ onSuccess }) => {
     defaultValues,
     reValidateMode: 'onChange',
     mode: 'onSubmit',
+    disabled: loading,
   });
 
   const {
@@ -27,13 +30,16 @@ const SignInForm = ({ onSuccess }) => {
   } = methods;
 
   const onSubmit = values => {
+    setLoading(true);
     dispatch(login(values))
       .unwrap()
       .then(() => {
         reset();
+        setLoading(false);
         onSuccess && onSuccess();
       })
       .catch(error => {
+        setLoading(false);
         errorNotification(error);
       });
   };
@@ -63,7 +69,8 @@ const SignInForm = ({ onSuccess }) => {
             <Button
               variant="primary"
               type="submit"
-              disabled={isSubmitting || !isDirty}
+              isLoading={loading}
+              disabled={loading || isSubmitting || !isDirty}
             >
               SIGN IN
             </Button>
