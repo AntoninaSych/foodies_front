@@ -136,21 +136,30 @@
   }
 }
 
-.fadeIn {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fadeOut {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
 .center {
   align-items: center;
   display: flex;
   justify-content: center;
   margin: 0 auto;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+}
+
+.slideItem {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
 }

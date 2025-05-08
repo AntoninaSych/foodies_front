@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './Testimonials.module.css';
 import {
   selectError,
   selectLoading,
   selectTestimonials,
-} from '../../redux/testimonials/selectors.js';
-import { fetchTestimonials } from '../../redux/testimonials/operations.js';
-import Loader from '../Loader/Loader.jsx';
-import Message from '../Message/Message.jsx';
+} from '../../redux/testimonials/selectors';
+import { fetchTestimonials } from '../../redux/testimonials/operations';
+import Loader from '../Loader/Loader';
+import Message from '../Message/Message';
+import styles from './Testimonials.module.css';
 
 const AUTO_SLIDE_INTERVAL = 5000;
 
@@ -19,9 +19,7 @@ const Testimonials = () => {
   const error = useSelector(selectError);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(true);
   const intervalRef = useRef(null);
-  const timeoutRef = useRef(null);
   const indexRef = useRef(0);
 
   useEffect(() => {
@@ -36,41 +34,29 @@ const Testimonials = () => {
   useEffect(() => {
     if (testimonials.length > 1) {
       intervalRef.current = setInterval(() => {
-        const nextIndex = (indexRef.current + 1) % testimonials.length;
-        slideTo(nextIndex);
+        const next = (indexRef.current + 1) % testimonials.length;
+        setCurrentIndex(next);
+        indexRef.current = next;
       }, AUTO_SLIDE_INTERVAL);
     }
-    return () => {
-      clearInterval(intervalRef.current);
-      clearTimeout(timeoutRef.current);
-    };
+    return () => clearInterval(intervalRef.current);
   }, [testimonials.length]);
 
-  const slideTo = index => {
-    clearTimeout(timeoutRef.current);
-    setFade(false);
-    timeoutRef.current = setTimeout(() => {
-      setCurrentIndex(index);
-      indexRef.current = index;
-      setFade(true);
-    }, 300);
-  };
-
-  const handleDotClick = index => {
+  const handleDotClick = idx => {
     clearInterval(intervalRef.current);
-    slideTo(index);
+    setCurrentIndex(idx);
+    indexRef.current = idx;
   };
 
   if (loading) return <Loader />;
   if (error) return <Message>{error}</Message>;
-
-  if (testimonials.length === 0) {
+  if (testimonials.length === 0)
     return (
       <div className={styles.wrapper}>
         <div className={styles.center}>There are no testimonials here yet.</div>
       </div>
     );
-  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.section}>
@@ -80,22 +66,31 @@ const Testimonials = () => {
           <use href="/sprite.svg#quote" />
         </svg>
 
-        <div className={styles.slide} aria-live="polite">
-          <div className={fade ? styles.fadeIn : styles.fadeOut}>
-            <p className={styles.quote}>
-              “{testimonials[currentIndex]?.testimonial ?? 'Loading…'}”
-            </p>
-            <p className={styles.author}>
-              {testimonials[currentIndex]?.author ?? ''}
-            </p>
+        <div className={styles.slider}>
+          <div
+            className={styles.slides}
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+              transition: 'transform 0.5s ease-in-out',
+            }}
+            aria-live="polite"
+          >
+            {testimonials.map(({ id, testimonial, author }) => (
+              <div key={id} className={styles.slideItem}>
+                <p className={styles.quote}>&ldquo;{testimonial}&rdquo;</p>
+                <p className={styles.author}>{author}</p>
+              </div>
+            ))}
           </div>
         </div>
 
         <div>
-          {testimonials.map((testimonial, idx) => (
+          {testimonials.map((_, idx) => (
             <button
-              key={testimonial.id ?? idx}
-              className={`${styles.dot} ${currentIndex === idx ? styles.active : ''}`}
+              key={idx}
+              className={`${styles.dot} ${
+                currentIndex === idx ? styles.active : ''
+              }`}
               onClick={() => handleDotClick(idx)}
               aria-label={`Go to testimonial ${idx + 1}`}
             />
