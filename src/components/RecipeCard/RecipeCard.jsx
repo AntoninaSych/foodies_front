@@ -1,44 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
 import { GoArrowUpRight } from 'react-icons/go';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../redux/recipes/operations';
-
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
 
 // TODO remove background color for images when backend provides them, recipe.thumb, owner.avatarURL
-export const RecipeCard = ({ recipe, onUnAuthClick, isFavorite = true }) => {
-  const dispatch = useDispatch();
+export const RecipeCard = ({
+  recipe,
+  addFavorite,
+  removeFavorite,
+  handleAuthorClick,
+  isFavorite = false,
+}) => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleFavoriteToggle = () => {
-    // TODO show modal SignInModal if not isLoggedIn
-    if (!isLoggedIn) {
-      return onUnAuthClick();
-    }
     if (isFavorite) {
-      dispatch(removeFromFavorites(recipe.id));
+      removeFavorite(recipe.id);
     } else {
-      dispatch(addToFavorites(recipe.id));
-    }
-  };
-
-  const handleAuthorClick = () => {
-    // TODO show modal SignInModal if not isLoggedIn
-    if (!isLoggedIn) {
-      return onUnAuthClick();
-    }
-
-    if (recipe.owner) {
-      navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
+      addFavorite(recipe.id);
     }
   };
 
