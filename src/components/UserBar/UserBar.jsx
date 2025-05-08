@@ -4,14 +4,14 @@ import { GoArrowUpRight } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ROUTERS } from '../../../../const';
-import { selectUser } from '../../../../redux/auth/selectors';
-import { logout } from '../../../../redux/auth/operations';
-import LogOutModal from '../../../LogOutModal/LogOutModal';
-import css from './Account.module.css';
-import cssNavigation from '../../../styles/navigation.module.css';
+import { ROUTERS } from '../../const';
+import { selectUser } from '../../redux/auth/selectors';
+import { logout } from '../../redux/auth/operations';
+import LogOutModal from '../LogOutModal/LogOutModal';
+import css from './UserBar.module.css';
+import cssNavigation from '../styles/navigation.module.css';
 
-const Account = ({ theme }) => {
+const UserBar = ({ theme }) => {
   const [open, setOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const Account = ({ theme }) => {
   };
 
   return (
-    <>
+    <div className={css.wrapper}>
       <div className={className}>
         <img
           className={css.avatar}
@@ -74,8 +74,8 @@ const Account = ({ theme }) => {
         onSubmit={onDialogSubmit}
         onClose={handleCloseDialog}
       />
-    </>
+    </div>
   );
 };
 
-export default Account;
+export default UserBar;

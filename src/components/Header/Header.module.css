@@ -12,42 +12,31 @@
   align-items: center;
   padding: 40px 0;
   height: 46px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row-reverse;
+  gap: 6px;
 }
 
 .brand {
-  color: var(--color-main);
-  font-family: "Mulish Bold", Arial, sans-serif;
-  font-size: 24px;
   margin-right: auto;
   width: 30%;
-}
-
-.brand a {
-  text-decoration: none;
-}
-
-.dark .brand {
-  color: var(--color-white);
 }
 
 @media only screen and (min-width: 768px) {
   .nav {
     flex-grow: 1;
+    flex-direction: row;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .header {
     padding: 24px 0;
-  }
-  .brand {
-    width: 50%;
   }
 }
