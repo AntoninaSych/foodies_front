@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
@@ -9,27 +9,27 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
-import { selectRecipes } from '../../redux/recipes/selectors';
 import css from './Recipes.module.css';
 
-const Recipes = ({ category, onBack }) => {
+const Recipes = ({ category }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const data = useSelector(selectRecipes);
-  const [recipes, setRecipes] = useState(data);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({ ingredient: '', area: '' });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchArea = searchParams.get('area') || '';
+  const searchIngredient = searchParams.get('ingredient') || '';
+
+  const [page] = useState(1);
+  const [recipes, setRecipes] = useState([]);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
-  const { ingredient, area } = filters;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipesFetch({
           category,
-          ingredient,
-          area,
-          page: currentPage,
-          size: limit,
+          ingredient: searchIngredient,
+          area: searchArea,
+          page,
+          limit,
         });
 
         setRecipes(response);
@@ -39,22 +39,32 @@ const Recipes = ({ category, onBack }) => {
       }
     };
 
-    // TODO fetch new data only if there is at least one filter is set.
-    // Comment the condition to fetch recipes if passing recipes as a prop not implemented yet
-    if (area || ingredient) {
-      fetchData();
-    }
-  }, [category, ingredient, area, currentPage, limit]);
+    fetchData();
+  }, [category, searchIngredient, searchArea, page, limit]);
 
-  const handleFilterChange = (type, value) => {
-    setFilters({ ...filters, [type]: value });
-    setCurrentPage(1);
+  const handleFilterChange = (name, value) => {
+    const params = {
+      category,
+      area: searchArea,
+      ingredient: searchIngredient,
+    };
+    params[name] = value;
+    setSearchParams(params);
   };
+
+  const handleBackClick = () => {
+    setSearchParams({});
+  };
+
+  // // TODO used for Paginator
+  // const handleChangePage = value => {
+  //   setPage(value);
+  // };
 
   return (
     <section>
       <div className={css.navigation}>
-        <button className={css.backBtn} onClick={onBack}>
+        <button className={css.backBtn} onClick={handleBackClick}>
           <IoArrowBack /> Back
         </button>
       </div>
@@ -67,7 +77,11 @@ const Recipes = ({ category, onBack }) => {
       </Subtitle>
 
       <div className={css.content}>
-        <RecipeFilters filters={filters} onFilterChange={handleFilterChange} />
+        <RecipeFilters
+          areaValue={searchArea}
+          ingredientValue={searchIngredient}
+          onFilterChange={handleFilterChange}
+        />
 
         {recipes.length ? (
           <RecipeList recipes={recipes} />
