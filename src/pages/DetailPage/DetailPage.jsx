@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import css from './DetailPage.module.css';
 import { useParams } from 'react-router-dom';
 import { recipesDetailFetch } from '../../api/recipesApi';
 import Container from '../../components/Container/Container';
 import Loader from '../../components/Loader/Loader';
-
 import PathInfo from '../../components/PathInfo/PathInfo';
 import RecipeInfo from '../../components/RecipeInfo/RecipeInfo';
-import { errorHandler } from '../../utils/notification.js';
-//import PopularRecipes from '../../components/PopularRecipes/PopularRecipes';
-
+import { errorHandler } from '../../utils/notification';
+import css from './DetailPage.module.css';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -20,9 +17,8 @@ const DetailPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const recipeData = await recipesDetailFetch (id);
+        const recipeData = await recipesDetailFetch(id);
         setRecipe(recipeData);
-        // const popularData = await fetchPopularRecipes();
       } catch (error) {
         errorHandler(error, 'Failed to load recipe');
       } finally {
@@ -39,14 +35,10 @@ const DetailPage = () => {
     return <Loader />;
   }
 
-  if (!recipe) {
-    return <div className={css.wrapper}><Container><p>Recipe not found</p></Container></div>;
-  }
-
   return (
     <section className={css.wrapper}>
       <Container>
-        <PathInfo breadcrumbs={[{ name: recipe.title }]} />
+        <PathInfo breadcrumbs={[{ name: recipe?.title }]} />
         <RecipeInfo recipe={recipe} />
       </Container>
     </section>

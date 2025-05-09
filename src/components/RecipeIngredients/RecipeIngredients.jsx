@@ -7,20 +7,21 @@ const RecipeIngredients = ({ ingredients = [] }) => {
 
   return (
     <section className={css.ingredientsBlock}>
-      <h2 className={css.sectionTitle}>Ingredients:</h2>
+      <h3 className={css.title}>Ingredients:</h3>
       <ul className={css.ingredientsList}>
         {ingredients.map(ingredient => (
-          <li key={ingredient.id || ingredient.name}>
-            <div className={css.ingredientsItem}>
-              <img
-                src={ingredient.thumb || '/placeholder.png'}
-                alt={ingredient.name}
-                className={css.ingredientsImg}
-              />
-              <div>
-                <p className={css.ingredientsName}>{ingredient.name}</p>
-                <p className={css.ingredientsMeasure}>{ingredient.measure}</p>
-              </div>
+          <li
+            key={ingredient.id || ingredient.name}
+            className={css.ingredientsItem}
+          >
+            <img
+              src={ingredient.thumb}
+              alt={ingredient.name}
+              className={css.ingredientsImg}
+            />
+            <div>
+              <p className={css.ingredientsName}>{ingredient.name}</p>
+              <p className={css.ingredientsMeasure}>{ingredient.measure}</p>
             </div>
           </li>
         ))}

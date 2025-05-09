@@ -8,9 +8,9 @@ const PathInfo = ({ breadcrumbs }) => {
       <li>
         <Link to={ROUTERS.HOME}>HOME</Link>
       </li>
-      {breadcrumbs.map(path => {
+      {breadcrumbs.map((path, index) => {
         return (
-          <li key={path.name}>
+          <li key={path?.name || index}>
             {path.to ? (
               <Link to={ROUTERS.HOME}>HOME</Link>
             ) : (

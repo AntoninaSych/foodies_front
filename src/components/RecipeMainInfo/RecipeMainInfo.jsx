@@ -9,7 +9,7 @@ import css from './RecipeMainInfo.module.css';
 
 const RecipeMainInfo = ({ recipe }) => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const { title, time, description, category, owner } = recipe;
@@ -18,17 +18,17 @@ const RecipeMainInfo = ({ recipe }) => {
     if (isLoggedIn) {
       navigate(`${ROUTERS.USER}/${owner.id}`);
     } else {
-      setIsOpen(true);
+      setOpenModel(true);
     }
   };
 
-  const handleOnClose = () => {
-    setIsOpen(false);
+  const handleOnCloseModal = () => {
+    setOpenModel(false);
   };
 
   return (
     <div>
-      <h2 className={css.title}>{title}</h2>
+      <h3 className={css.title}>{title}</h3>
 
       <div className={css.tags}>
         <span className={css.tag}>{category?.name}</span>
@@ -39,19 +39,19 @@ const RecipeMainInfo = ({ recipe }) => {
 
       <div className={css.authorInfo}>
         {owner && (
-          <button className={css.author} onClick={handleAuthorClick}>
+          <button className={css.authorButton} onClick={handleAuthorClick}>
             <img
-              src={owner?.avatarURL || '/default-avatar.png'}
+              src={owner?.avatarURL || '/images/default-avatar.png'}
               alt={`Avatar ${owner?.name}`}
             />
             <div className={css.authorText}>
               <span className={css.authorLabel}>Created by:</span>
-              <p>{owner?.name}</p>
+              <p className={css.authorName}>{owner?.name}</p>
             </div>
           </button>
         )}
       </div>
-      <SignInModal isOpen={isOpen} onClose={handleOnClose} />
+      <SignInModal isOpen={openModel} onClose={handleOnCloseModal} />
     </div>
   );
 };
