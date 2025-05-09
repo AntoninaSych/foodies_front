@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { GoArrowUpRight } from 'react-icons/go';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
+import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
 
-// TODO remove background color for images when backend provides them, recipe.thumb, owner.avatarURL
 export const RecipeCard = ({
   recipe,
   addFavorite,
@@ -23,7 +23,8 @@ export const RecipeCard = ({
     }
   };
 
-  const handleViewRecipe = () => navigate(`/recipe/${recipe.id}`);
+  const handleViewRecipe = () =>
+    navigate(`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`);
 
   return (
     <div className={css.card}>
@@ -32,6 +33,14 @@ export const RecipeCard = ({
       </div>
       <div className={css.content}>
         <h4 className={css.title}>{recipe.title}</h4>
+        <div className={css.tags}>
+          {recipe.category?.name && (
+            <span className={css.tag}>{recipe.category.name}</span>
+          )}
+          {recipe.area?.name && (
+            <span className={css.tag}>{recipe.area.name}</span>
+          )}
+        </div>
         <p className={css.description}>{recipe.description}</p>
         <div className={css.footer}>
           {recipe.owner && (
