@@ -1,0 +1,17 @@
+.wrapper {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.instructions {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.actionButton {
+    
+    margin-top: 8px;
+}
