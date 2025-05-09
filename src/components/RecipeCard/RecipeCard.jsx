@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { GoArrowUpRight } from 'react-icons/go';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
+import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
-import { ROUTERS } from '../../const/index.js';
 
 export const RecipeCard = ({
   recipe,
