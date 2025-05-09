@@ -22,9 +22,13 @@ export const fetchRecipes = createAsyncThunk(
 
 export const addToFavorites = createAsyncThunk(
   'recipes/addToFavorites',
-  async (recipeId, { rejectWithValue }) => {
+  async (recipeId, { rejectWithValue, getState }) => {
     try {
-      return await addRecipeToFavorites(recipeId);
+      const {
+        auth: { token },
+      } = getState();
+      await addRecipeToFavorites(token, recipeId);
+      return recipeId;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
@@ -33,9 +37,13 @@ export const addToFavorites = createAsyncThunk(
 
 export const removeFromFavorites = createAsyncThunk(
   'recipes/removeFromFavorites',
-  async (recipeId, { rejectWithValue }) => {
+  async (recipeId, { rejectWithValue, getState }) => {
     try {
-      return await removeRecipeFromFavorites(recipeId);
+      const {
+        auth: { token },
+      } = getState();
+      await removeRecipeFromFavorites(token, recipeId);
+      return recipeId;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
@@ -44,9 +52,12 @@ export const removeFromFavorites = createAsyncThunk(
 
 export const getFavoriteRecipes = createAsyncThunk(
   'recipes/getFavorites',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      return await getFavoritesApi(); // <- async API виклик
+      const {
+        auth: { token },
+      } = getState();
+      return await getFavoritesApi(token); // <- async API виклик
     } catch (error) {
       return rejectWithValue(handleError(error));
     }

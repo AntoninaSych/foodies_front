@@ -19,6 +19,10 @@
   color: var(--color-text);
 }
 
+.iconLoading {
+  animation: rotate var(--trns-slow-linear) infinite;
+}
+
 .button:disabled {
   cursor: default;
 }
@@ -80,5 +84,16 @@
   background-color: var(--color-white);
   color: var(--color-main);
   border-color: var(--color-white);
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
 }
 

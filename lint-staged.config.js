@@ -1,6 +1,10 @@
 export default {
-  'src/**/*.{js,jsx}': stagedFiles => [
-    `eslint .`,
-    `prettier --write ${stagedFiles.join(' ')}`,
-  ],
+  'src/**/*.{js,jsx}': stagedFiles => {
+    const quotedFiles = stagedFiles.map(f => `"${f}"`).join(' ');
+
+    return [
+      `eslint .`,
+      `prettier --write ${quotedFiles}`,
+    ]
+  }
 };

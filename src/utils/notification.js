@@ -12,3 +12,9 @@ export const successNotification = (message, options = {}) => {
 export const errorNotification = (message, options = {}) => {
   toast.error(message, { ...defaultOptions, ...options });
 };
+
+export const errorHandler = (error, text = '') => {
+  const message =
+    text || error.response?.data?.message || error.message || 'Error';
+  errorNotification(message);
+};

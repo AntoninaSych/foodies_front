@@ -1,0 +1,16 @@
+.wrapper {
+  width: 100%;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  text-decoration: none;
+}

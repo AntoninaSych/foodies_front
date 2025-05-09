@@ -1,0 +1,42 @@
+.header {
+  padding: 12px 0;
+}
+
+.header > div {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+  height: 46px;
+  font-size: 14px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 6px;
+}
+
+.brand {
+  margin-right: auto;
+  width: 30%;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav {
+    flex-grow: 1;
+    flex-direction: row;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .header {
+    padding: 24px 0;
+  }
+}

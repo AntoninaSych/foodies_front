@@ -1,64 +1,58 @@
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
 import { GoArrowUpRight } from 'react-icons/go';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../redux/recipes/operations';
-
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { ROUTERS } from '../../const';
 import css from './RecipeCard.module.css';
 
-export const RecipeCard = ({ recipe, isFavorite = true }) => {
-  const dispatch = useDispatch();
+export const RecipeCard = ({
+  recipe,
+  addFavorite,
+  removeFavorite,
+  handleAuthorClick,
+  isFavorite = false,
+}) => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleFavoriteToggle = () => {
-    if (!isLoggedIn) return alert('Please sign in to manage favorites');
     if (isFavorite) {
-      dispatch(removeFromFavorites(recipe.id));
+      removeFavorite(recipe.id);
     } else {
-      dispatch(addToFavorites(recipe.id));
+      addFavorite(recipe.id);
     }
   };
 
-  const handleAuthorClick = () => {
-    // TODO show modal SignInModal if not isLoggedIn
-    if (!isLoggedIn) return alert('Sign in to view profile');
-    if (recipe.owner) {
-      navigate(`${ROUTERS.USER}/${recipe.owner.id}`);
-    }
-  };
-
-  const handleViewRecipe = () => navigate(`/recipe/${recipe.id}`);
+  const handleViewRecipe = () =>
+    navigate(`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`);
 
   return (
     <div className={css.card}>
       <div className={css.imageWrapper}>
-        <img
-          src={`https://placehold.co/290x275/png`}
-          alt={recipe.title}
-          className={css.image}
-        />
+        <img src={recipe.thumb} alt={recipe.title} className={css.image} />
       </div>
       <div className={css.content}>
         <h4 className={css.title}>{recipe.title}</h4>
+        <div className={css.tags}>
+          {recipe.category?.name && (
+            <span className={css.tag}>{recipe.category.name}</span>
+          )}
+          {recipe.area?.name && (
+            <span className={css.tag}>{recipe.area.name}</span>
+          )}
+        </div>
         <p className={css.description}>{recipe.description}</p>
         <div className={css.footer}>
           {recipe.owner && (
             <button className={css.author} onClick={handleAuthorClick}>
               <img
                 className={css.avatar}
-                src={recipe.owner.avatarURL || 'https://i.pravatar.cc/320'}
+                src={recipe.owner.avatarURL}
+                alt={`Avatar ${recipe.owner.name}`}
                 width={32}
                 height={32}
               />
-              {recipe.owner.name}
+              <p className={css.avatarName}>{recipe.owner.name}</p>
             </button>
           )}
 

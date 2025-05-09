@@ -2,18 +2,18 @@ import axios from './default';
 import { getAuthorizationHeader } from './utils';
 
 export const usersSignup = async user => {
-  const { data } = await axios.post('/auth/register', user);
+  const { data } = await axios.post('/users/register', user);
   return data;
 };
 
 export const usersLogin = async user => {
-  const { data } = await axios.post('/auth/login', user);
+  const { data } = await axios.post('/users/login', user);
   return data;
 };
 
 export const usersLogout = async token => {
   await axios.post(
-    '/auth/logout',
+    '/users/logout',
     {},
     {
       headers: {
@@ -24,7 +24,7 @@ export const usersLogout = async token => {
 };
 
 export const fetchCurrentUser = async token => {
-  const { data } = await axios.get('/auth/current', {
+  const { data } = await axios.get('/users/current', {
     headers: {
       Authorization: getAuthorizationHeader(token),
     },

@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '../../components/Container/Container';
-import css from './AddRecipePage.module.css';
 import AddRecipeForm from '../../components/AddRecipeForm/AddRecipeForm';
 import { recipeAdd } from '../../api/recipesApi';
-
 import { selectToken, selectUser } from '../../redux/auth/selectors';
 import { fetchCategories } from '../../redux/categories/operations';
 import { fetchIngredients } from '../../redux/ingredients/operations';
@@ -13,10 +11,8 @@ import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import { ROUTERS } from '../../const';
-import {
-  errorNotification,
-  successNotification,
-} from '../../utils/notification';
+import { errorHandler, successNotification } from '../../utils/notification';
+import css from './AddRecipePage.module.css';
 
 const AddRecipePage = () => {
   const token = useSelector(selectToken);
@@ -48,17 +44,12 @@ const AddRecipePage = () => {
       navigate(`${ROUTERS.USER}/${user.id}`, { state: location });
       successNotification('New recipe successfully added!');
     } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        error.message ||
-        'Error while adding a new recipe...';
-      console.log(error);
-      errorNotification(message);
+      errorHandler(error, 'Error while adding a new recipe.');
     }
   };
 
   return (
-    <div className={css.wrapper}>
+    <section className={css.wrapper}>
       <Container>
         <PathInfo breadcrumbs={[{ name: 'add recipe' }]} />
         <MainTitle>Add recipe</MainTitle>
@@ -68,7 +59,7 @@ const AddRecipePage = () => {
         </Subtitle>
         <AddRecipeForm onSubmit={onSubmit} />
       </Container>
-    </div>
+    </section>
   );
 };
 

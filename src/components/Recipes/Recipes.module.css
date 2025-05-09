@@ -26,6 +26,9 @@
 	.content {
 	  gap: 40px;
 	}
+	.subtitle {
+		max-width: 540px;
+	}
 }
 
 /* Desktop styles */

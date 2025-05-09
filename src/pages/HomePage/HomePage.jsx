@@ -1,45 +1,44 @@
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
-import { fetchCategories } from '../../redux/categories/operations';
-import CategoriesList from '../../components/CategoriesList/CategoriesList';
-import AppBar from '../../components/AppBar/AppBar';
+import Header from '../../components/Header/Header';
 import Hero from '../../components/Hero/Hero';
-import Recipes from '../../components/Recipes/Recipes';
+
 import { THEMES } from '../../const';
 import css from './HomePage.module.css';
+import Testimonials from '../../components/Testimonials/Testimonials.jsx';
+
+const Recipes = lazy(() => import('../../components/Recipes/Recipes'));
+const Categories = lazy(() => import('../../components/Categories/Categories'));
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const [category, setCategory] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get('category') || '';
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  const onChangeCategory = category => {
-    setCategory(category);
-  };
-
-  const handleBack = () => {
-    setCategory(null);
+  const handleChangeCategory = category => {
+    setSearchParams({ category });
   };
 
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
         <Container>
-          <AppBar theme={THEMES.DARK} />
+          <Header theme={THEMES.DARK} />
           <Hero />
         </Container>
       </div>
-      <Container>
-        {!category ? (
-          <CategoriesList onChangeCategory={onChangeCategory} />
-        ) : (
-          <Recipes category={category} onBack={handleBack} />
-        )}
-      </Container>
+      <div className={css.main}>
+        <Container>
+          <Suspense>
+            {!category ? (
+              <Categories handleChangeCategory={handleChangeCategory} />
+            ) : (
+              <Recipes category={category} />
+            )}
+          </Suspense>
+          <Testimonials />
+        </Container>
+      </div>
     </div>
   );
 };

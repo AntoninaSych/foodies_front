@@ -1,81 +1,91 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMediaQuery } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeFilters from '../RecipeFilters/RecipeFilters';
-import { fetchRecipes } from '../../redux/recipes/operations';
-import { selectRecipes } from '../../redux/recipes/selectors';
-import styles from './Recipes.module.css';
+import { recipesFetch } from '../../api/recipesApi';
+import { errorHandler } from '../../utils/notification';
+import { CATALOG_LIMIT } from '../../const';
+import Message from '../Message/Message';
+import css from './Recipes.module.css';
 
-const Recipes = ({ category, onBack }) => {
-  const dispatch = useDispatch();
-  const recipes = useSelector(selectRecipes);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [limit] = useState(getLimit());
-  const [selectedIngredient, setSelectedIngredient] = useState('');
-  const [selectedArea, setSelectedArea] = useState('');
-
-  function getLimit() {
-    const width = window.innerWidth;
-    return width < 768 ? 8 : 12;
-  }
+const Recipes = ({ category }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchArea = searchParams.get('area') || '';
+  const searchIngredient = searchParams.get('ingredient') || '';
+  const [recipes, setRecipes] = useState([]);
+  const [, setTotal] = useState(0);
+  const [page] = useState(1);
+  const limit = isMobile ? 8 : CATALOG_LIMIT;
 
   useEffect(() => {
-    dispatch(
-      fetchRecipes({
-        category,
-        ingredient: selectedIngredient,
-        area: selectedArea,
-        page: currentPage,
-        size: limit,
-      })
-    );
-  }, [
-    dispatch,
-    category,
-    selectedIngredient,
-    selectedArea,
-    currentPage,
-    limit,
-  ]);
+    const fetchData = async () => {
+      try {
+        const response = await recipesFetch({
+          category,
+          ingredient: searchIngredient,
+          area: searchArea,
+          page,
+          limit,
+        });
 
-  const handleFilterChange = (type, value) => {
-    if (type === 'ingredient') {
-      setSelectedIngredient(value);
-    } else if (type === 'area') {
-      setSelectedArea(value);
+        const { items = [], total = 0 } = response;
+        setRecipes(items);
+        setTotal(total);
+      } catch (error) {
+        errorHandler(error, 'Error while fetching recipes.');
+      }
+    };
+
+    if (category) {
+      fetchData();
     }
-    setCurrentPage(1);
+  }, [category, searchIngredient, searchArea, page, limit]);
+
+  const handleFilterChange = (name, value) => {
+    const params = {
+      category,
+      area: searchArea,
+      ingredient: searchIngredient,
+    };
+    params[name] = value;
+    setSearchParams(params);
+  };
+
+  const handleBackClick = () => {
+    setSearchParams({});
   };
 
   return (
     <section>
-      <div className={styles.navigation}>
-        <button className={styles.backBtn} onClick={onBack}>
+      <div className={css.navigation}>
+        <button className={css.backBtn} onClick={handleBackClick}>
           <IoArrowBack /> Back
         </button>
       </div>
 
       <MainTitle>{category}</MainTitle>
-      <Subtitle>
+      <Subtitle className={css.subtitle}>
         Go on a taste journey, where every sip is a sophisticated creative
         chord, and every dessert is an expression of the most refined
         gastronomic desires.
       </Subtitle>
 
-      <div className={styles.content}>
+      <div className={css.content}>
         <RecipeFilters
-          selectedArea={selectedArea}
-          selectedIngredient={selectedIngredient}
+          areaValue={searchArea}
+          ingredientValue={searchIngredient}
           onFilterChange={handleFilterChange}
         />
 
         {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
-          <p>No recipes found.</p>
+          <Message>No recipes found.</Message>
         )}
       </div>
     </section>

@@ -2,6 +2,7 @@ export const ROUTERS = {
   HOME: '/',
   USER: '/user',
   ADD_RECIPE: '/recipe/add',
+  RECIPE_DETAIL: '/recipe',
 };
 export const ROOT_CONTAINER = '#root';
 export const CATALOG_LIMIT = 12;
