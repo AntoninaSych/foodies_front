@@ -9,6 +9,7 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
+import Message from '../Message/Message';
 import css from './Recipes.module.css';
 
 const Recipes = ({ category }) => {
@@ -88,7 +89,7 @@ const Recipes = ({ category }) => {
         {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
-          <p>No recipes found.</p>
+          <Message>No recipes found.</Message>
         )}
       </div>
     </section>
