@@ -1,11 +1,32 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { ROUTERS } from '../../const';
 import styles from './Hero.module.css';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import SignInModal from '../SignInModal/SignInModal';
 
 const Hero = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleOnAddRecipe = () => {
+    if (!isLoggedIn) {
+      return setShowAuthModal(true);
+    }
+
+    navigate(ROUTERS.ADD_RECIPE);
+  };
+
+  const handleOnCloseModal = () => {
+    setShowAuthModal(false);
+  };
+
   return (
     <section className={styles.heroSection}>
-      <div className={styles.heroThumb}>
+      <div>
         <div className={styles.textWrapper}>
           <h1 className={styles.title}>Improve Your Culinary Talents</h1>
           <p className={styles.subtitle}>
@@ -13,8 +34,8 @@ const Hero = () => {
             you in the aromas and tastes of various cuisines.
           </p>
           <Button
+            onClick={handleOnAddRecipe}
             className={styles.heroButton}
-            to={ROUTERS.ADD_RECIPE}
             variant={Button.variants.SECONDARY_REVERSED}
           >
             Add recipe
@@ -40,6 +61,7 @@ const Hero = () => {
           />
         </div>
       </div>
+      <SignInModal isOpen={showAuthModal} onClose={handleOnCloseModal} />
     </section>
   );
 };
