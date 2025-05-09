@@ -16,4 +16,10 @@ export const MODALS = {
   SIGN_IN: 'sign-in',
   SIGN_UP: 'sign-up',
   AUTH: 'auth',
+  LOGOUT: 'logout',
+};
+
+export const FORM_TYPES = {
+  SIGN_IN: 'sign-in',
+  SIGN_UP: 'sign-up',
 };

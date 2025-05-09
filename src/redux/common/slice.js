@@ -4,10 +4,17 @@ const commonSlice = createSlice({
   name: 'common',
   initialState: {
     modal: null,
+    modalOptions: {},
   },
   reducers: {
     showModal(state, action) {
-      state.modal = action.payload;
+      if (typeof action.payload === 'object') {
+        const { modal, ...options } = action.payload;
+        state.modal = modal;
+        state.modalOptions = options;
+      } else {
+        state.modal = action.payload;
+      }
     },
     closeModal(state) {
       state.modal = null;
