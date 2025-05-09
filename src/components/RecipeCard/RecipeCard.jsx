@@ -4,8 +4,8 @@ import { GoArrowUpRight } from 'react-icons/go';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
 import css from './RecipeCard.module.css';
+import { ROUTERS } from '../../const/index.js';
 
-// TODO remove background color for images when backend provides them, recipe.thumb, owner.avatarURL
 export const RecipeCard = ({
   recipe,
   addFavorite,
@@ -23,7 +23,8 @@ export const RecipeCard = ({
     }
   };
 
-  const handleViewRecipe = () => navigate(`/recipe/${recipe.id}`);
+  const handleViewRecipe = () =>
+    navigate(`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`);
 
   return (
     <div className={css.card}>
