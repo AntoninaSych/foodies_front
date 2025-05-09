@@ -1,0 +1,10 @@
+.imgSmall {
+  max-width: 100%;
+  width: 77px;
+  padding-bottom: 26px;
+}
+
+.imgLarge {
+  max-width: 100%;
+  width: 190px;
+}
