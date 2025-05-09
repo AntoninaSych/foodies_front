@@ -27,7 +27,8 @@ export const addToFavorites = createAsyncThunk(
       const {
         auth: { token },
       } = getState();
-      return await addRecipeToFavorites(token, recipeId);
+      await addRecipeToFavorites(token, recipeId);
+      return recipeId;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
@@ -41,7 +42,8 @@ export const removeFromFavorites = createAsyncThunk(
       const {
         auth: { token },
       } = getState();
-      return await removeRecipeFromFavorites(token, recipeId);
+      await removeRecipeFromFavorites(token, recipeId);
+      return recipeId;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }

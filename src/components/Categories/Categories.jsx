@@ -18,6 +18,7 @@ const Categories = ({ handleChangeCategory }) => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const categories = useSelector(selectCategories);
+  const hasData = categories.length > 0;
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -35,9 +36,9 @@ const Categories = ({ handleChangeCategory }) => {
         recipes that combine taste, style and the warm atmosphere of the
         kitchen.
       </Subtitle>
-      {error ? (
-        <Message>{error}</Message>
-      ) : (
+      {error && <Message>{error}</Message>}
+      {!error && !hasData && <Message>No categories found.</Message>}
+      {!error && hasData && (
         <CategoriesList
           handleChangeCategory={handleChangeCategory}
           categories={categories}

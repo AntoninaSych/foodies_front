@@ -6,6 +6,7 @@ import Hero from '../../components/Hero/Hero';
 
 import { THEMES } from '../../const';
 import css from './HomePage.module.css';
+import Testimonials from '../../components/Testimonials/Testimonials.jsx';
 
 const Recipes = lazy(() => import('../../components/Recipes/Recipes'));
 const Categories = lazy(() => import('../../components/Categories/Categories'));
@@ -35,6 +36,7 @@ const HomePage = () => {
               <Recipes category={category} />
             )}
           </Suspense>
+          <Testimonials />
         </Container>
       </div>
     </div>

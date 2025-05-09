@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTERS } from '../../const';
 import { selectUser } from '../../redux/auth/selectors';
+import { clearFavorites } from '../../redux/recipes/slice';
 import { logout } from '../../redux/auth/operations';
 import LogOutModal from '../LogOutModal/LogOutModal';
 import css from './UserBar.module.css';
@@ -26,6 +27,7 @@ const UserBar = ({ theme }) => {
   const onDialogSubmit = event => {
     event.preventDefault();
     dispatch(logout());
+    dispatch(clearFavorites());
   };
 
   const handleOnOpen = () => {

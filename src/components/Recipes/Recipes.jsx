@@ -2,16 +2,14 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
-
 import MainTitle from '../MainTitle/MainTitle';
 import Subtitle from '../Subtitle/Subtitle';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeFilters from '../RecipeFilters/RecipeFilters';
-
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
-
+import Message from '../Message/Message';
 import css from './Recipes.module.css';
 
 const Recipes = ({ category }) => {
@@ -19,10 +17,9 @@ const Recipes = ({ category }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchArea = searchParams.get('area') || '';
   const searchIngredient = searchParams.get('ingredient') || '';
-
   const [recipes, setRecipes] = useState([]);
   const [, setTotal] = useState(0);
-  const [page] = useState(1); // Пока не используем пагинацию, фиксированная страница 1
+  const [page] = useState(1);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
 
   useEffect(() => {
@@ -88,7 +85,7 @@ const Recipes = ({ category }) => {
         {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
-          <p>No recipes found.</p>
+          <Message>No recipes found.</Message>
         )}
       </div>
     </section>
