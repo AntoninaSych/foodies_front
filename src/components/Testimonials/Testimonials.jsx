@@ -48,14 +48,21 @@ const Testimonials = () => {
     indexRef.current = idx;
   };
 
-  if (loading) return <Loader />;
-  if (error) return <Message>{error}</Message>;
-  if (testimonials.length === 0)
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Message>{error}</Message>;
+  }
+
+  if (testimonials.length === 0) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.center}>There are no testimonials here yet.</div>
       </div>
     );
+  }
 
   return (
     <div className={styles.wrapper}>
