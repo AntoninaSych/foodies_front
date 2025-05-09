@@ -4,19 +4,25 @@ import {
   removeFromFavorites,
 } from '../../redux/recipes/operations';
 import Button from '../Button/Button';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { selectFavoriteRecipes } from '../../redux/recipes/selectors';
 import css from './RecipePreparation.module.css';
 
 const RecipePreparation = ({ recipe }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.recipes.favorites);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const favorites = useSelector(selectFavoriteRecipes);
   if (!recipe) return null;
 
   const isFavorite =
     Array.isArray(favorites) && favorites.some(fav => fav.id === recipe.id);
 
-  //console.log('> RecipePreparation render, instructions:', recipe.instructions);
-
   const handleFavoriteClick = () => {
+    if (!isLoggedIn) {
+      // TODO SHOW AUTH MODAL
+      // return dispatch(showModal(MODALS.AUTH));
+    }
+
     if (isFavorite) {
       dispatch(removeFromFavorites(recipe.id));
     } else {
@@ -36,13 +42,15 @@ const RecipePreparation = ({ recipe }) => {
         </p>
       ))}
 
-      <Button
-        variant="secondary"
-        className={css.action}
-        onClick={handleFavoriteClick}
-      >
-        {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-      </Button>
+      <div className={css.actions}>
+        <Button
+          variant="secondary"
+          className={css.action}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        </Button>
+      </div>
     </div>
   );
 };
