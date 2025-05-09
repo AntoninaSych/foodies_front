@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from '../Link/Link';
 import Modal from '../Modal/Modal';
 import SignUpForm from '../SignUpForm/SignUpForm';
@@ -5,13 +6,13 @@ import SignInForm from '../SignInForm/SignInForm';
 import { FORM_TYPES } from './const/index';
 import css from '../styles/modal.module.css';
 
-const AuthModal = ({
-  isOpen,
-  onClose,
-  handleChangeForm,
-  form = FORM_TYPES.SIGN_IN,
-}) => {
+const AuthModal = ({ isOpen, onClose }) => {
+  const [form, setForm] = useState(FORM_TYPES.SIGN_IN);
   const showSignInForm = form === FORM_TYPES.SIGN_IN;
+
+  const handleChangeForm = formType => () => {
+    setForm(formType);
+  };
 
   return (
     <Modal open={isOpen} onClose={onClose}>

@@ -15,7 +15,7 @@ const RecipeIngredients = ({ ingredients = [] }) => {
             className={css.ingredientsItem}
           >
             <img
-              src={ingredient.thumb}
+              src={ingredient.thumb || '/images/default-ingredient.png'}
               alt={ingredient.name}
               className={css.ingredientsImg}
             />

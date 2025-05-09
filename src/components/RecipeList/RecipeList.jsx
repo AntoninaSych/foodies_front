@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { selectFavoriteRecipes } from '../../redux/recipes/selectors';
 import {
   addToFavorites,
@@ -8,13 +8,12 @@ import {
   removeFromFavorites,
 } from '../../redux/recipes/operations';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import SignInModal from '../SignInModal/SignInModal';
-import css from './RecipeList.module.css';
-import { ROUTERS } from '../../const';
+import { showModal } from '../../redux/common/slice';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { MODALS, ROUTERS } from '../../const';
+import css from './RecipeList.module.css';
 
 const RecipeList = ({ recipes }) => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
@@ -26,13 +25,6 @@ const RecipeList = ({ recipes }) => {
     }
   }, [dispatch, isLoggedIn]);
 
-  const onUnAuthClick = () => {
-    setShowAuthModal(true);
-  };
-  const handleOnCloseModal = () => {
-    setShowAuthModal(false);
-  };
-
   const isFavorite = id => {
     return !Array.isArray(favoriteRecipes)
       ? false
@@ -41,21 +33,21 @@ const RecipeList = ({ recipes }) => {
 
   const handleAddFavorite = recipeId => {
     if (!isLoggedIn) {
-      return setShowAuthModal(true);
+      return dispatch(showModal(MODALS.AUTH));
     }
     dispatch(addToFavorites(recipeId));
   };
 
   const handleRemoveFavorite = recipeId => {
     if (!isLoggedIn) {
-      return setShowAuthModal(true);
+      return dispatch(showModal(MODALS.AUTH));
     }
     dispatch(removeFromFavorites(recipeId));
   };
 
   const handleAuthorClick = ownerId => () => {
     if (!isLoggedIn) {
-      return setShowAuthModal(true);
+      return dispatch(showModal(MODALS.AUTH));
     }
 
     navigate(`${ROUTERS.USER}/${ownerId}`);
@@ -69,13 +61,10 @@ const RecipeList = ({ recipes }) => {
           removeFavorite={handleRemoveFavorite}
           key={recipe.id}
           recipe={recipe}
-          onUnAuthClick={onUnAuthClick}
           handleAuthorClick={handleAuthorClick(recipe.owner?.id)}
           isFavorite={isFavorite(recipe.id)}
         />
       ))}
-
-      <SignInModal isOpen={showAuthModal} onClose={handleOnCloseModal} />
     </div>
   );
 };
