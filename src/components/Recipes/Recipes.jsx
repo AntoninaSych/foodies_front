@@ -9,6 +9,7 @@ import RecipeFilters from '../RecipeFilters/RecipeFilters';
 import { recipesFetch } from '../../api/recipesApi';
 import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
+import Message from '../Message/Message';
 import css from './Recipes.module.css';
 
 const Recipes = ({ category }) => {
@@ -16,10 +17,9 @@ const Recipes = ({ category }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchArea = searchParams.get('area') || '';
   const searchIngredient = searchParams.get('ingredient') || '';
-
-  const [page] = useState(1);
   const [recipes, setRecipes] = useState([]);
   const [, setTotal] = useState(0);
+  const [page] = useState(1);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
 
   useEffect(() => {
@@ -32,16 +32,18 @@ const Recipes = ({ category }) => {
           page,
           limit,
         });
-        const { items, total } = response;
+
+        const { items = [], total = 0 } = response;
         setRecipes(items);
         setTotal(total);
       } catch (error) {
         errorHandler(error, 'Error while fetching recipes.');
-        console.log(error);
       }
     };
 
-    fetchData();
+    if (category) {
+      fetchData();
+    }
   }, [category, searchIngredient, searchArea, page, limit]);
 
   const handleFilterChange = (name, value) => {
@@ -57,11 +59,6 @@ const Recipes = ({ category }) => {
   const handleBackClick = () => {
     setSearchParams({});
   };
-
-  // // TODO used for Paginator
-  // const handleChangePage = value => {
-  //   setPage(value);
-  // };
 
   return (
     <section>
@@ -88,7 +85,7 @@ const Recipes = ({ category }) => {
         {recipes.length ? (
           <RecipeList recipes={recipes} />
         ) : (
-          <p>No recipes found.</p>
+          <Message>No recipes found.</Message>
         )}
       </div>
     </section>

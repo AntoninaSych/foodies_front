@@ -1,0 +1,73 @@
+.ingredientsBlock {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  line-height: 1.33;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.ingredientsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.ingredientsItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 152px;
+  gap: 10px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.ingredientsImg {
+  width: 75px;
+  height: 75px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid var(--color-secondary);
+}
+
+.ingredientsName {
+  color: var(--color-main);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+}
+
+.ingredientsMeasure {
+  color: var(--color-secondary);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ingredientsList {
+    gap: 20px;
+  }
+
+  .ingredientsItem {
+    max-width: 178px;
+    gap: 14px;
+  }
+
+  .ingredientsImg {
+    width: 90px;
+    height: 90px;
+    padding: 15px;
+  }
+}

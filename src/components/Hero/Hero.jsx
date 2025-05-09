@@ -24,16 +24,16 @@ const Hero = () => {
         <div className={styles.imgWrapper}>
           <img
             srcSet="
-              ./images/hero/hero-dish2-1x.png 1x,
-              ./images/hero/hero-dish2-2x.png 2x"
+              /images/hero/hero-dish2-1x.png 1x,
+              /images/hero/hero-dish2-2x.png 2x"
             src="/images/hero/hero-dish2-1x.png"
             alt="Meat pie"
             className={styles.imgSmall}
           />
           <img
             srcSet="
-              ./images/hero/hero-dish1-1x.png 1x,
-              ./images/hero/hero-dish1-2x.png 2x"
+              /images/hero/hero-dish1-1x.png 1x,
+              /images/hero/hero-dish1-2x.png 2x"
             src="/images/hero/hero-dish1-1x.png"
             alt="Chocolate pudding"
             className={styles.imgLarge}

@@ -8,12 +8,10 @@ const CategoriesList = ({ categories, handleChangeCategory }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [limit, setLimit] = useState(isMobile ? 7 : 10);
   const sortedCategories = useMemo(() => {
-    const sorted = []
-      .concat(categories)
-      .sort((a, b) => (a.name > b.name ? 1 : -1));
-
+    const sorted = [...categories].sort((a, b) => (a.name > b.name ? 1 : -1));
     return limit ? sorted.slice(0, limit + 1) : sorted;
   }, [categories, limit]);
+
   const showAll = sortedCategories.length !== categories.length;
 
   const handleOnCategoryClick = category => {

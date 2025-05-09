@@ -7,11 +7,12 @@ Don't forget to set up both Prettier and ESLint with autosave on your IDE!
 
 - [@mui/material](https://www.npmjs.com/package/@mui/material)
 - @reduxjs/toolkit
+- react-redux
+- redux-persist
 - react-hot-toast
 - [react-icons](https://www.npmjs.com/package/react-icons)
 - react-loader-spinner
-- formik
-- react-redux
+- [react-hook-form](https://react-hook-form.com/)
 - axios
 - yup
 
@@ -55,3 +56,4 @@ style: update css variables
 You can use the `chore` type for anything, but using a type more appropriate to your commit is more welcome.
 
 ## Functionality
+### Home page
