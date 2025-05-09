@@ -11,7 +11,6 @@ import {
 } from '../../redux/categories/selectors';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
-import PopularRecipes from '../PopularRecipes/PopularRecipes';
 import css from './Categories.module.css';
 
 const Categories = ({ handleChangeCategory }) => {
@@ -45,7 +44,6 @@ const Categories = ({ handleChangeCategory }) => {
           categories={categories}
         />
       )}
-      <PopularRecipes />
     </section>
   );
 };
