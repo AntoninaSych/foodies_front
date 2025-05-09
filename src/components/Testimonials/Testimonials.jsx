@@ -82,10 +82,10 @@ const Testimonials = () => {
             }}
             aria-live="polite"
           >
-            {testimonials.map(({ id, testimonial, author }) => (
+            {testimonials.map(({ id, testimonial, user }) => (
               <div key={id} className={styles.slideItem}>
                 <p className={styles.quote}>&ldquo;{testimonial}&rdquo;</p>
-                <p className={styles.author}>{author}</p>
+                <p className={styles.author}>{user?.name}</p>
               </div>
             ))}
           </div>
