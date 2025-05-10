@@ -1,10 +1,15 @@
 .wrapper {
   display: flex;
-  gap: 6px;
-  margin: 0 auto;
+  align-self: center;
 }
 
-.page {
+.list {
+  display: flex;
+  gap: 6px;
+  margin: 32px auto 0 auto;
+}
+
+.listItem {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -14,26 +19,20 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-family: "Mulish Bold", Arial, sans-serif;
-  font-weight: 400;
   font-size: 14px;
-  line-height: 1.4;
-  transition: all var(--trns-fast);
-  padding: 0;
+  line-height: 1;
+  transition: border-color var(--trns-fast);
 }
 
-.page:hover {
-  border: 1px solid var(--color-secondary);
-}
-
-.page.active {
-  border: 1px solid var(--color-secondary);
+.listItem:hover,
+.listItem.active {
+  border-color: 1px solid var(--color-main);
 }
 
 /* tablet */
 @media only screen and (min-width: 768px) {
   .wrapper {
-    margin-bottom: 40px;
+    margin-top: 60px;
   }
 }
 

@@ -6,12 +6,6 @@
 	flex-direction: column;
 	gap: 32px;
 }
-.recipesContent {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 60px;
-}
 .backBtn {
 	display:flex;
 	align-items: center;

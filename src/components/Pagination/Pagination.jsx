@@ -1,10 +1,12 @@
+import clsx from 'clsx';
+import { NUMBER_PAGES_TO_SHOW } from '../../const';
 import css from './Pagination.module.css';
 
 const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
-  pageNumbersToShow,
+  pageNumbersToShow = NUMBER_PAGES_TO_SHOW,
 }) => {
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -27,17 +29,21 @@ const Pagination = ({
   const visiblePages = getVisiblePages();
 
   return (
-    <ul className={css.wrapper}>
-      {visiblePages.map(page => (
-        <li
-          className={`${css.page} ${page === currentPage ? css.active : ''}`}
-          key={page}
-          onClick={() => handlePageChange(page)}
-        >
-          {page}
-        </li>
-      ))}
-    </ul>
+    <div className={css.wrapper}>
+      <ul className={css.list}>
+        {visiblePages.map(page => (
+          <li
+            className={clsx(css.listItem, {
+              [css.active]: page === currentPage,
+            })}
+            key={`${page}`}
+            onClick={() => handlePageChange(page)}
+          >
+            {page}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

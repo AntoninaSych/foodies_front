@@ -7,6 +7,7 @@ export const ROUTERS = {
 export const ROOT_CONTAINER = '#root';
 export const CATALOG_LIMIT = 12;
 export const SCROLL_UP_DISTANCE = 250;
+export const NUMBER_PAGES_TO_SHOW = 4;
 
 export const THEMES = {
   DARK: 'dark',

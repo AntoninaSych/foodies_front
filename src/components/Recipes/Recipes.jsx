@@ -100,7 +100,6 @@ const Recipes = ({ category }) => {
             currentPage={page}
             totalPages={totalPages}
             onPageChange={handlePageChange}
-            pageNumbersToShow={3}
           />
         </div>
       </div>
