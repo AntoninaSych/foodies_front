@@ -53,10 +53,10 @@ export const unfollowUserApi = async (token, userId) => {
 };
 
 export const getUserDetailsApi = async (token, userId) => {
-  const res = await fetch(`/api/users/${userId}`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const response = await axios.get(`/users/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
-
-  if (!res.ok) throw new Error('Failed to fetch user details');
-  return await res.json();
+  return response.data;
 };

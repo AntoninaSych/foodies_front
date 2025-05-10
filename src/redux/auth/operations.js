@@ -113,7 +113,8 @@ export const fetchUserDetails = createAsyncThunk(
       const {
         auth: { token },
       } = getState();
-      return await getUserDetailsApi(token, userId);
+      const userDetails = await getUserDetailsApi(token, userId);
+      return userDetails;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
