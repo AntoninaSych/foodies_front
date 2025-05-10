@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  gap: 6px;
+}
+
+.page {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: all var(--trns-fast);
+  padding: 0;
+}
+
+.page:hover {
+  border: 1px solid var(--color-secondary);
+}
+
+.page.active {
+  border: 1px solid var(--color-secondary);
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-bottom: 40px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {}
