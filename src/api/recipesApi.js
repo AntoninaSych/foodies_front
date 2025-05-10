@@ -67,3 +67,12 @@ export const recipeAdd = async (token, data = {}) => {
   });
   return response.data;
 };
+
+export const deleteRecipeFromApi = async (token, recipeId) => {
+  const response = await axios.delete(`/api/recipes/${recipeId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};

@@ -4,7 +4,11 @@ import {
   usersLogin,
   usersLogout,
   usersSignup,
+  followUserApi,
+  unfollowUserApi,
+  getUserDetailsApi,
 } from '../../api/authApi';
+import { handleError } from '../utils';
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -70,6 +74,48 @@ export const refreshUser = createAsyncThunk(
       }
     } else {
       return rejectWithValue('Token is not available');
+    }
+  }
+);
+
+export const followUser = createAsyncThunk(
+  'auth/followUser',
+  async (userId, { rejectWithValue, getState }) => {
+    try {
+      const {
+        auth: { token },
+      } = getState();
+      return await followUserApi(token, userId);
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+export const unfollowUser = createAsyncThunk(
+  'auth/unfollowUser',
+  async (userId, { rejectWithValue, getState }) => {
+    try {
+      const {
+        auth: { token },
+      } = getState();
+      return await unfollowUserApi(token, userId);
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+export const fetchUserDetails = createAsyncThunk(
+  'auth/fetchUserDetails',
+  async (userId, { rejectWithValue, getState }) => {
+    try {
+      const {
+        auth: { token },
+      } = getState();
+      return await getUserDetailsApi(token, userId);
+    } catch (error) {
+      return rejectWithValue(handleError(error));
     }
   }
 );
