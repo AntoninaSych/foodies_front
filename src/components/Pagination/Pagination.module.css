@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   gap: 6px;
+  margin: 0 auto;
 }
 
 .page {

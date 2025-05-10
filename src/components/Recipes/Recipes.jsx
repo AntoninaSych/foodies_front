@@ -47,6 +47,10 @@ const Recipes = ({ category }) => {
     }
   }, [category, searchIngredient, searchArea, page, limit]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [searchIngredient, searchArea]);
+
   const handleFilterChange = (name, value) => {
     const params = {
       category,
