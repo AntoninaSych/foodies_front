@@ -20,6 +20,7 @@ const FieldTextArea = ({
   const { getValues } = useFormContext();
   const defaultMaxLength = maxLength && parseInt(maxLength, 10);
   const { ref: registerRef, ...rest } = register(name, { required });
+  const withExtra = !!maxLength;
 
   const values = getValues();
 
@@ -36,6 +37,19 @@ const FieldTextArea = ({
     }
   };
 
+  const renderExtra = () => {
+    if (maxLength) {
+      return (
+        <span className={css.count}>
+          <span className={count > 0 ? css.currentCount : undefined}>
+            {count}
+          </span>
+          /{defaultMaxLength}
+        </span>
+      );
+    }
+  };
+
   useEffect(() => {
     if (!values[name]) {
       setCount(0);
@@ -48,9 +62,7 @@ const FieldTextArea = ({
   return (
     <div className={clsx(css.field, error && css.error)}>
       {label && <label htmlFor={fieldId}>{label}</label>}
-      <div
-        className={clsx(css.inputWrapper, defaultMaxLength && css.withCount)}
-      >
+      <div className={clsx(css.textAreaWrapper, withExtra && css.withExtra)}>
         <textarea
           ref={event => {
             registerRef(event);
@@ -62,15 +74,7 @@ const FieldTextArea = ({
           maxLength={defaultMaxLength}
           aria-invalid={error ? 'true' : 'false'}
         />
-
-        {!!maxLength && (
-          <span className={css.count}>
-            <span className={count > 0 ? css.currentCount : undefined}>
-              {count}
-            </span>
-            /{defaultMaxLength}
-          </span>
-        )}
+        {withExtra && <div className={css.extra}>{renderExtra()}</div>}
       </div>
       {error && <ErrorField>{error}</ErrorField>}
     </div>

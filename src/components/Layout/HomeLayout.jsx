@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import ScrollUp from '../ScrollUp/ScrollUp';
 import Footer from '../Footer/Footer';
+import ShowModal from '../ShowModal/ShowModal';
 import css from './Layout.module.css';
 
 const HomeLayout = () => {
@@ -15,6 +16,7 @@ const HomeLayout = () => {
           <Outlet />
         </Suspense>
       </main>
+      <ShowModal />
       <ScrollUp />
       <Toaster />
       <Footer />

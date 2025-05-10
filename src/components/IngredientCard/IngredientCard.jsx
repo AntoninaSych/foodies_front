@@ -7,7 +7,7 @@ const IngredientCard = ({ ingredient }) => {
     <div className={css.wrapper}>
       <img
         className={css.image}
-        src={thumb}
+        src={thumb || '/images/default-ingredient.png'}
         width={90}
         height={90}
         alt={name}

@@ -1,6 +1,6 @@
 import RecipeMainInfo from '../RecipeMainInfo/RecipeMainInfo';
 import RecipeIngredients from '../RecipeIngredients/RecipeIngredients';
-//import RecipePreparation from '../RecipePreparation/RecipePreparation';
+import RecipePreparation from '../RecipePreparation/RecipePreparation';
 import PopularRecipes from '../PopularRecipes/PopularRecipes';
 import Message from '../Message/Message';
 import css from './RecipeInfo.module.css';
@@ -21,12 +21,10 @@ const RecipeInfo = ({ recipe }) => {
         <div className={css.content}>
           <RecipeMainInfo recipe={recipe} />
           <RecipeIngredients ingredients={recipe.ingredients} />
-          {/*<RecipePreparation steps={recipe.instructions} />*/}
+          <RecipePreparation recipe={recipe} />
         </div>
       </div>
-      <div>
-        <PopularRecipes />
-      </div>
+      <PopularRecipes />
     </>
   );
 };
