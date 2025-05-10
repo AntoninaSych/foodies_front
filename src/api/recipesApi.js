@@ -67,3 +67,9 @@ export const recipeAdd = async (token, data = {}) => {
   });
   return response.data;
 };
+
+// TODO, endpoint must have owner object, https://github.com/AntoninaSych/foodies_back/issues/85
+export const popularRecipesFetch = async () => {
+  const response = await axios.get('/recipes/popular');
+  return response.data;
+};
