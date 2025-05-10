@@ -11,6 +11,7 @@ import { errorHandler } from '../../utils/notification';
 import { CATALOG_LIMIT } from '../../const';
 import Message from '../Message/Message';
 import css from './Recipes.module.css';
+import Pagination from '../Pagination/Pagination';
 
 const Recipes = ({ category }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -18,8 +19,8 @@ const Recipes = ({ category }) => {
   const searchArea = searchParams.get('area') || '';
   const searchIngredient = searchParams.get('ingredient') || '';
   const [recipes, setRecipes] = useState([]);
-  const [, setTotal] = useState(0);
-  const [page] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
 
   useEffect(() => {
@@ -33,9 +34,9 @@ const Recipes = ({ category }) => {
           limit,
         });
 
-        const { items = [], total = 0 } = response;
+        const { items = [], totalPages = 0 } = response;
         setRecipes(items);
-        setTotal(total);
+        setTotalPages(totalPages);
       } catch (error) {
         errorHandler(error, 'Error while fetching recipes.');
       }
@@ -60,6 +61,10 @@ const Recipes = ({ category }) => {
     setSearchParams({});
   };
 
+  const handlePageChange = page => {
+    setPage(page);
+  };
+
   return (
     <section>
       <div className={css.navigation}>
@@ -81,12 +86,19 @@ const Recipes = ({ category }) => {
           ingredientValue={searchIngredient}
           onFilterChange={handleFilterChange}
         />
-
-        {recipes.length ? (
-          <RecipeList recipes={recipes} />
-        ) : (
-          <Message>No recipes found.</Message>
-        )}
+        <div className={css.recipesContent}>
+          {recipes.length ? (
+            <RecipeList recipes={recipes} />
+          ) : (
+            <Message>No recipes found.</Message>
+          )}
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            pageNumbersToShow={3}
+          />
+        </div>
       </div>
     </section>
   );
