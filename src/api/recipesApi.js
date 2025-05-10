@@ -68,6 +68,11 @@ export const recipeAdd = async (token, data = {}) => {
   return response.data;
 };
 
+export const popularRecipesFetch = async () => {
+  const response = await axios.get('/recipes/popular');
+  return response.data;
+};
+
 export const deleteRecipeFromApi = async (token, recipeId) => {
   const response = await axios.delete(`/api/recipes/${recipeId}`, {
     headers: {

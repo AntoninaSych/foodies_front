@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { ROUTERS } from '../../const';
+import { useDispatch, useSelector } from 'react-redux';
+import { ROUTERS, MODALS } from '../../const';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import SignInModal from '../SignInModal/SignInModal';
-
+import { showModal } from '../../redux/common/slice';
 import css from './RecipeMainInfo.module.css';
 
 const RecipeMainInfo = ({ recipe }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [openModel, setOpenModel] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const { title, time, description, category, owner } = recipe;
@@ -18,12 +16,8 @@ const RecipeMainInfo = ({ recipe }) => {
     if (isLoggedIn) {
       navigate(`${ROUTERS.USER}/${owner.id}`);
     } else {
-      setOpenModel(true);
+      dispatch(showModal(MODALS.AUTH));
     }
-  };
-
-  const handleOnCloseModal = () => {
-    setOpenModel(false);
   };
 
   return (
@@ -51,7 +45,6 @@ const RecipeMainInfo = ({ recipe }) => {
           </button>
         )}
       </div>
-      <SignInModal isOpen={openModel} onClose={handleOnCloseModal} />
     </div>
   );
 };

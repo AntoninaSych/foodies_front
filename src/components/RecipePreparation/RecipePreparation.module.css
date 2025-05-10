@@ -1,0 +1,44 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 1.33;
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+.actions {
+  margin-top: 12px;
+}
+
+.action {
+  align-self: flex-start;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    margin-top: 32px;
+  }
+  .title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .actions {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    margin-top: 40px;
+  }
+}
