@@ -1,27 +1,22 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import { ROUTERS } from '../../const';
+import { MODALS, ROUTERS } from '../../const';
 import styles from './Hero.module.css';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import SignInModal from '../SignInModal/SignInModal';
+import { showModal } from '../../redux/common/slice';
 
 const Hero = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleOnAddRecipe = () => {
     if (!isLoggedIn) {
-      return setShowAuthModal(true);
+      return dispatch(showModal(MODALS.AUTH));
     }
 
     navigate(ROUTERS.ADD_RECIPE);
-  };
-
-  const handleOnCloseModal = () => {
-    setShowAuthModal(false);
   };
 
   return (
@@ -61,7 +56,6 @@ const Hero = () => {
           />
         </div>
       </div>
-      <SignInModal isOpen={showAuthModal} onClose={handleOnCloseModal} />
     </section>
   );
 };
