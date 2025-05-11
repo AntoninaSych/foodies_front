@@ -9,13 +9,14 @@ const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
   state.items = [];
+  state.user = 'error';
 };
 
 const usersSlice = createSlice({
   name: 'users',
   initialState: {
     items: [],
-    user: null,
+    user: 'initial state user',
     loading: false,
     error: null,
   },
@@ -28,13 +29,10 @@ const usersSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUsers.rejected, handleRejected)
-      .addCase(fetchCurrentUser.pending, handlePending)
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.loading = false;
-        state.error = null;
-      })
-      .addCase(fetchCurrentUser.rejected, handleRejected);
+        state.user = action.payload;
+        console.log(action.payload, 'slice case');
+      });
   },
 });
 

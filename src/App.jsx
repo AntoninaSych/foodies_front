@@ -35,7 +35,7 @@ const App = () => {
         </Route>
         <Route path="/" element={<Layout />}>
           <Route
-            path="user/current"
+            path="user/profile"
             element={
               <PrivateRoute component={<DetailUserPage current={true} />} />
             }

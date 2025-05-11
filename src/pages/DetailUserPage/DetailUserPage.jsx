@@ -1,23 +1,48 @@
-// import { useEffect } from 'react';
 import { useParams /*useLocation, useNavigate*/ } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectToken, selectUser } from '../../redux/auth/selectors';
 import Container from '../../components/Container/Container';
 import css from './DetailUserPage.module.css';
 import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
-import Button from '../../components/Button/Button';
-import { ROUTERS } from '../../const';
 import UserInfo from '../../components/UserInfo/UserInfo';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../../redux/auth/selectors';
+import { useEffect, useState } from 'react';
+import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
+import { errorHandler } from '../../utils/notification';
+import Loader from '../../components/Loader/Loader';
 
 const DetailUserPage = ({ current = false }) => {
   const { id } = useParams();
-  // const token = useSelector(selectToken);
-  // const user = useSelector(selectUser);
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const token = useSelector(selectToken);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (current) {
+          setLoading(true);
+          const userData = await currentUserDetailFetch(token);
+          // console.log(userData);
+          setUser(userData);
+        } else if (id) {
+          setLoading(true);
+          const userData = await userDetailFetch(token, id);
+          // console.log(userData);
+          setUser(userData);
+        }
+      } catch (error) {
+        errorHandler(error, 'Failed to load user');
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id, current, token]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>
@@ -28,15 +53,7 @@ const DetailUserPage = ({ current = false }) => {
           Reveal your culinary art, share your favorite recipe and create
           gastronomic masterpieces with us.
         </Subtitle>
-        Detail User Page, ID {!current ? id : null}
-        <UserInfo id={id}></UserInfo>
-        <Button
-          type="submit"
-          variant={Button.variants.PRIMARY}
-          to={ROUTERS.HOME}
-        >
-          Log out
-        </Button>
+        {user && <UserInfo userData={user}></UserInfo>}
       </div>
     </Container>
   );
