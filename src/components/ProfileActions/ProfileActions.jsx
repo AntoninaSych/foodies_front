@@ -1,13 +1,11 @@
 import Button from '../Button/Button.jsx';
 
-const ProfileActions = ({
-  isOwnProfile,
-  isFollowing,
-  loading,
-  onLogoutClick,
-  onFollow,
-  onUnfollow,
-}) => {
+const ProfileActions = ({ loading, isOwnProfile, isFollowing }) => {
+  const handleLogout = () => {};
+
+  const handleFollow = () => {};
+  const handleUnfollow = () => {};
+
   if (loading) {
     return (
       <Button variant={'primary'} disabled>
@@ -20,16 +18,16 @@ const ProfileActions = ({
     <>
       {isOwnProfile ? (
         <>
-          <Button variant={'primary'} onClick={onLogoutClick}>
+          <Button variant={'primary'} onClick={handleLogout}>
             Log Out
           </Button>
         </>
       ) : isFollowing ? (
-        <Button variant={'primary'} onClick={onUnfollow}>
+        <Button variant={'primary'} onClick={handleUnfollow}>
           Following
         </Button>
       ) : (
-        <Button variant={'primary'} onClick={onFollow}>
+        <Button variant={'primary'} onClick={handleFollow}>
           Follow
         </Button>
       )}
