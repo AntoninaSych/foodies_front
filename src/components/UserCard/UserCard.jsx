@@ -20,11 +20,11 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
 
     try {
       if (isFollowing) {
-        await unfollowUserApi(id);
+        await unfollowUserApi(token, id);
         onUnfollow && onUnfollow(id);
         successNotification('Successfully unfollow');
       } else {
-        await followUserApi(id);
+        await followUserApi(token, id);
         successNotification('Successfully follow');
       }
     } catch (error) {
@@ -34,41 +34,45 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
 
   return (
     <div className={css.card}>
-      <div className={css.userInfo}>
-        <img
-          className={css.avatar}
-          src={avatarURL || '/images/default-avatar.png'}
-          alt={`Avatar ${name}`}
-          width={32}
-          height={32}
-        />
-        <div className={css.userInfoContent}>
-          <h3 className={css.name}>{name}</h3>
-          <p className={css.stats}>Recipes: {allRecipes}</p>
-          {(activeTab === TABS.FOLLOWERS || activeTab === TABS.FOLLOWING) && (
-            <Button
-              variant="secondary"
-              onClick={handleFollowToggle}
-              className={clsx(css.button, css.followBtn)}
-              small
-            >
-              {isFollowing ? 'Following' : 'Follow'}
-            </Button>
-          )}
+      <div className={css.userInfoWrapper}>
+        <div className={css.userInfo}>
+          <img
+            className={css.avatar}
+            src={avatarURL || '/images/default-avatar.png'}
+            alt={`Avatar ${name}`}
+            width={32}
+            height={32}
+          />
+          <div className={css.userInfoContent}>
+            <h3 className={css.name}>{name}</h3>
+            <p className={css.stats}>Recipes: {allRecipes}</p>
+            {(activeTab === TABS.FOLLOWERS || activeTab === TABS.FOLLOWING) && (
+              <Button
+                variant="secondary"
+                onClick={handleFollowToggle}
+                className={clsx(css.button, css.followBtn)}
+                small
+              >
+                {isFollowing ? 'Following' : 'Follow'}
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
 
-      <ul className={css.recipeList}>
-        {recipes.map(recipe => (
-          <li key={recipe.id} className={css.recipeItem}>
-            <img
-              src={recipe.thumb}
-              alt={recipe.title}
-              className={css.recipeThumb}
-            />
-          </li>
-        ))}
-      </ul>
+        <ul className={css.recipeList}>
+          {recipes.map(recipe => (
+            <li key={recipe.id} className={css.recipeItem}>
+              <Link to={`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`}>
+                <img
+                  src={recipe.thumb}
+                  alt={recipe.title}
+                  className={css.recipeThumb}
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div className={css.actions}>
         <Link

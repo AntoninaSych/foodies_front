@@ -64,8 +64,6 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
     return <Message className={css.message}>{showMessage()}</Message>;
   }
 
-  console.log('visibleItems', visibleItems);
-
   return (
     <div className={clsx(css.list)}>
       {showRecipePreview &&
