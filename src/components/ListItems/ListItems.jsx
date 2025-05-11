@@ -56,7 +56,9 @@ const ListItems = ({ currentTab, items, isOwnProfile }) => {
   };
 
   useEffect(() => {
-    setVisibleItems(items);
+    if (items.length) {
+      setVisibleItems(items);
+    }
   }, [items]);
 
   const showMessage = () => {

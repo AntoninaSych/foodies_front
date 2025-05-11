@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button';
 import { showModal } from '../../redux/common/slice';
-import { MODALS } from '../../const';
+import { MODALS } from '../../const/index';
 import { selectFollowing } from '../../redux/users/selectors';
 import { selectUser } from '../../redux/auth/selectors';
 import { unfollow, follow } from '../../redux/users/operations';
@@ -12,7 +12,7 @@ const ProfileActions = () => {
   const { id: userId } = useParams();
   const dispatch = useDispatch();
   const authUser = useSelector(selectUser);
-  const isOwnProfile = authUser.id === userId;
+  const isOwnProfile = authUser?.id === userId;
   const following = useSelector(selectFollowing);
 
   const isFollowing = () => {
@@ -29,6 +29,7 @@ const ProfileActions = () => {
   const handleFollow = () => {
     dispatch(follow(userId));
   };
+
   const handleUnfollow = () => {
     dispatch(unfollow(userId));
   };

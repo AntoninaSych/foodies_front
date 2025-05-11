@@ -1,6 +1,6 @@
-import css from './TabsList.module.css';
 import clsx from 'clsx';
 import { PRIVATE_TABS, USER_TABS } from './const';
+import css from './TabsList.module.css';
 
 const TabsList = ({ isOwnProfile, currentTab, onChange }) => {
   const tabs = isOwnProfile ? PRIVATE_TABS : USER_TABS;

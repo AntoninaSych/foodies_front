@@ -23,7 +23,7 @@ import Loader from '../Loader/Loader';
 const ProfileContent = () => {
   const { id: userId } = useParams();
   const authUser = useSelector(selectUser);
-  const isOwnProfile = authUser.id === userId;
+  const isOwnProfile = authUser?.id === userId;
   const [loading, setLoading] = useState(false);
   const defaultTab = isOwnProfile ? TABS.MY_RECIPES : TABS.RECIPES;
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -59,7 +59,6 @@ const ProfileContent = () => {
               result = items;
               break;
             }
-
             case TABS.FAVORITES: {
               result = await getFavoritesApi(token, {
                 page,
@@ -67,7 +66,6 @@ const ProfileContent = () => {
               });
               break;
             }
-
             case TABS.MY_FOLLOWERS: {
               result = await fetchCurrentUserFollowers(token, {
                 page,
@@ -75,7 +73,6 @@ const ProfileContent = () => {
               });
               break;
             }
-
             case TABS.FOLLOWING: {
               result = await fetchCurrentUserFollowing(token, {
                 page,

@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
+import { useMemo } from 'react';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import { ROUTERS } from '../../const';
@@ -8,7 +9,6 @@ import { errorNotification } from '../../utils/notification';
 import Button from '../Button/Button';
 import { unfollow, follow } from '../../redux/users/operations';
 import css from './UserCard.module.css';
-import { useMemo } from 'react';
 
 const UserCard = ({ user, isFollowing, currentUser, handleUnfollow }) => {
   const isTablet = useMediaQuery('(max-width: 1439px)');

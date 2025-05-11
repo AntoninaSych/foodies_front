@@ -12,7 +12,7 @@ import css from './DetailUser.module.css';
 const DetailUser = () => {
   const { id: userId } = useParams();
   const authUser = useSelector(selectUser);
-  const isOwnProfile = authUser.id === userId;
+  const isOwnProfile = authUser?.id === userId;
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const token = useSelector(selectToken);
