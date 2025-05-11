@@ -5,7 +5,7 @@ import { areasReducer } from './areas/slice';
 import { ingredientsReducer } from './ingredients/slice';
 import { testimonialsReducer } from './testimonials/slice';
 import { commonReducer } from './common/slice';
-import authReducer from './auth/slice';
+import { authReducer } from './auth/slice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -19,7 +19,6 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(persistAuthConfig, authReducer),
     common: commonReducer,
-    // recipesReducer is probably not needed, we should call endpoint directly from recipesApi on a particular page
     recipes: recipesReducer,
     categories: categoriesReducer,
     areas: areasReducer,
