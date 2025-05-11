@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import TabsList from '../TabsList/TabsList';
 import ListItems from '../ListItems/ListItems';
 import { useEffect, useState } from 'react';
@@ -12,29 +13,26 @@ import {
   fetchCurrentUserFollowing,
   fetchCurrentUserFollowers,
   fetchUserFollowers,
-} from '../../api/authApi.js';
+} from '../../api/authApi';
 import { errorHandler } from '../../utils/notification';
 import { TABS } from '../TabsList/const';
-import { selectIsLoggedIn, selectToken } from '../../redux/auth/selectors';
+import { selectToken, selectUser } from '../../redux/auth/selectors';
 import { CATALOG_LIMIT } from '../../const';
-import { useSearchParams } from 'react-router-dom';
 
-// TODO used for testing, should be modified or remove after implementation
 const ProfileContent = () => {
+  const { id: userId } = useParams();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const [searchParams] = useSearchParams();
-  const userId = searchParams.get('id') || null;
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const authUser = useSelector(selectUser);
   const token = useSelector(selectToken);
-  const [currentTab, setCurrentTab] = useState(
-    isLoggedIn ? TABS.MY_RECIPES : TABS.RECIPES
-  );
+  const [currentTab, setCurrentTab] = useState();
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
+  const current = authUser.id === userId;
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('currentTab', currentTab);
       try {
         switch (currentTab) {
           case TABS.MY_RECIPES: {
@@ -103,8 +101,17 @@ const ProfileContent = () => {
         errorHandler(error, 'Error while fetching data.');
       }
     };
-    fetchData();
-  }, [isLoggedIn, userId, limit, page, token, currentTab]);
+    if (currentTab) {
+      fetchData();
+    }
+  }, [userId, limit, page, token, currentTab]);
+
+  useEffect(() => {
+    if (userId && authUser) {
+      const tab = authUser.id === userId ? TABS.MY_RECIPES : TABS.RECIPES;
+      setCurrentTab(tab);
+    }
+  }, [authUser, userId]);
 
   const handleOnTabChange = tab => {
     setCurrentTab(tab);
@@ -114,11 +121,7 @@ const ProfileContent = () => {
   return (
     <div>
       <TabsList currentTab={currentTab} onChange={handleOnTabChange} />
-      <ListItems
-        isOwnProfile={isLoggedIn}
-        currentTab={currentTab}
-        items={items}
-      />
+      <ListItems isOwnProfile={current} currentTab={currentTab} items={items} />
     </div>
   );
 };

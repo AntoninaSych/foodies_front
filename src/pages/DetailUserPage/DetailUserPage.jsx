@@ -4,6 +4,7 @@ import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import DetailUser from '../../components/DetailUser/DetailUser';
 import css from './DetailUserPage.module.css';
+import ProfileContent from '../../components/ProfileContent/ProfileContent.jsx';
 
 const DetailUserPage = () => {
   return (
@@ -18,7 +19,9 @@ const DetailUserPage = () => {
         <div className={css.sidebar}>
           <DetailUser />
         </div>
-        <div className={css.content}>TABS</div>
+        <div>
+          <ProfileContent />
+        </div>
       </div>
     </Container>
   );

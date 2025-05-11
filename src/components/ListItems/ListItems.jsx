@@ -32,7 +32,9 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
   };
 
   useEffect(() => {
-    setVisibleItems(items);
+    if (items.length) {
+      setVisibleItems(items);
+    }
   }, [items]);
 
   const showMessage = () => {
@@ -61,6 +63,8 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
   if (!visibleItems || visibleItems.length === 0) {
     return <Message className={css.message}>{showMessage()}</Message>;
   }
+
+  console.log('visibleItems', visibleItems);
 
   return (
     <div className={clsx(css.list)}>
