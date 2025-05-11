@@ -1,16 +1,24 @@
-import { useParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
+import PathInfo from '../../components/PathInfo/PathInfo';
+import MainTitle from '../../components/MainTitle/MainTitle';
+import Subtitle from '../../components/Subtitle/Subtitle';
 import DetailUser from '../../components/DetailUser/DetailUser';
 import css from './DetailUserPage.module.css';
 
 const DetailUserPage = () => {
-  const { id } = useParams();
-
   return (
     <Container>
+      <PathInfo breadcrumbs={[{ name: 'profile' }]}></PathInfo>
+      <MainTitle>Profile</MainTitle>
+      <Subtitle>
+        Reveal your culinary art, share your favorite recipe and create
+        gastronomic masterpieces with us.
+      </Subtitle>
       <div className={css.wrapper}>
-        Detail User Page, ID {id}
-        <DetailUser data={{}} />
+        <div className={css.sidebar}>
+          <DetailUser />
+        </div>
+        <div className={css.content}>TABS</div>
       </div>
     </Container>
   );
