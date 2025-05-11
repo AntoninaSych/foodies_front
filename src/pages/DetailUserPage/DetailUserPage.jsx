@@ -1,12 +1,29 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import Container from '../../components/Container/Container';
 import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import DetailUser from '../../components/DetailUser/DetailUser';
+import ProfileContent from '../../components/ProfileContent/ProfileContent';
+import { fetchFollowing } from '../../redux/users/operations';
 import css from './DetailUserPage.module.css';
-import ProfileContent from '../../components/ProfileContent/ProfileContent.jsx';
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 const DetailUserPage = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchFollowing());
+    }
+  }, [dispatch, isLoggedIn]);
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
   return (
     <Container>
       <PathInfo breadcrumbs={[{ name: 'profile' }]}></PathInfo>
@@ -19,7 +36,7 @@ const DetailUserPage = () => {
         <div className={css.sidebar}>
           <DetailUser />
         </div>
-        <div>
+        <div className={css.content}>
           <ProfileContent />
         </div>
       </div>

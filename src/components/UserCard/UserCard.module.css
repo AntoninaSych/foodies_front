@@ -122,6 +122,10 @@
     font-size: 20px;
     line-height: 1.2;
   }
+  .recipeItem {
+    width: 100px;
+    height: 100px;
+  }
 }
 
   @media only screen and (min-width: 1440px)  {
@@ -130,11 +134,6 @@
   }
 
   .avatar {
-    width: 64px;
-    height: 64px;
-  }
-
-  .recipeItem {
     width: 64px;
     height: 64px;
   }

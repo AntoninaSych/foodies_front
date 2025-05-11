@@ -19,6 +19,7 @@ const UserBar = ({ theme }) => {
 
   const handleLogout = () => {
     dispatch(showModal(MODALS.LOGOUT));
+    setOpen(false);
   };
 
   const handleOnOpen = () => {
@@ -43,6 +44,7 @@ const UserBar = ({ theme }) => {
 
         <div className={clsx(css.menu, open && css.active)}>
           <NavLink
+            onClick={handleOnOpen}
             className={clsx(cssNavigation.link, css.link)}
             to={`${ROUTERS.USER}/${id}`}
           >

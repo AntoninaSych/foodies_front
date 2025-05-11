@@ -1,18 +1,12 @@
-import css from './TabsList.module.css';
-import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { selectUser } from '../../redux/auth/selectors';
 import { PRIVATE_TABS, USER_TABS } from './const';
-import { useParams } from 'react-router-dom';
+import css from './TabsList.module.css';
 
-const TabsList = ({ currentTab, onChange }) => {
-  const { id } = useParams();
-  const authUser = useSelector(selectUser);
-  const current = authUser.id === id;
-  const tabs = current ? PRIVATE_TABS : USER_TABS;
+const TabsList = ({ isOwnProfile, currentTab, onChange }) => {
+  const tabs = isOwnProfile ? PRIVATE_TABS : USER_TABS;
 
   const handleOnTabClick = tab => () => {
-    onChange && onChange(tab);
+    onChange(tab);
   };
 
   return (
