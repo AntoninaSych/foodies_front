@@ -57,8 +57,9 @@
   resize: none;
 }
 
-.inputWrapper {
+.inputWrapper, .textAreaWrapper {
   width: 100%;
+  position: relative;
 }
 
 .select [class^="select__control"] {
@@ -115,13 +116,9 @@
 }
 
 
-.inputWrapper.withCount {
+.inputWrapper.withExtra, .textAreaWrapper.withExtra {
   position: relative;
   align-items: flex-start;
-}
-
-.inputWrapper.withCount input, .inputWrapper.withCount textarea {
-  padding-right: 80px;
 }
 
 .inputCountWrapper {
@@ -137,11 +134,36 @@
   color: var(--color-secondary);
 }
 
-.count {
-  color: var(--color-secondary);
+.extra {
   position: absolute;
   right: 0;
   top: 16px;
+}
+
+.inputWrapper.withExtra input {
+  padding-right: 60px;
+}
+
+.inputWrapper.withExtra .extra {
+  right: 14px;
+  font-size: 20px;
+}
+
+.textAreaWrapper.withExtra textarea {
+  padding-right: 80px;
+}
+
+.showPassword {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.count {
+  color: var(--color-secondary);
 }
 
 .currentCount {

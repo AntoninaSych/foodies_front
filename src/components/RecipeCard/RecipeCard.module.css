@@ -12,10 +12,6 @@
   color: var(--color-main);
 }
 
-.card:hover {
-  box-shadow: var(--box-shadow);
-}
-
 .image {
   width: 100%;
   height: 100%;
@@ -33,7 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
 }
 
 .title {

@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader';
 import ScrollUp from '../ScrollUp/ScrollUp';
 import Footer from '../Footer/Footer';
 import css from './Layout.module.css';
+import ShowModal from '../ShowModal/ShowModal';
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
           <Outlet />
         </Suspense>
       </main>
+      <ShowModal />
       <ScrollUp />
       <Toaster />
       <Footer />

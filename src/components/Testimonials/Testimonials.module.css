@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 32px 0;
+  padding-top: 64px;
 }
 
 .section {
@@ -83,7 +83,7 @@
 /* 📱 Tablet */
 @media only screen and (min-width: 768px) {
   .wrapper {
-    padding: 50px 0;
+    padding-top: 100px;
   }
 
   .icon {
@@ -127,7 +127,7 @@
 
 @media only screen and (min-width: 1440px) {
   .wrapper {
-    padding: 60px 0;
+    padding-top: 120px;
   }
 
   .section {

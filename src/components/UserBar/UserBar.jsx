@@ -4,38 +4,25 @@ import { GoArrowUpRight } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ROUTERS } from '../../const';
+import { MODALS, ROUTERS } from '../../const';
 import { selectUser } from '../../redux/auth/selectors';
-import { clearFavorites } from '../../redux/recipes/slice';
-import { logout } from '../../redux/auth/operations';
-import LogOutModal from '../LogOutModal/LogOutModal';
+import { showModal } from '../../redux/common/slice';
 import css from './UserBar.module.css';
 import cssNavigation from '../styles/navigation.module.css';
 
 const UserBar = ({ theme }) => {
   const [open, setOpen] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
   const dispatch = useDispatch();
   const { name, avatarURL } = useSelector(selectUser);
 
   const className = clsx(css.placeholder, theme && css[theme]);
 
   const handleLogout = () => {
-    setShowDialog(true);
-  };
-
-  const onDialogSubmit = event => {
-    event.preventDefault();
-    dispatch(logout());
-    dispatch(clearFavorites());
+    dispatch(showModal(MODALS.LOGOUT));
   };
 
   const handleOnOpen = () => {
     setOpen(!open);
-  };
-
-  const handleCloseDialog = () => {
-    setShowDialog(false);
   };
 
   return (
@@ -70,12 +57,6 @@ const UserBar = ({ theme }) => {
           </a>
         </div>
       </div>
-
-      <LogOutModal
-        isOpen={showDialog}
-        onSubmit={onDialogSubmit}
-        onClose={handleCloseDialog}
-      />
     </div>
   );
 };
