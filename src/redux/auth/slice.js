@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { login, logout, refreshUser, register } from './operations';
 import { fetchUserDetails } from './operations';
-import axiosAPI from '../../api/authApi';
+import axiosAPI from '../../api/default';
 
 const initialState = {
   user: null,
