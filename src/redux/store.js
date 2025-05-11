@@ -5,7 +5,7 @@ import { areasReducer } from './areas/slice';
 import { ingredientsReducer } from './ingredients/slice';
 import { testimonialsReducer } from './testimonials/slice';
 import { commonReducer } from './common/slice';
-import { authReducer } from './auth/slice';
+import authReducer from './auth/slice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
