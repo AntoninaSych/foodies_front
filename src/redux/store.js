@@ -19,7 +19,6 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(persistAuthConfig, authReducer),
     common: commonReducer,
-    // recipesReducer is probably not needed, we should call endpoint directly from recipesApi on a particular page
     recipes: recipesReducer,
     categories: categoriesReducer,
     areas: areasReducer,

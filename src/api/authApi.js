@@ -31,3 +31,58 @@ export const fetchCurrentUser = async token => {
   });
   return data;
 };
+
+export const followUserApi = async (token, userId) => {
+  const { data } = await axios.post(
+    `/users/${userId}/follow`,
+    {},
+    {
+      headers: { Authorization: getAuthorizationHeader(token) },
+    }
+  );
+
+  return data;
+};
+
+export const unfollowUserApi = async (token, userId) => {
+  const { data } = await axios.delete(`/users/${userId}/follow`, {
+    headers: { Authorization: getAuthorizationHeader(token) },
+  });
+
+  return data;
+};
+
+export const fetchCurrentUserFollowers = async (token, options = {}) => {
+  const params = {
+    ...options,
+  };
+  const { data } = await axios.get('/users/followers', {
+    params,
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
+  return data;
+};
+
+export const fetchCurrentUserFollowing = async (token, options = {}) => {
+  const params = {
+    ...options,
+  };
+  const { data } = await axios.get('/users/following', {
+    params,
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
+  return data;
+};
+
+export const fetchUserFollowers = async (token, userId) => {
+  const { data } = await axios.get(`/users/${userId}/followers`, {
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+    },
+  });
+  return data;
+};

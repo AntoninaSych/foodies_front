@@ -11,9 +11,7 @@ export const fetchRecipes = createAsyncThunk(
   'recipes/fetchAll',
   async (options = {}, { rejectWithValue }) => {
     try {
-      return await recipesFetch({
-        ...options,
-      });
+      return await recipesFetch({ ...options });
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
@@ -57,7 +55,7 @@ export const getFavoriteRecipes = createAsyncThunk(
       const {
         auth: { token },
       } = getState();
-      return await getFavoritesApi(token); // <- async API виклик
+      return await getFavoritesApi(token);
     } catch (error) {
       return rejectWithValue(handleError(error));
     }

@@ -5,8 +5,8 @@ import Header from '../../components/Header/Header';
 import Hero from '../../components/Hero/Hero';
 
 import { THEMES } from '../../const';
+import Testimonials from '../../components/Testimonials/Testimonials';
 import css from './HomePage.module.css';
-import Testimonials from '../../components/Testimonials/Testimonials.jsx';
 
 const Recipes = lazy(() => import('../../components/Recipes/Recipes'));
 const Categories = lazy(() => import('../../components/Categories/Categories'));

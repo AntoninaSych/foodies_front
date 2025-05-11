@@ -14,6 +14,7 @@ const Button = ({
   isLoading,
   type = TYPES.BUTTON,
   disabled = false,
+  small = false,
 }) => {
   const clickHandler = event => {
     if (onClick) {
@@ -22,7 +23,12 @@ const Button = ({
     }
   };
 
-  const classNames = clsx(css.button, variant && css[variant], className);
+  const classNames = clsx(
+    css.button,
+    variant && css[variant],
+    small && css.small,
+    className
+  );
 
   if (href) {
     return (

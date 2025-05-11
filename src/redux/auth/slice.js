@@ -3,6 +3,7 @@ import { login, logout, refreshUser, register } from './operations';
 
 const initialState = {
   user: null,
+  userDetails: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -20,6 +21,7 @@ const authorizationCase = (state, action) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(login.fulfilled, authorizationCase)

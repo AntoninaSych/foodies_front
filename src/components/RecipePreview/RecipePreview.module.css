@@ -1,0 +1,107 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 75px;
+  height: 75px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.title {
+  font-family: "Mulish Bold", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+.description {
+  margin: 4px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 3em;
+  line-height: 1.5em;
+}
+
+.actions {
+  margin-left: 6px;
+  display: flex;
+  gap: 4px;
+  justify-self: flex-end;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-secondary);
+  border-radius: 100%;
+  padding: 10px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--trns-fast), color var(--trns-fast);
+}
+
+.iconButton:hover {
+  color: var(--color-white);
+  background-color: var(--color-main);
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .actions {
+    margin-left: 16px;
+  }
+
+  .iconButton {
+    width: 42px;
+    height: 42px;
+    padding: 12px;
+  }
+
+  .imageWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card {
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+@media only screen and (min-width: 1440px) {}
