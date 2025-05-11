@@ -31,7 +31,7 @@ export const currentUserDetailFetch = async token => {
   if (useMockData) {
     return mockData['items'][0];
   }
-  const response = await axios.get(`/users/current`, {
+  const response = await axios.get(`/users/current_details`, {
     headers: {
       Authorization: getAuthorizationHeader(token),
     },

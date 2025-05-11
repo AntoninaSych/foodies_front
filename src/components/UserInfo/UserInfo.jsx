@@ -1,28 +1,56 @@
-// import { useEffect } from 'react';
-// import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { /*useDispatch,*/ useSelector } from 'react-redux';
-import { selectToken, selectUser } from '../../redux/auth/selectors';
 import css from './UserInfo.module.css';
 import Button from '../../components/Button/Button';
+import clsx from 'clsx';
 
-const UserInfo = ({ id }) => {
-  const token = useSelector(selectToken);
-  const user = useSelector(selectUser);
-  //   const location = useLocation();
-  //   const navigate = useNavigate();
-  //   const dispatch = useDispatch();
-
+const UserInfo = ({ userData }) => {
+  const { user, createdRecipes, favorites, followers, following } = userData;
   return (
     <div className={css.wrapper}>
-      <img
-        className={css.avatar}
-        src={user.avatarURL ? user.avatarURL.toString() : null}
-        width={50}
-        height={50}
-        alt="avatar"
-      />
-      <Button type="submit">+</Button>
-      {id} {token}
+      <div className={css.userinfo}>
+        <div className={css.avatar}>
+          <img
+            className={css.avatarImage}
+            src={user.avatarURL ? user.avatarURL.toString() : null}
+            alt="avatar"
+          />
+          <Button
+            type="submit"
+            variant={Button.variants.PRIMARY}
+            className={css.avatarButton}
+          >
+            +
+          </Button>
+        </div>
+        <h3 className={clsx(css.userName, css.textWrap)}>{user.name}</h3>
+        <div className={css.characteristics}>
+          <div className={css.characteristic}>
+            <span className={css.characteristicTitle}>Email:</span>
+            <div className={clsx(css.characteristicInfo, css.textWrap)}>
+              {user.email}
+            </div>
+          </div>
+          <div className={css.characteristic}>
+            <span className={css.characteristicTitle}>Added recipes:</span>
+            <span className={css.characteristicInfo}>{createdRecipes}</span>
+          </div>
+          {favorites && (
+            <div className={css.characteristic}>
+              <span className={css.characteristicTitle}>Favorites:</span>
+              <span className={css.characteristicInfo}>{favorites}</span>
+            </div>
+          )}
+          <div className={css.characteristic}>
+            <span className={css.characteristicTitle}>Followers:</span>
+            <span className={css.characteristicInfo}>{followers}</span>
+          </div>
+          {following && (
+            <div className={css.characteristic}>
+              <span className={css.characteristicTitle}>Following:</span>
+              <span className={css.characteristicInfo}>{following}</span>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
