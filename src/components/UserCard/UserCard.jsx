@@ -1,12 +1,17 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { followUser, unfollowUser } from '../../redux/auth/operations';
 import { MdOutlineArrowOutward } from 'react-icons/md';
+import clsx from 'clsx';
 
-import styles from './UserCard.module.css';
+import { followUser, unfollowUser } from '../../redux/auth/operations';
+import { selectToken } from '../../redux/auth/selectors';
 
-const UserCard = ({ user, activeTab }) => {
+import css from './UserCard.module.css';
+
+const UserCard = ({ user, activeTab, onUnfollow }) => {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+
   const {
     _id,
     id,
@@ -16,60 +21,68 @@ const UserCard = ({ user, activeTab }) => {
     recipesCount,
     isFollowing,
   } = user;
+
   const userId = _id || id;
 
-  const handleFollowToggle = () => {
+  const handleFollowToggle = async () => {
+    if (!token) return;
+
     if (isFollowing) {
-      dispatch(unfollowUser(userId));
+      await dispatch(unfollowUser(userId));
+      if (activeTab === 'following' && typeof onUnfollow === 'function') {
+        onUnfollow(userId);
+      }
     } else {
       dispatch(followUser(userId));
     }
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.userInfo}>
+    <div className={css.card}>
+      <div className={css.userInfo}>
         <img
-          src={avatarURL || '/default-avatar.png'}
-          alt={name}
-          className={styles.avatar}
+          className={css.avatar}
+          src={avatarURL || '/images/default-avatar.png'}
+          alt={`Avatar ${name}`}
+          width={32}
+          height={32}
         />
         <div>
-          <h3 className={styles.name}>{name}</h3>
-          <p className={styles.stats}>
-            Own recipes: {recipesCount || recipes.length}
-          </p>
+          <h3 className={css.name}>{name}</h3>
+          <p className={css.stats}>Recipes: {recipesCount || recipes.length}</p>
         </div>
       </div>
 
-      {/* Recipe preview thumbnails */}
-      <ul className={styles.recipeList}>
+      <ul className={css.recipeList}>
         {recipes.slice(0, 4).map(recipe => (
-          <li key={recipe._id || recipe.id} className={styles.recipeItem}>
+          <li key={recipe._id || recipe.id} className={css.recipeItem}>
             <img
               src={recipe.thumb}
               alt={recipe.title}
-              className={styles.recipeThumb}
+              className={css.recipeThumb}
             />
           </li>
         ))}
       </ul>
 
-      {/* Actions */}
-      <div className={styles.actions}>
-        <Link to={`/user/${userId}`} className={styles.iconBtn}>
+      <div className={css.actions}>
+        <Link
+          to={`/user/${userId}`}
+          className={css.iconBtn}
+          aria-label="Go to profile"
+        >
           <MdOutlineArrowOutward />
         </Link>
 
-        {activeTab === 'followers' || activeTab === 'following' ? (
+        {(activeTab === 'followers' || activeTab === 'following') && (
           <button
             type="button"
             onClick={handleFollowToggle}
-            className={styles.followBtn}
+            className={clsx(css.followBtn, isFollowing && css.active)}
           >
             {isFollowing ? 'Following' : 'Follow'}
           </button>
-        ) : null}
+        )}
       </div>
     </div>
   );

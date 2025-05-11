@@ -2,11 +2,38 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .empty {
-  padding: 40px 0;
-  text-align: center;
-  color: var(--color-secondary);
   font-size: 16px;
+  text-align: center;
+  color: #bfbebe;
+  padding: 40px 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .list {
+    gap: 28px;
+    max-width: 704px;
+  }
+
+  .empty {
+    font-size: 18px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .list {
+    gap: 32px;
+    max-width: 960px;
+  }
+
+  .empty {
+    font-size: 20px;
+  }
 }

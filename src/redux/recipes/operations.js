@@ -4,7 +4,7 @@ import {
   addRecipeToFavorites,
   removeRecipeFromFavorites,
   getFavoritesApi,
-  deleteRecipeFromApi, // ✅ правильний імпорт
+  deleteRecipeFromApi,
 } from '../../api/recipesApi';
 import { handleError } from '../utils';
 

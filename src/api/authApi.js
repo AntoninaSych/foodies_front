@@ -33,7 +33,7 @@ export const fetchCurrentUser = async token => {
 };
 
 export const followUserApi = async (token, userId) => {
-  const res = await fetch(`/api/users/follow/${userId}`, {
+  const res = await fetch(`/api/users/${userId}/follow`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -43,7 +43,7 @@ export const followUserApi = async (token, userId) => {
 };
 
 export const unfollowUserApi = async (token, userId) => {
-  const res = await fetch(`/api/users/unfollow/${userId}`, {
+  const res = await fetch(`/api/users/${userId}/follow`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
   });

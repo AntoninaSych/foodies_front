@@ -1,52 +1,136 @@
 .card {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
   padding: 16px 0;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid #e6e6e6;
+  gap: 16px;
 }
 
-.avatarBox {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.name {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #050505;
+  text-transform: uppercase;
+}
+
+.stats {
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #bfbebe;
+  margin-top: 2px;
+}
+
+.recipeList {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+}
+
+.recipeItem {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.recipeThumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.content {
-  flex-grow: 1;
-}
-
-.name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #222;
-}
-
 .actions {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 20px;
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #bfbebe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: border-color 0.2s;
 }
 
-.button:hover {
-  background-color: #333;
+.iconBtn:hover {
+  border-color: #050505;
+}
+
+.followBtn {
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid #bfbebe;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #050505;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.followBtn.active {
+  background-color: #f6f6f6;
+  color: #050505;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .recipeList {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .card {
+    padding: 20px 0;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .recipeItem {
+    width: 64px;
+    height: 64px;
+  }
+
+  .followBtn {
+    padding: 10px 20px;
+  }
 }

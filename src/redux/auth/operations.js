@@ -79,29 +79,31 @@ export const refreshUser = createAsyncThunk(
 );
 
 export const followUser = createAsyncThunk(
-  'auth/followUser',
-  async (userId, { rejectWithValue, getState }) => {
+  'user/followUser',
+  async (userId, { getState, rejectWithValue }) => {
     try {
-      const {
-        auth: { token },
-      } = getState();
-      return await followUserApi(token, userId);
+      const state = getState();
+      const token = state.auth.token;
+
+      const response = await followUserApi(token, userId);
+      return { userId, response };
     } catch (error) {
-      return rejectWithValue(handleError(error));
+      return rejectWithValue(error.message || 'Follow failed');
     }
   }
 );
 
 export const unfollowUser = createAsyncThunk(
-  'auth/unfollowUser',
-  async (userId, { rejectWithValue, getState }) => {
+  'user/unfollowUser',
+  async (userId, { getState, rejectWithValue }) => {
     try {
-      const {
-        auth: { token },
-      } = getState();
-      return await unfollowUserApi(token, userId);
+      const state = getState();
+      const token = state.auth.token;
+
+      const response = await unfollowUserApi(token, userId);
+      return { userId, response };
     } catch (error) {
-      return rejectWithValue(handleError(error));
+      return rejectWithValue(error.message || 'Unfollow failed');
     }
   }
 );
