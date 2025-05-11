@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import UserInfo from '../UserInfo/UserInfo';
 import { selectToken, selectUser } from '../../redux/auth/selectors';
 import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
@@ -10,12 +10,12 @@ import ProfileActions from '../ProfileActions/ProfileActions';
 import css from './DetailUser.module.css';
 
 const DetailUser = () => {
-  const { id } = useParams();
+  const { id: userId } = useParams();
+  const authUser = useSelector(selectUser);
+  const isOwnProfile = authUser.id === userId;
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const authUser = useSelector(selectUser);
   const token = useSelector(selectToken);
-  const isOwnProfile = authUser.id === id;
 
   useEffect(() => {
     const fetData = async () => {
@@ -24,9 +24,9 @@ const DetailUser = () => {
           setLoading(true);
           const userData = await currentUserDetailFetch(token);
           setUser(userData);
-        } else if (id) {
+        } else if (userId) {
           setLoading(true);
-          const userData = await userDetailFetch(token, id);
+          const userData = await userDetailFetch(token, userId);
           setUser(userData);
         }
       } catch (error) {
@@ -37,7 +37,7 @@ const DetailUser = () => {
     };
 
     fetData();
-  }, [id, isOwnProfile, token]);
+  }, [userId, isOwnProfile, token]);
 
   if (loading) {
     return <Loader />;
@@ -46,7 +46,7 @@ const DetailUser = () => {
   return (
     <div className={css.wrapper}>
       {user && <UserInfo userData={user}></UserInfo>}
-      <ProfileActions isOwnProfile={isOwnProfile} />
+      <ProfileActions />
     </div>
   );
 };

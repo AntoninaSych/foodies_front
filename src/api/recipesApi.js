@@ -70,7 +70,7 @@ export const popularRecipesFetch = async () => {
   return response.data;
 };
 
-export const deleteRecipeFromApi = async ({ token, recipeId }) => {
+export const deleteRecipeFromApi = async (token, recipeId) => {
   if (useMockData) {
     console.log(`Mock delete recipe ${recipeId}`);
     return { id: recipeId };

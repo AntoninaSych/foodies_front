@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 import RecipePreview from '../RecipePreview/RecipePreview';
 import UserCard from '../UserCard/UserCard';
 import { TABS } from '../TabsList/const';
 import Message from '../Message/Message';
+import { selectFollowing } from '../../redux/users/selectors';
+import { selectFavoriteRecipes } from '../../redux/recipes/selectors';
+import { selectUser } from '../../redux/auth/selectors';
 import css from './ListItems.module.css';
-import clsx from 'clsx';
 
-const ListItems = ({ currentTab, isOwnProfile, items }) => {
+const ListItems = ({ currentTab, items, isOwnProfile }) => {
   const [visibleItems, setVisibleItems] = useState(items);
+  const authUser = useSelector(selectUser);
+  const favorites = useSelector(selectFavoriteRecipes);
+  const following = useSelector(selectFollowing);
+
   const showRecipePreview = [
     TABS.RECIPES,
     TABS.MY_RECIPES,
@@ -19,8 +27,10 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
     TABS.FOLLOWING,
   ].includes(currentTab);
 
-  const handleUnfollowRemove = userId => {
-    setVisibleItems(prev => prev.filter(user => user.id !== userId));
+  const handleUnfollow = userId => {
+    if (currentTab === TABS.FOLLOWING) {
+      setVisibleItems(prev => prev.filter(user => user.id !== userId));
+    }
   };
 
   const handleFavoriteRemove = recipeId => {
@@ -31,10 +41,22 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
     setVisibleItems(prev => prev.filter(recipe => recipe.id !== recipeId));
   };
 
-  useEffect(() => {
-    if (items.length) {
-      setVisibleItems(items);
+  const isFollowing = userId => {
+    if (Array.isArray(following)) {
+      return following.some(item => item.id === userId);
     }
+    return false;
+  };
+
+  const isFavorite = recipeId => {
+    if (Array.isArray(favorites)) {
+      return favorites.some(item => item.id === recipeId);
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    setVisibleItems(items);
   }, [items]);
 
   const showMessage = () => {
@@ -69,12 +91,13 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
       {showRecipePreview &&
         visibleItems.map(recipe => (
           <RecipePreview
-            handleRemove={handleRecipeRemove}
-            handleFavoriteRemove={handleFavoriteRemove}
             key={recipe.id}
             recipe={recipe}
+            handleFavoriteRemove={handleFavoriteRemove}
+            handleRemove={handleRecipeRemove}
+            isFavorite={isFavorite(recipe.id)}
             isFavorites={currentTab === TABS.FAVORITES}
-            isOwnProfile={currentTab === TABS.MY_RECIPES}
+            isOwnProfile={isOwnProfile}
           />
         ))}
 
@@ -83,12 +106,9 @@ const ListItems = ({ currentTab, isOwnProfile, items }) => {
           <UserCard
             key={user.id}
             user={user}
-            activeTab={currentTab}
-            onUnfollow={
-              isOwnProfile && currentTab === TABS.FOLLOWING
-                ? handleUnfollowRemove
-                : undefined
-            }
+            currentUser={authUser.id === user.id}
+            handleUnfollow={handleUnfollow}
+            isFollowing={isFollowing(user.id)}
           />
         ))}
     </div>

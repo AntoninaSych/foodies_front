@@ -1,34 +1,41 @@
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
-import { selectToken } from '../../redux/auth/selectors';
-import { TABS } from '../TabsList/const';
-import css from './UserCard.module.css';
 import { ROUTERS } from '../../const';
-import { followUserApi, unfollowUserApi } from '../../api/authApi';
-import { errorHandler, successNotification } from '../../utils/notification';
+import { errorNotification } from '../../utils/notification';
 import Button from '../Button/Button';
+import { unfollow, follow } from '../../redux/users/operations';
+import css from './UserCard.module.css';
+import { useMemo } from 'react';
 
-const UserCard = ({ user, activeTab, onUnfollow }) => {
-  const token = useSelector(selectToken);
+const UserCard = ({ user, isFollowing, currentUser, handleUnfollow }) => {
+  const isTablet = useMediaQuery('(max-width: 1439px)');
+  const dispatch = useDispatch();
   const { id, name, avatarURL, allRecipes, recipes = [] } = user;
-  const isFollowing = activeTab === TABS.FOLLOWING;
+  const limit = isTablet ? 3 : 4;
+  const filteredRecipes = useMemo(() => {
+    return isTablet ? recipes.slice(0, limit) : recipes;
+  }, [isTablet, limit, recipes]);
 
-  const handleFollowToggle = async () => {
-    if (!token) return;
-
-    try {
-      if (isFollowing) {
-        await unfollowUserApi(token, id);
-        onUnfollow && onUnfollow(id);
-        successNotification('Successfully unfollow');
-      } else {
-        await followUserApi(token, id);
-        successNotification('Successfully follow');
-      }
-    } catch (error) {
-      errorHandler(error);
+  const handleFollowToggle = () => {
+    if (isFollowing) {
+      dispatch(unfollow(id))
+        .unwrap()
+        .then(() => {
+          handleUnfollow(id);
+        })
+        .catch(error => {
+          errorNotification(error);
+        });
+    } else {
+      dispatch(follow(id))
+        .unwrap()
+        .then(() => {})
+        .catch(error => {
+          errorNotification(error);
+        });
     }
   };
 
@@ -46,7 +53,7 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
           <div className={css.userInfoContent}>
             <h3 className={css.name}>{name}</h3>
             <p className={css.stats}>Recipes: {allRecipes}</p>
-            {(activeTab === TABS.FOLLOWERS || activeTab === TABS.FOLLOWING) && (
+            {!currentUser && (
               <Button
                 variant="secondary"
                 onClick={handleFollowToggle}
@@ -60,7 +67,7 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
         </div>
 
         <ul className={css.recipeList}>
-          {recipes.map(recipe => (
+          {filteredRecipes.map(recipe => (
             <li key={recipe.id} className={css.recipeItem}>
               <Link to={`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`}>
                 <img

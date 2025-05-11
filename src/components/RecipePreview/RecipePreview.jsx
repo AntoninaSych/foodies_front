@@ -1,19 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { GoArrowUpRight } from 'react-icons/go';
 import { MdDeleteOutline } from 'react-icons/md';
 import { ROUTERS } from '../../const';
-
-import css from './RecipePreview.module.css';
 import { selectToken } from '../../redux/auth/selectors';
-import { deleteRecipeFromApi } from '../../api/recipesApi';
 import {
-  errorHandler,
-  errorNotification,
-  successNotification,
-} from '../../utils/notification.js';
-import { removeFromFavorites } from '../../redux/recipes/operations';
+  deleteRecipeFromApi,
+  removeRecipeFromFavorites,
+} from '../../api/recipesApi';
+import { errorHandler } from '../../utils/notification';
+import css from './RecipePreview.module.css';
 
 const RecipePreview = ({
   recipe,
@@ -22,7 +19,6 @@ const RecipePreview = ({
   handleFavoriteRemove,
   isOwnProfile = false,
 }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
   const { id, title, description, thumb } = recipe;
@@ -37,22 +33,18 @@ const RecipePreview = ({
     }
 
     if (isFavorites) {
-      dispatch(removeFromFavorites(id))
-        .unwrap()
-        .then(() => {
-          handleFavoriteRemove(id);
-          successNotification('Successfully remove recipe from favorites');
-        })
-        .catch(error => {
-          errorNotification(error);
-        });
+      try {
+        await removeRecipeFromFavorites(token, id);
+        handleFavoriteRemove(id);
+      } catch (error) {
+        errorHandler(error);
+      }
     } else {
       try {
-        await deleteRecipeFromApi({ token, recipeId: id });
-        successNotification('Successfully deleted recipe');
+        await deleteRecipeFromApi(token, id);
         handleRemove(id);
       } catch (error) {
-        errorHandler(error, 'Error while deleting recipe');
+        errorHandler(error);
       }
     }
   };

@@ -6,6 +6,7 @@ import { ingredientsReducer } from './ingredients/slice';
 import { testimonialsReducer } from './testimonials/slice';
 import { commonReducer } from './common/slice';
 import { authReducer } from './auth/slice';
+import { usersReducer } from './users/slice.js';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -20,6 +21,7 @@ export const store = configureStore({
     auth: persistReducer(persistAuthConfig, authReducer),
     common: commonReducer,
     recipes: recipesReducer,
+    users: usersReducer,
     categories: categoriesReducer,
     areas: areasReducer,
     ingredients: ingredientsReducer,

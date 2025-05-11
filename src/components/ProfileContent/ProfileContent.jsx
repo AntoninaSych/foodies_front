@@ -18,95 +18,105 @@ import { errorHandler } from '../../utils/notification';
 import { TABS } from '../TabsList/const';
 import { selectToken, selectUser } from '../../redux/auth/selectors';
 import { CATALOG_LIMIT } from '../../const';
+import Loader from '../Loader/Loader';
 
 const ProfileContent = () => {
   const { id: userId } = useParams();
   const authUser = useSelector(selectUser);
-  const defaultTab = authUser.id === userId ? TABS.MY_RECIPES : TABS.RECIPES;
+  const isOwnProfile = authUser.id === userId;
+  const [loading, setLoading] = useState(false);
+  const defaultTab = isOwnProfile ? TABS.MY_RECIPES : TABS.RECIPES;
   const isMobile = useMediaQuery('(max-width: 767px)');
   const token = useSelector(selectToken);
-  const [currentTab, setCurrentTab] = useState(defaultTab);
+  const [currentTab, setCurrentTab] = useState(null);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const limit = isMobile ? 8 : CATALOG_LIMIT;
-  const current = authUser.id === userId;
 
   useEffect(() => {
+    let active = true;
+
     const fetchData = async () => {
-      try {
-        switch (currentTab) {
-          case TABS.MY_RECIPES: {
-            const { items } = await recipesOwnFetch(token, {
-              page,
-              limit,
-            });
-            setItems(items);
-            break;
-          }
-          case TABS.RECIPES: {
-            const { items } = await recipesFetch({
-              page,
-              limit,
-              owner: userId,
-            });
-            setItems(items);
-            break;
-          }
+      setTimeout(async () => {
+        let result = [];
+        try {
+          setLoading(true);
+          switch (currentTab) {
+            case TABS.MY_RECIPES: {
+              const { items } = await recipesOwnFetch(token, {
+                page,
+                limit,
+              });
+              result = items;
+              break;
+            }
+            case TABS.RECIPES: {
+              const { items } = await recipesFetch({
+                page,
+                limit,
+                owner: userId,
+              });
+              result = items;
+              break;
+            }
 
-          case TABS.FAVORITES: {
-            const response = await getFavoritesApi(token, {
-              page,
-              limit,
-            });
-            setItems(response);
-            break;
-          }
+            case TABS.FAVORITES: {
+              result = await getFavoritesApi(token, {
+                page,
+                limit,
+              });
+              break;
+            }
 
-          case TABS.MY_FOLLOWERS: {
-            const response = await fetchCurrentUserFollowers(token, {
-              page,
-              limit,
-            });
-            setItems(response);
-            break;
-          }
+            case TABS.MY_FOLLOWERS: {
+              result = await fetchCurrentUserFollowers(token, {
+                page,
+                limit,
+              });
+              break;
+            }
 
-          case TABS.FOLLOWING: {
-            const response = await fetchCurrentUserFollowing(token, {
-              page,
-              limit,
-            });
-            setItems(response);
-            break;
-          }
+            case TABS.FOLLOWING: {
+              result = await fetchCurrentUserFollowing(token, {
+                page,
+                limit,
+              });
+              break;
+            }
 
-          case TABS.FOLLOWERS: {
-            const response = await fetchUserFollowers(token, userId, {
-              page,
-              limit,
-            });
-            setItems(response);
-            break;
-          }
+            case TABS.FOLLOWERS: {
+              result = await fetchUserFollowers(token, userId, {
+                page,
+                limit,
+              });
+              break;
+            }
 
-          default: {
-            setItems([]);
+            default: {
+              result = [];
+            }
           }
+        } catch (error) {
+          errorHandler(error, 'Error while fetching data.');
+          setItems([]);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        errorHandler(error, 'Error while fetching data.');
-        setItems([]);
-      }
+
+        if (active) {
+          setItems(result);
+        }
+      }, 0);
     };
-    if (currentTab) {
-      fetchData();
-    }
+
+    fetchData();
+    return () => {
+      active = false;
+    };
   }, [userId, limit, page, token, currentTab]);
 
   useEffect(() => {
-    if (userId) {
-      setCurrentTab(defaultTab);
-    }
+    setCurrentTab(defaultTab);
   }, [userId, defaultTab]);
 
   const handleOnTabChange = tab => {
@@ -114,11 +124,23 @@ const ProfileContent = () => {
     setPage(1);
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div>
-      <TabsList currentTab={currentTab} onChange={handleOnTabChange} />
-      <ListItems isOwnProfile={current} currentTab={currentTab} items={items} />
-    </div>
+    <>
+      <TabsList
+        isOwnProfile={isOwnProfile}
+        currentTab={currentTab}
+        onChange={handleOnTabChange}
+      />
+      <ListItems
+        isOwnProfile={isOwnProfile}
+        currentTab={currentTab}
+        items={items}
+      />
+    </>
   );
 };
 
