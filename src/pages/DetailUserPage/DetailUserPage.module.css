@@ -6,8 +6,20 @@
   /* gap: 16px; */
 }
 
+.userInfoTabsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfoWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 @media only screen and (min-width: 768px) {
   .wrapper {
     gap: 32px;
   }
 }
+
+

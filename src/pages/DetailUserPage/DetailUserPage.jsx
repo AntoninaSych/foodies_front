@@ -1,16 +1,15 @@
-import { useParams /*useLocation, useNavigate*/ } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
-import css from './DetailUserPage.module.css';
 import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
-import UserInfo from '../../components/UserInfo/UserInfo';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/auth/selectors';
 import { useEffect, useState } from 'react';
 import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
 import { errorHandler } from '../../utils/notification';
 import Loader from '../../components/Loader/Loader';
+import DetailUser from '../../components/DetailUser/DetailUser';
 
 const DetailUserPage = ({ current = false }) => {
   const { id } = useParams();
@@ -46,15 +45,13 @@ const DetailUserPage = ({ current = false }) => {
 
   return (
     <Container>
-      <div className={css.wrapper}>
-        <PathInfo breadcrumbs={[{ name: 'profile' }]}></PathInfo>
-        <MainTitle>Profile</MainTitle>
-        <Subtitle>
-          Reveal your culinary art, share your favorite recipe and create
-          gastronomic masterpieces with us.
-        </Subtitle>
-        {user && <UserInfo userData={user}></UserInfo>}
-      </div>
+      <PathInfo breadcrumbs={[{ name: 'profile' }]}></PathInfo>
+      <MainTitle>Profile</MainTitle>
+      <Subtitle>
+        Reveal your culinary art, share your favorite recipe and create
+        gastronomic masterpieces with us.
+      </Subtitle>
+      {user && <DetailUser user={user} />}
     </Container>
   );
 };
