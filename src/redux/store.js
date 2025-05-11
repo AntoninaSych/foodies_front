@@ -6,6 +6,7 @@ import { ingredientsReducer } from './ingredients/slice';
 import { testimonialsReducer } from './testimonials/slice';
 import { commonReducer } from './common/slice';
 import { authReducer } from './auth/slice';
+import { followsReducer } from './follows/slice.js';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -25,6 +26,7 @@ export const store = configureStore({
     areas: areasReducer,
     ingredients: ingredientsReducer,
     testimonials: testimonialsReducer,
+    follows: followsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
