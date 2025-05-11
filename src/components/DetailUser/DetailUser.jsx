@@ -6,6 +6,8 @@ import { selectToken, selectUser } from '../../redux/auth/selectors';
 import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
 import { errorHandler } from '../../utils/notification';
 import Loader from '../../components/Loader/Loader';
+import ProfileActions from '../ProfileActions/ProfileActions';
+import css from './DetailUser.module.css';
 
 const DetailUser = () => {
   const { id } = useParams();
@@ -13,15 +15,12 @@ const DetailUser = () => {
   const [loading, setLoading] = useState(false);
   const authUser = useSelector(selectUser);
   const token = useSelector(selectToken);
-  const current = authUser.id === id;
-
-  console.log('current', current);
-  console.log('id', id);
+  const isOwnProfile = authUser.id === id;
 
   useEffect(() => {
     const fetData = async () => {
       try {
-        if (current) {
+        if (isOwnProfile) {
           setLoading(true);
           const userData = await currentUserDetailFetch(token);
           setUser(userData);
@@ -38,13 +37,18 @@ const DetailUser = () => {
     };
 
     fetData();
-  }, [id, current, token]);
+  }, [id, isOwnProfile, token]);
 
-  if (loading || !user) {
+  if (loading) {
     return <Loader />;
   }
 
-  return <UserInfo userData={user}></UserInfo>;
+  return (
+    <div className={css.wrapper}>
+      {user && <UserInfo userData={user}></UserInfo>}
+      <ProfileActions isOwnProfile={isOwnProfile} />
+    </div>
+  );
 };
 
 export default DetailUser;

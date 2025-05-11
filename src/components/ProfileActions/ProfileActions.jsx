@@ -1,18 +1,17 @@
+import { useDispatch } from 'react-redux';
 import Button from '../Button/Button.jsx';
+import { showModal } from '../../redux/common/slice';
+import { MODALS } from '../../const/index';
 
-const ProfileActions = ({ loading, isOwnProfile, isFollowing }) => {
-  const handleLogout = () => {};
+const ProfileActions = ({ isOwnProfile, isFollowing }) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(showModal(MODALS.LOGOUT));
+  };
 
   const handleFollow = () => {};
   const handleUnfollow = () => {};
-
-  if (loading) {
-    return (
-      <Button variant={'primary'} disabled>
-        ...
-      </Button>
-    );
-  }
 
   return (
     <>

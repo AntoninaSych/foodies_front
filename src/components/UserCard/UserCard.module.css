@@ -2,11 +2,17 @@
   display: flex;
   align-self: flex-start;
   gap: 20px;
+  width: 100%;
 }
 
 .card:not(:first-of-type) {
   border-top: 1px solid var(--color-secondary);
   padding-top: 20px;
+}
+
+.userInfoWrapper {
+  display: flex;
+  width: 100%;
 }
 
 .userInfo {
@@ -105,7 +111,7 @@
   }
 
   .userInfo {
-    max-width: 240px;
+    width: 240px;
   }
 
   .recipeList {
@@ -120,7 +126,7 @@
 
   @media only screen and (min-width: 1440px)  {
   .userInfo {
-    max-width: 280px;
+    width: 280px;
   }
 
   .avatar {
