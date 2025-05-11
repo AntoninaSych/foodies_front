@@ -1,6 +1,6 @@
-import css from './UserInfo.module.css';
-import Button from '../../components/Button/Button';
 import clsx from 'clsx';
+import Button from '../../components/Button/Button';
+import css from './UserInfo.module.css';
 
 const UserInfo = ({ userData }) => {
   const { user, createdRecipes, favorites, followers, following } = userData;
@@ -10,7 +10,7 @@ const UserInfo = ({ userData }) => {
         <div className={css.avatar}>
           <img
             className={css.avatarImage}
-            src={user.avatarURL ? user.avatarURL.toString() : null}
+            src={user.avatarURL || '/images/default-avatar.png'}
             alt="avatar"
           />
           <Button

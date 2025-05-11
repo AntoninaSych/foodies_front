@@ -35,12 +35,6 @@ const App = () => {
         </Route>
         <Route path="/" element={<Layout />}>
           <Route
-            path="user/profile"
-            element={
-              <PrivateRoute component={<DetailUserPage current={true} />} />
-            }
-          />
-          <Route
             path="user/:id"
             element={<PrivateRoute component={<DetailUserPage />} />}
           />

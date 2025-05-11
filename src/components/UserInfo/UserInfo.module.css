@@ -87,11 +87,11 @@
 @media only screen and (min-width: 768px) {
     .userInfo {
         width: 394px;
-        padding: 40px 80px;
+        margin: 0 auto;
     }
 }
 
 /* desktop */
 @media only screen and (min-width: 1440px) {
-    
+
 }

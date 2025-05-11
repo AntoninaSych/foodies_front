@@ -1,9 +1,8 @@
-.wrapper {
-  padding-top: 64px;
-  padding-bottom: 64px;
+.wrapper{
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
+  align-items: flex-start;
+  gap: 64px;
 }
 
 .userInfoTabsWrapper {
@@ -16,10 +15,27 @@
   flex-direction: column;
 }
 
-@media only screen and (min-width: 768px) {
-  .wrapper {
-    gap: 32px;
+@media only screen and (max-width: 1339px) {
+  .sidebar {
+    width: 100%;
   }
 }
 
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    gap: 80px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .sidebar {
+    width: 394px;
+  }
+
+  .wrapper {
+    flex-direction: row;
+    gap: 40px;
+  }
+}
 

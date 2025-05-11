@@ -1,48 +1,11 @@
-import { useParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
 import PathInfo from '../../components/PathInfo/PathInfo';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import Subtitle from '../../components/Subtitle/Subtitle';
-import { useSelector } from 'react-redux';
-import { selectToken } from '../../redux/auth/selectors';
-import { useEffect, useState } from 'react';
-import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
-import { errorHandler } from '../../utils/notification';
-import Loader from '../../components/Loader/Loader';
 import DetailUser from '../../components/DetailUser/DetailUser';
+import css from './DetailUserPage.module.css';
 
-const DetailUserPage = ({ current = false }) => {
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const token = useSelector(selectToken);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        if (current) {
-          setLoading(true);
-          const userData = await currentUserDetailFetch(token);
-          // console.log(userData);
-          setUser(userData);
-        } else if (id) {
-          setLoading(true);
-          const userData = await userDetailFetch(token, id);
-          // console.log(userData);
-          setUser(userData);
-        }
-      } catch (error) {
-        errorHandler(error, 'Failed to load user');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [id, current, token]);
-
-  if (loading) {
-    return <Loader />;
-  }
-
+const DetailUserPage = () => {
   return (
     <Container>
       <PathInfo breadcrumbs={[{ name: 'profile' }]}></PathInfo>
@@ -51,7 +14,12 @@ const DetailUserPage = ({ current = false }) => {
         Reveal your culinary art, share your favorite recipe and create
         gastronomic masterpieces with us.
       </Subtitle>
-      {user && <DetailUser user={user} />}
+      <div className={css.wrapper}>
+        <div className={css.sidebar}>
+          <DetailUser />
+        </div>
+        <div className={css.content}>TABS</div>
+      </div>
     </Container>
   );
 };

@@ -13,7 +13,7 @@ import cssNavigation from '../styles/navigation.module.css';
 const UserBar = ({ theme }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const { name, avatarURL } = useSelector(selectUser);
+  const { name, id, avatarURL } = useSelector(selectUser);
 
   const className = clsx(css.placeholder, theme && css[theme]);
 
@@ -44,7 +44,7 @@ const UserBar = ({ theme }) => {
         <div className={clsx(css.menu, open && css.active)}>
           <NavLink
             className={clsx(cssNavigation.link, css.link)}
-            to={`${ROUTERS.USER}/profile`}
+            to={`${ROUTERS.USER}/${id}`}
           >
             PROFILE
           </NavLink>

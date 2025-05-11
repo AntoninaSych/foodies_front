@@ -1,35 +1,50 @@
-import Button from '../../components/Button/Button';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import UserInfo from '../UserInfo/UserInfo';
-import css from './DetailUser.module.css';
+import { selectToken, selectUser } from '../../redux/auth/selectors';
+import { currentUserDetailFetch, userDetailFetch } from '../../api/usersApi';
+import { errorHandler } from '../../utils/notification';
+import Loader from '../../components/Loader/Loader';
 
-const DetailUser = ({ user }) => {
-  const {
-    user: { id },
-  } = user;
-  console.log(id);
-  return (
-    <div className={css.wrapper}>
-      <div className={css.userInfoTabsWrapper}>
-        <div className={css.userInfoWrapper}>
-          <UserInfo userData={user}></UserInfo>
-          <Button
-            type="submit"
-            variant={Button.variants.PRIMARY}
-            className={css.button}
-          >
-            Log out
-          </Button>
-        </div>
-        <div
-          style={{
-            width: '100%',
-            height: '100px',
-            backgroundColor: 'tan',
-          }}
-        ></div>
-      </div>
-    </div>
-  );
+const DetailUser = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const authUser = useSelector(selectUser);
+  const token = useSelector(selectToken);
+  const current = authUser.id === id;
+
+  console.log('current', current);
+  console.log('id', id);
+
+  useEffect(() => {
+    const fetData = async () => {
+      try {
+        if (current) {
+          setLoading(true);
+          const userData = await currentUserDetailFetch(token);
+          setUser(userData);
+        } else if (id) {
+          setLoading(true);
+          const userData = await userDetailFetch(token, id);
+          setUser(userData);
+        }
+      } catch (error) {
+        errorHandler(error, 'Failed to load user');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetData();
+  }, [id, current, token]);
+
+  if (loading || !user) {
+    return <Loader />;
+  }
+
+  return <UserInfo userData={user}></UserInfo>;
 };
 
 export default DetailUser;
