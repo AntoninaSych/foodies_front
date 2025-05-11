@@ -1,11 +1,39 @@
-.wrapper {
+ .wrapper {
   display: flex;
   gap: 60px;
   flex-direction: column;
 }
 
+.userInfoTabsWrapper {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.userInfoWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+
+.button {
+  width: 100%;
+}
+
 /* tablet */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+  .userInfoWrapper {
+    margin: 0 auto;
+    margin-bottom: 80px;
+  }
+}
 
 /* desktop */
-@media only screen and (min-width: 1440px) {}
+@media only screen and (min-width: 1440px) {
+  .userInfoTabsWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+}

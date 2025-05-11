@@ -6,7 +6,7 @@ const UserInfo = ({ userData }) => {
   const { user, createdRecipes, favorites, followers, following } = userData;
   return (
     <div className={css.wrapper}>
-      <div className={css.userinfo}>
+      <div className={css.userInfo}>
         <div className={css.avatar}>
           <img
             className={css.avatarImage}
