@@ -1,39 +1,34 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
-
-import { followUser, unfollowUser } from '../../redux/auth/operations';
 import { selectToken } from '../../redux/auth/selectors';
-
+import { TABS } from '../TabsList/const';
 import css from './UserCard.module.css';
+import { ROUTERS } from '../../const';
+import { followUserApi, unfollowUserApi } from '../../api/authApi';
+import { errorHandler, successNotification } from '../../utils/notification';
+import Button from '../Button/Button';
 
 const UserCard = ({ user, activeTab, onUnfollow }) => {
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-
-  const {
-    _id,
-    id,
-    name,
-    avatarURL,
-    recipes = [],
-    recipesCount,
-    isFollowing,
-  } = user;
-
-  const userId = _id || id;
+  const { id, name, avatarURL, allRecipes, recipes = [] } = user;
+  const isFollowing = activeTab === TABS.FOLLOWING;
 
   const handleFollowToggle = async () => {
     if (!token) return;
 
-    if (isFollowing) {
-      await dispatch(unfollowUser(userId));
-      if (activeTab === 'following' && typeof onUnfollow === 'function') {
-        onUnfollow(userId);
+    try {
+      if (isFollowing) {
+        await unfollowUserApi(id);
+        onUnfollow && onUnfollow(id);
+        successNotification('Successfully unfollow');
+      } else {
+        await followUserApi(id);
+        successNotification('Successfully follow');
       }
-    } else {
-      dispatch(followUser(userId));
+    } catch (error) {
+      errorHandler(error);
     }
   };
 
@@ -47,15 +42,25 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
           width={32}
           height={32}
         />
-        <div>
+        <div className={css.userInfoContent}>
           <h3 className={css.name}>{name}</h3>
-          <p className={css.stats}>Recipes: {recipesCount || recipes.length}</p>
+          <p className={css.stats}>Recipes: {allRecipes}</p>
+          {(activeTab === TABS.FOLLOWERS || activeTab === TABS.FOLLOWING) && (
+            <Button
+              variant="secondary"
+              onClick={handleFollowToggle}
+              className={clsx(css.button, css.followBtn)}
+              small
+            >
+              {isFollowing ? 'Following' : 'Follow'}
+            </Button>
+          )}
         </div>
       </div>
 
       <ul className={css.recipeList}>
-        {recipes.slice(0, 4).map(recipe => (
-          <li key={recipe._id || recipe.id} className={css.recipeItem}>
+        {recipes.map(recipe => (
+          <li key={recipe.id} className={css.recipeItem}>
             <img
               src={recipe.thumb}
               alt={recipe.title}
@@ -67,22 +72,12 @@ const UserCard = ({ user, activeTab, onUnfollow }) => {
 
       <div className={css.actions}>
         <Link
-          to={`/user/${userId}`}
+          to={`${ROUTERS.USER}/${id}`}
           className={css.iconBtn}
           aria-label="Go to profile"
         >
           <MdOutlineArrowOutward />
         </Link>
-
-        {(activeTab === 'followers' || activeTab === 'following') && (
-          <button
-            type="button"
-            onClick={handleFollowToggle}
-            className={clsx(css.followBtn, isFollowing && css.active)}
-          >
-            {isFollowing ? 'Following' : 'Follow'}
-          </button>
-        )}
       </div>
     </div>
   );

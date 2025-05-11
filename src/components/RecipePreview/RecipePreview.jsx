@@ -7,29 +7,53 @@ import { ROUTERS } from '../../const';
 
 import css from './RecipePreview.module.css';
 import { selectToken } from '../../redux/auth/selectors';
+import { deleteRecipeFromApi } from '../../api/recipesApi';
 import {
-  deleteRecipeFromApi,
-  removeRecipeFromFavorites,
-} from '../../api/recipesApi';
+  errorHandler,
+  errorNotification,
+  successNotification,
+} from '../../utils/notification.js';
+import { removeFromFavorites } from '../../redux/recipes/operations';
 
-const RecipePreview = ({ recipe, isFavorite, isOwnProfile = false }) => {
+const RecipePreview = ({
+  recipe,
+  isFavorites,
+  handleRemove,
+  handleFavoriteRemove,
+  isOwnProfile = false,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
-
-  const { _id, id, title, description, thumb } = recipe;
-  const recipeId = _id || id;
+  const { id, title, description, thumb } = recipe;
 
   const handleViewRecipe = () => {
-    navigate(`${ROUTERS.RECIPE_DETAIL}/${recipe.id}`);
+    navigate(`${ROUTERS.RECIPE_DETAIL}/${id}`);
   };
 
-  const handleDelete = () => {
-    if (!token) return;
-    if (isFavorite) {
-      dispatch(removeRecipeFromFavorites({ token, recipeId }));
+  const handleDelete = async () => {
+    if (!token) {
+      return;
+    }
+
+    if (isFavorites) {
+      dispatch(removeFromFavorites(id))
+        .unwrap()
+        .then(() => {
+          handleFavoriteRemove(id);
+          successNotification('Successfully remove recipe from favorites');
+        })
+        .catch(error => {
+          errorNotification(error);
+        });
     } else {
-      dispatch(deleteRecipeFromApi({ token, recipeId }));
+      try {
+        await deleteRecipeFromApi({ token, recipeId: id });
+        successNotification('Successfully deleted recipe');
+        handleRemove(id);
+      } catch (error) {
+        errorHandler(error, 'Error while deleting recipe');
+      }
     }
   };
 
@@ -39,8 +63,10 @@ const RecipePreview = ({ recipe, isFavorite, isOwnProfile = false }) => {
         <img src={thumb} alt={title} className={css.image} />
       </div>
       <div className={css.content}>
-        <h3 className={css.title}>{title}</h3>
-        <p className={css.description}>{description}</p>
+        <div>
+          <h4 className={css.title}>{title}</h4>
+          <p className={css.description}>{description}</p>
+        </div>
         <div className={css.actions}>
           <button
             className={css.iconButton}
@@ -49,11 +75,13 @@ const RecipePreview = ({ recipe, isFavorite, isOwnProfile = false }) => {
           >
             <GoArrowUpRight />
           </button>
-          {(isFavorite || isOwnProfile) && (
+          {isOwnProfile && (
             <button
-              className={clsx(css.iconButton, css.trash)}
+              className={clsx(css.iconButton)}
               onClick={handleDelete}
-              aria-label="Delete recipe"
+              aria-label={
+                isFavorites ? 'Delete recipe from favorites' : 'Delete recipe'
+              }
             >
               <MdDeleteOutline />
             </button>

@@ -19,7 +19,7 @@ export const recipesFetch = async (options = {}) => {
 
 export const recipesDetailFetch = async id => {
   if (useMockData) {
-    return mockData.items.find(r => r.id === id || r._id === id) || null;
+    return mockData.items.find(r => r.id === id) || null;
   }
   const response = await axios.get(`/recipes/${id}`);
   return response.data;
@@ -38,8 +38,13 @@ export const addRecipeToFavorites = async (token, recipeId) => {
   return data;
 };
 
-export const getFavoritesApi = async token => {
+export const getFavoritesApi = async (token, options = {}) => {
+  const params = {
+    ...options,
+  };
+
   const response = await axios.get('/recipes/favorites', {
+    params,
     headers: {
       Authorization: getAuthorizationHeader(token),
     },
@@ -72,19 +77,33 @@ export const deleteRecipeFromApi = async ({ token, recipeId }) => {
   }
 
   await axios.delete(`/recipes/${recipeId}`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: getAuthorizationHeader(token) },
   });
   return { id: recipeId };
 };
 
-export const removeRecipeFromFavorites = async ({ token, recipeId }) => {
+export const removeRecipeFromFavorites = async (token, recipeId) => {
   if (useMockData) {
     console.log(`Mock remove from favorites: ${recipeId}`);
     return { id: recipeId };
   }
 
   await axios.delete(`/recipes/${recipeId}/favorite`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: getAuthorizationHeader(token) },
   });
   return { id: recipeId };
+};
+
+export const recipesOwnFetch = async (token, options = {}) => {
+  const params = {
+    limit: CATALOG_LIMIT,
+    page: 1,
+    ...options,
+  };
+
+  const response = await axios.get('/recipes/own', {
+    params,
+    headers: { Authorization: getAuthorizationHeader(token) },
+  });
+  return response.data;
 };

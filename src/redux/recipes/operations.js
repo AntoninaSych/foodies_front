@@ -4,7 +4,6 @@ import {
   addRecipeToFavorites,
   removeRecipeFromFavorites,
   getFavoritesApi,
-  deleteRecipeFromApi,
 } from '../../api/recipesApi';
 import { handleError } from '../utils';
 
@@ -57,21 +56,6 @@ export const getFavoriteRecipes = createAsyncThunk(
         auth: { token },
       } = getState();
       return await getFavoritesApi(token);
-    } catch (error) {
-      return rejectWithValue(handleError(error));
-    }
-  }
-);
-
-export const deleteRecipe = createAsyncThunk(
-  'recipes/delete',
-  async (recipeId, { rejectWithValue, getState }) => {
-    try {
-      const {
-        auth: { token },
-      } = getState();
-      await deleteRecipeFromApi(token, recipeId); // ✅ виклик функції
-      return recipeId;
     } catch (error) {
       return rejectWithValue(handleError(error));
     }

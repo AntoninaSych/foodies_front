@@ -3,37 +3,29 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  padding: 0;
-  margin: 0 auto;
 }
 
-.empty {
-  font-size: 16px;
-  text-align: center;
-  color: #bfbebe;
-  padding: 40px 20px;
+.message {
+  margin-top: 80px;
 }
 
 /* Tablet */
 @media (min-width: 768px) {
   .list {
     gap: 28px;
-    max-width: 704px;
+  }
+  .message {
+    margin-top: 100px;
   }
 
-  .empty {
-    font-size: 18px;
-  }
 }
 
 /* Desktop */
-@media (min-width: 1280px) {
+@media only screen and (min-width: 1440px) {
   .list {
     gap: 32px;
-    max-width: 960px;
   }
-
-  .empty {
-    font-size: 20px;
+  .message {
+    margin-top: 140px;
   }
 }

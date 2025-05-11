@@ -4,11 +4,7 @@ import {
   usersLogin,
   usersLogout,
   usersSignup,
-  followUserApi,
-  unfollowUserApi,
-  getUserDetailsApi,
 } from '../../api/authApi';
-import { handleError } from '../utils';
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -74,51 +70,6 @@ export const refreshUser = createAsyncThunk(
       }
     } else {
       return rejectWithValue('Token is not available');
-    }
-  }
-);
-
-export const followUser = createAsyncThunk(
-  'user/followUser',
-  async (userId, { getState, rejectWithValue }) => {
-    try {
-      const state = getState();
-      const token = state.auth.token;
-
-      const response = await followUserApi(token, userId);
-      return { userId, response };
-    } catch (error) {
-      return rejectWithValue(error.message || 'Follow failed');
-    }
-  }
-);
-
-export const unfollowUser = createAsyncThunk(
-  'user/unfollowUser',
-  async (userId, { getState, rejectWithValue }) => {
-    try {
-      const state = getState();
-      const token = state.auth.token;
-
-      const response = await unfollowUserApi(token, userId);
-      return { userId, response };
-    } catch (error) {
-      return rejectWithValue(error.message || 'Unfollow failed');
-    }
-  }
-);
-
-export const fetchUserDetails = createAsyncThunk(
-  'auth/fetchUserDetails',
-  async (userId, { rejectWithValue, getState }) => {
-    try {
-      const {
-        auth: { token },
-      } = getState();
-      const userDetails = await getUserDetailsApi(token, userId);
-      return userDetails;
-    } catch (error) {
-      return rejectWithValue(handleError(error));
     }
   }
 );
