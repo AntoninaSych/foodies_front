@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { FaAngleDown } from 'react-icons/fa6';
 import { GoArrowUpRight } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODALS, ROUTERS } from '../../const';
 import { selectUser } from '../../redux/auth/selectors';
@@ -12,6 +12,7 @@ import cssNavigation from '../styles/navigation.module.css';
 
 const UserBar = ({ theme }) => {
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const { name, id, avatarURL } = useSelector(selectUser);
 
@@ -26,9 +27,21 @@ const UserBar = ({ theme }) => {
     setOpen(!open);
   };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [buttonRef]);
+
   return (
     <div className={css.wrapper}>
-      <div className={className}>
+      <button className={className} onClick={handleOnOpen} ref={buttonRef}>
         <img
           className={css.avatar}
           src={avatarURL.toString()}
@@ -37,10 +50,7 @@ const UserBar = ({ theme }) => {
           alt="avatar"
         />
         <div className={css.name}>{name}</div>
-        <FaAngleDown
-          className={clsx(css.dropdown, open && css.active)}
-          onClick={handleOnOpen}
-        />
+        <FaAngleDown className={clsx(css.dropdown, open && css.active)} />
 
         <div className={clsx(css.menu, open && css.active)}>
           <NavLink
@@ -58,7 +68,7 @@ const UserBar = ({ theme }) => {
             LOG OUT <GoArrowUpRight />
           </a>
         </div>
-      </div>
+      </button>
     </div>
   );
 };
