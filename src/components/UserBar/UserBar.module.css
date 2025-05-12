@@ -24,6 +24,8 @@
   gap: 6px;
   position: relative;
   padding-right: 14px;
+  border: none;
+  margin: 0;
   order: 2;
 }
 
@@ -40,7 +42,7 @@
 .placeholder svg{
   font-size: 16px;
 }
-.placeholder svg:hover{
+.placeholder:hover {
   cursor: pointer;
 }
 
