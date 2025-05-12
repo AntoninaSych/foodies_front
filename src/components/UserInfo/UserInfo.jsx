@@ -43,22 +43,18 @@ const UserInfo = ({ userData }) => {
             <span className={css.characteristicTitle}>Added recipes:</span>
             <span className={css.characteristicInfo}>{createdRecipes}</span>
           </div>
-          {favorites && (
-            <div className={css.characteristic}>
-              <span className={css.characteristicTitle}>Favorites:</span>
-              <span className={css.characteristicInfo}>{favorites}</span>
-            </div>
-          )}
+          <div className={css.characteristic}>
+            <span className={css.characteristicTitle}>Favorites:</span>
+            <span className={css.characteristicInfo}>{favorites}</span>
+          </div>
           <div className={css.characteristic}>
             <span className={css.characteristicTitle}>Followers:</span>
             <span className={css.characteristicInfo}>{followers}</span>
           </div>
-          {following && (
-            <div className={css.characteristic}>
-              <span className={css.characteristicTitle}>Following:</span>
-              <span className={css.characteristicInfo}>{following}</span>
-            </div>
-          )}
+          <div className={css.characteristic}>
+            <span className={css.characteristicTitle}>Following:</span>
+            <span className={css.characteristicInfo}>{following}</span>
+          </div>
         </div>
       </div>
     </div>
