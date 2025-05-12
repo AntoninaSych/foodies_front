@@ -6,10 +6,10 @@
   display: flex;
   gap: 30px;
   margin: 64px 0 32px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
   white-space: nowrap;
-  -ms-overflow-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 .tabs::-webkit-scrollbar {
@@ -61,8 +61,6 @@
   .tabs {
     gap: 40px;
     margin: 80px 0 40px 0;
-    /*overflow-x: unset;*/
-    /*overflow-y: unset;*/
   }
 }
 
