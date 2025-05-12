@@ -21,7 +21,10 @@ export const register = createAsyncThunk(
         }
         return rejectWithValue('User creation error');
       }
-      return rejectWithValue('Server error');
+
+      return rejectWithValue(
+        error.response?.data?.message || error.message || 'Server error'
+      );
     }
   }
 );
@@ -35,7 +38,9 @@ export const login = createAsyncThunk(
       if (error.status === 400) {
         return rejectWithValue('Login error, please check your credentials');
       }
-      return rejectWithValue(error.message);
+      return rejectWithValue(
+        error.response?.data?.message || error.message || 'Server error'
+      );
     }
   }
 );
