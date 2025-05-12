@@ -57,10 +57,12 @@
 }
 
 .characteristicInfo{
-    font-weight: 700;
     font-size: 14px;
     line-height: 1.4;
     max-width: calc(100% - 30px);
+    color: var(--color-text);
+    font-family: "Mulish Medium", Arial, sans-serif;
+    font-weight: 700;
 }
 
 /* tablet */
