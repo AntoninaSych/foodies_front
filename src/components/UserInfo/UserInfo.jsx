@@ -1,25 +1,35 @@
 import clsx from 'clsx';
-import Button from '../../components/Button/Button';
 import css from './UserInfo.module.css';
+import { useSelector } from 'react-redux';
+import Avatar from '../Avatar/Avatar';
+import { updateAvatar } from '../../api/usersApi';
+import { errorHandler, successNotification } from '../../utils/notification';
+import { selectToken } from '../../redux/auth/selectors';
 
 const UserInfo = ({ userData }) => {
+  const token = useSelector(selectToken);
   const { user, createdRecipes, favorites, followers, following } = userData;
+
+  const handleUploadedFile = async file => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+      await updateAvatar(token, formData);
+      successNotification('Avatar successfully updated!');
+    } catch (error) {
+      errorHandler(error, 'Error while updating avatar.');
+    }
+  };
+
   return (
     <div className={css.wrapper}>
       <div className={css.userInfo}>
         <div className={css.avatar}>
-          <img
-            className={css.avatarImage}
-            src={user.avatarURL || '/images/default-avatar.png'}
-            alt="avatar"
+          <Avatar
+            avatar={user.avatarURL || '/images/default-avatar.png'}
+            handleUploadedFile={handleUploadedFile}
           />
-          <Button
-            type="submit"
-            variant={Button.variants.PRIMARY}
-            className={css.avatarButton}
-          >
-            +
-          </Button>
         </div>
         <h3 className={clsx(css.userName, css.textWrap)}>{user.name}</h3>
         <div className={css.characteristics}>

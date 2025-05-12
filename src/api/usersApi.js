@@ -25,3 +25,13 @@ export const currentUserDetailFetch = async token => {
   });
   return response.data;
 };
+
+export const updateAvatar = async (token, data) => {
+  const response = await axios.patch(`/users/avatars`, data, {
+    headers: {
+      Authorization: getAuthorizationHeader(token),
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};

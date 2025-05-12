@@ -101,7 +101,7 @@
   padding: 0;
   color:  var(--color-main);
   font-size: 28px;
-  display: block;
+  display: flex;
 }
 
 .dark .menuButtonOpen,
