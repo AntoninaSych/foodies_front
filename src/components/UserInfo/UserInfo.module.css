@@ -1,8 +1,3 @@
-:root {
-    --avatar-size: 80px;
-    --avatar-button-size: 28px;
-}
-
 .wrapper{
     margin-bottom: 20px;
 }
@@ -21,24 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: calc(var(--avatar-button-size) / 2 + 6px);
+    justify-content: center;
+    margin-bottom: 20px;
 }
-
-.avatarImage {
-    background-color: white;
-    height: var(--avatar-size);
-    width: var(--avatar-size);
-    border-radius: 50%;
-}
-.avatarButton {
-    position: absolute;
-    top: calc(var(--avatar-size) - var(--avatar-button-size) / 2);
-    padding: 6px;
-    min-width: var(--avatar-button-size);
-    width: var(--avatar-button-size);
-    height: var(--avatar-button-size);
-}
-
 .userName {
     font-weight: 800;
     font-size: 18px;
@@ -88,6 +68,9 @@
     .userInfo {
         width: 394px;
         margin: 0 auto;
+    }
+    .avatar {
+        margin-bottom: 24px;
     }
 }
 
